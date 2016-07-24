@@ -1,0 +1,32 @@
+
+    <table class='table table-responsive table-condensed table-hover'>
+
+      <tr>
+        <th>名称</th>
+        <th>规格</th>
+        <th>型号</th>
+      </tr>
+
+      <tbody>
+      <% repertory_dbs.each do |db| %>
+          <tr>
+            <td>
+              <%= db.name %>
+            </td>
+            <td>
+              <%= db.standard %>
+            </td>
+            <td>
+              <%= db.kind %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+
+
+    </table>
+
+    <%= will_paginate repertory_dbs, :param_name => 'repertory_page',
+                      :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
+
+

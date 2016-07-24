@@ -1,0 +1,28 @@
+
+    <table class='table table-responsive table-condensed table-hover'>
+
+      <tr>
+        <th>产品</th>
+        <th>供应商</th>
+      </tr>
+
+      <tbody>
+      <% supplier_dbs.each do |db| %>
+          <tr>
+            <td>
+              <%= db.product %>
+            </td>
+            <td>
+              <%= db.supplier %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+
+
+    </table>
+
+    <%= will_paginate supplier_dbs, :param_name => 'supplier_page',
+                      :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
+
+
