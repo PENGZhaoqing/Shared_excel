@@ -24,8 +24,9 @@ class SupplierExcelsController < ApplicationController
 
   def index
     @supplier_excels=SupplierExcel.paginate(:page => params[:excel_page], :per_page => 8).order('created_at DESC')
-    @supplier_dbs=SupplierDb.paginate(:page => params[:supplier_page], :per_page => 6)
+    @supplier_dbs=SupplierDb.filter(params[:label]).paginate(:page => params[:supplier_page], :per_page => 6)
     @supplier_excel=SupplierExcel.new
+    @supplier_labels=SupplierDb.label
   end
 
   def destroy

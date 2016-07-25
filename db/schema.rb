@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160723113257) do
     t.string   "name"
     t.string   "standard"
     t.string   "kind"
+    t.integer  "num"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

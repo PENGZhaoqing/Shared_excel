@@ -1,28 +1,42 @@
+<% supplier_labels.each do |label, num| %>
+    <%= link_to label: label do %>
+        <span class="label label-info" style="margin-left: 4px;">
+          <!--<span class="badge" style=" background-color: cornflowerblue;color: WHITE; font-size: 10px">-->
+          <%= label %>
+          <text style="color: black">
+            <%= num %>
+          </text>
+          <!--</span>-->
+        </span>
+    <% end %>
+<% end %>
 
-    <table class='table table-responsive table-condensed table-hover'>
 
+<table class='table table-responsive table-condensed table-hover' style="margin-top: 5px">
+
+  <tr>
+    <th>产品</th>
+    <th>供应商</th>
+  </tr>
+
+  <tbody>
+  <% supplier_dbs.each do |db| %>
       <tr>
-        <th>产品</th>
-        <th>供应商</th>
+        <td>
+          <%= db.product %>
+        </td>
+        <td>
+          <%= db.supplier %>
+        </td>
       </tr>
+  <% end %>
+  </tbody>
 
-      <tbody>
-      <% supplier_dbs.each do |db| %>
-          <tr>
-            <td>
-              <%= db.product %>
-            </td>
-            <td>
-              <%= db.supplier %>
-            </td>
-          </tr>
-      <% end %>
-      </tbody>
+</table>
+
+<%= will_paginate supplier_dbs, :param_name => 'supplier_page',
+                  :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
 
 
-    </table>
-
-    <%= will_paginate supplier_dbs, :param_name => 'supplier_page',
-                      :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
 
 

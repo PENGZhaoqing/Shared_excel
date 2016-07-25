@@ -9,8 +9,8 @@
         <div class="panel-heading">
           <text class="lead">供应商展示</text>
         </div>
-        <div class="panel-body">
-          <%= render "homes/supplier_table", :supplier_dbs => @supplier_dbs %>
+        <div class="panel-body" style="min-height:300px;max-height: 350px;overflow: scroll; padding-top: 5px ;">
+          <%= render "homes/supplier_table", :supplier_dbs => @supplier_dbs, :supplier_labels => @supplier_labels %>
         </div>
       </div>
     </div>
@@ -20,7 +20,7 @@
 
   <div class="col-sm-6">
 
-    <%=render "shared/excel_list",:excels=> @supplier_excels,:new_excel=>@supplier_excel,:path=> supplier_excels_path%>
+    <%= render "shared/excel_list", :excels => @supplier_excels, :new_excel => @supplier_excel, :path => supplier_excels_path %>
 
   </div>
 </div>
