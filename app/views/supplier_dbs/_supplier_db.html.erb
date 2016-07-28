@@ -21,8 +21,12 @@
 
         <% @supplier_dbs.each do |dbs| %>
             <tr>
-              <td><%= dbs.product %></td>
-              <td><%= dbs.supplier %></td>
+              <td>
+                <text style="font-size: small"><%= dbs.product %></text>
+              </td>
+              <td>
+                <text style="font-size: small"><%= dbs.supplier %></text>
+              </td>
             </tr>
         <% end %>
 

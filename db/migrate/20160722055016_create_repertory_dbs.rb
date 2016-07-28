@@ -5,6 +5,7 @@ class CreateRepertoryDbs < ActiveRecord::Migration
       t.string :standard
       t.string :kind
       t.integer :num
+      t.string :supplier
       t.timestamps null: false
     end
   end

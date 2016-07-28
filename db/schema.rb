@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20160723113257) do
     t.string   "standard"
     t.string   "kind"
     t.integer  "num"
+    t.string   "supplier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

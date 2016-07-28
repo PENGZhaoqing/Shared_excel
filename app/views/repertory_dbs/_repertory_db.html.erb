@@ -16,8 +16,9 @@
           <tr class="filters">
             <th><input type="text" class="form-control" placeholder="产品名" disabled></th>
             <th><input type="text" class="form-control" placeholder="规格" disabled></th>
-            <th><input type="text" class="form-control" placeholder="型号" disabled></th>
+            <th><input type="text" class="form-control" placeholder="供应商" disabled></th>
             <th><input type="text" class="form-control" placeholder="库存数量" disabled></th>
+
           </tr>
           </thead>
 
@@ -25,10 +26,18 @@
 
           <% @repertory_dbs.each do |db| %>
               <tr>
-                <td> <%= db.name %></td>
-                <td> <%= db.standard %></td>
-                <td> <%= db.kind %></td>
-                <td><%= db.num %></td>
+                <td>
+                  <text style="font-size: small"><%= db.name %></text>
+                </td>
+                <td>
+                  <text style="font-size: small"><%= db.standard %></text>
+                </td>
+                <td>
+                  <text style="font-size: small"><%= db.supplier %></text>
+                </td>
+                <td>
+                  <text style="font-size: small"><%= db.num %></text>
+                </td>
               </tr>
           <% end %>
 

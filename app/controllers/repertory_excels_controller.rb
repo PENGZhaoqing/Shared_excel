@@ -17,6 +17,7 @@ class RepertoryExcelsController < ApplicationController
       repertorydb.standard=workbook.row(row_index)[2]
       repertorydb.kind=workbook.row(row_index)[3]
       repertorydb.num=workbook.row(row_index)[5]
+      repertorydb.supplier=workbook.row(row_index)[7]
       repertorydb.save
     end
 
