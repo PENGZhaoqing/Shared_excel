@@ -13,15 +13,16 @@
         <li class=<%= "active" if params[:controller]=="supplier_dbs" %>> <%= link_to "供应商资料", supplier_dbs_path %></li>
         <li class= <%= "active" if params[:controller]=="project_dbs" %>> <%= link_to "立项数据", project_dbs_path %></li>
         <li class=<%= "active" if params[:controller]=="repertory_dbs" %>> <%= link_to "库存明细", repertory_dbs_path %></li>
+        <li class=<%= "active" if params[:controller]=="stock_dbs" %>> <%= link_to "出入库明细", stock_dbs_path %></li>
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
 
-        <% if admin_logged_in? %>
+        <% if current_user %>
 
             <li>
               <%= link_to root_path do %>
-                  <%= current_admin.name %><span class="glyphicon glyphicon-user"></span>
+                  <%= current_user.name %><span class="glyphicon glyphicon-user"></span>
               <% end %>
             </li>
 
@@ -32,50 +33,21 @@
                 <li>
                   <div class="row">
                     <div class="col-sm-12">
-
-                      <%= form_for current_admin, html: {role: 'form'} do |f| %>
-                          <%= render 'shared/error_messages', :object => current_admin %>
-
-                          <%= content_tag :div, class: "form-group#{' has-error' if current_admin.errors[:name].present?}" do %>
-                              <div class="input-group">
-                                <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-                                <%= f.text_field :name, class: 'form-control' %>
-                              </div>
-                          <% end %>
-
-                          <%= content_tag :div, class: "form-group#{' has-error' if current_admin.errors[:email].present?}" do %>
-                              <div class="input-group">
-                                <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-                                <%= f.text_field :email, class: 'form-control' %>
-                              </div>
-                          <% end %>
-
-                          <%= content_tag :div, class: "form-group#{' has-error' if current_admin.errors[:password].present?}" do %>
-                              <div class="input-group">
-                                <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-                                <%= f.password_field :password, class: 'form-control', placeholder: "输入新密码" %>
-                              </div>
-                          <% end %>
-
-                          <%= content_tag :div, class: "form-group#{' has-error' if current_admin.errors[:password_confirmation].present?}" do %>
-                              <div class="input-group">
-                                <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-                                <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "再次输入密码" %>
-                              </div>
-                          <% end %>
-
-                          <%= f.submit '更新', class: "btn btn-success btn-block" %>
-                          <%= link_to '取消', root_path, :class => "btn btn-default btn-block" %>
-
-                          <br>
-
-                      <% end %>
-
+                      <%= render "layouts/edit_user" %>
                     </div>
                   </div>
                 </li>
               </ul>
             </li>
+
+            <% if admin?(current_user) %>
+                <li>
+                  <%= link_to users_path(new: true), method: :get do %>
+                      后台管理 <span class="glyphicon glyphicon-eye-open"></span>
+                  <% end %>
+                </li>
+            <% end %>
+
 
             <li>
               <%= link_to sessions_logout_path, method: :delete do %>
@@ -95,55 +67,7 @@
   </div>
 </nav>
 
-<!-- Modal -->
-<div class="modal fade" id="panel_modal" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header" style="padding:35px 50px;">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4><span class="glyphicon glyphicon-lock"></span> 登录</h4>
-      </div>
-      <div class="modal-body" style="padding:40px 50px;">
-
-        <%= form_for(:session, url: sessions_login_path, method: :post, html: {role: 'form'}) do |f| %>
-
-            <div class="form-group">
-              <%= f.label :email do %>
-                  <span class="glyphicon glyphicon-user"></span>登录名
-              <% end %>
-              <%= f.email_field :email, class: 'form-control', placeholder: "输入邮箱" %>
-            </div>
-
-            <div class="form-group">
-              <%= f.label :password do %>
-                  <span class="glyphicon glyphicon-eye-open"></span>密码
-              <% end %>
-              <%= f.password_field :password, class: 'form-control', placeholder: "密码" %>
-            </div>
-
-            <div class="checkbox">
-              <label><%= f.check_box :remember_me %>记住我</label>
-            </div>
-
-            <%= f.submit "登录", class: "btn btn-success btn-block" do %>
-                <span class="glyphicon glyphicon-off"></span>
-            <% end %>
-        <% end %>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-  $(document).ready(function () {
-    $("#login_panel").click(function () {
-      $("#panel_modal").modal();
-    });
-  });
-</script>
+<%= render "layouts/login_panel" %>
 
 
 

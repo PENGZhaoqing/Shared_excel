@@ -1,5 +1,10 @@
 class SupplierDb < ActiveRecord::Base
 
+  def self.search(params)
+    where('supplier_dbs.product LIKE ?', "%#{params[:product]}%")
+        .where('supplier_dbs.supplier LIKE ?', "%#{params[:supplier]}%")
+  end
+
   def self.filter(product)
     if product.nil? && !SupplierDb.all.blank?
       product=SupplierDb.first.product

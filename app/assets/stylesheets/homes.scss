@@ -4,7 +4,14 @@
   margin-bottom: 0px;
 }
 
-.modal-header, h4{
+.modal-header h4{
+  background-color: #5cb85c;
+  color:white !important;
+  text-align: center;
+  font-size: 30px;
+}
+
+.modal-header {
   background-color: #5cb85c;
   color:white !important;
   text-align: center;
@@ -12,9 +19,23 @@
 }
 
 
-.modal-footer{
-  background-color: #f9f9f9;
+#filter-header .modal-header{
+  background-color: #C0C0C0;
+  color:white !important;
+  text-align: center;
+  font-size: 30px;
 }
+
+#filter-header h4{
+  background-color: #C0C0C0;
+  color:white !important;
+  text-align: center;
+  font-size: 30px;
+}
+
+//.modal-footer{
+//  background-color: #f9f9f9;
+//}
 
 
 body{
@@ -22,8 +43,6 @@ body{
   //background-color: ghostwhite;
   padding:50px;
 }
-
-
 
 #login-dp{
   min-width: 300px;
@@ -35,6 +54,7 @@ body{
 #login-dp .help-block{
   font-size:12px
 }
+
 #login-dp .bottom{
   background-color:rgba(255,255,255,.8);
   border-top:1px solid #ddd;

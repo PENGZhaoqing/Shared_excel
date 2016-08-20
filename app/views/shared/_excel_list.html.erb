@@ -1,50 +1,55 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="text text-center text-muted" style="margin-top: 10px;margin-bottom: 10px;">上传历史</h3>
-  </div>
 
-  <div class="panel-body" style="min-height: 400px;max-height: 400px;overflow: scroll;">
-    <table class="table table-responsive table-condensed table-hover">
+<h4 class="text-muted">上传历史</h4>
+<hr>
 
+<%= form_for new_excel, url: path, html: {multipart: true} do |f| %>
+    <%= f.file_field :file, title: "选择文件", accept: 'application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' %>
+    <%= f.submit '上传', class: "btn btn-info" %>
+<% end %>
+
+<br>
+
+<table class="table table-responsive table-condensed table-hover">
+
+  <tr>
+    <th>文件</th>
+    <th>上传时间</th>
+    <th>文件大小</th>
+    <th></th>
+  </tr>
+  <tbody>
+  <% excels.each do |excel| %>
       <tr>
-        <th>文件</th>
-        <th>上传时间</th>
-        <th></th>
-        <th></th>
+        <td><span class="	glyphicon glyphicon-link"></span>
+          <%= excel.file_file_name %>
+        </td>
+        <td>
+          <%= excel.file_updated_at.strftime("%Y/%m/%d %H:%M") if !excel.file_updated_at.nil? %>
+        </td>
+
+        <td>
+          <%= number_to_human_size(excel.file_file_size) %>
+        </td>
+
+        <td>
+          <%= link_to '下载', excel.file.url(:original, false), class: 'btn-xs btn-success pull-right' %>
+        </td>
+        <td>
+          <%= link_to '删除', supplier_excel_path(excel), :method => :delete, :data => {confirm: '确定删除?'}, class: 'btn-xs btn-danger pull-right' %>
+        </td>
+
       </tr>
-      <tbody>
-      <% excels.each do |excel| %>
-          <tr>
-            <td><span class="	glyphicon glyphicon-link"></span>
-              <%= excel.file_file_name %>
-            </td>
-            <td>
-              <%= excel.file_updated_at.strftime("%Y/%m/%d %H:%M") if !excel.file_updated_at.nil? %>
-            </td>
-            <td>
-              <%= link_to '下载', excel.file.url(:original, false), class: 'btn-xs btn-success pull-right' %>
-            </td>
-            <td>
-              <%= link_to '删除', supplier_excel_path(excel), :method => :delete, :data => {confirm: '确定删除?'}, class: 'btn-xs btn-danger pull-right' %>
-            </td>
+  <% end %>
+  </tbody>
+</table>
 
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
+<%= will_paginate excels, :param_name => 'excel_page',
+                  :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
 
-    <%= will_paginate excels, :param_name => 'excel_page',
-                      :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
+<!--<div class="text-center">-->
 
-    <div class="text-center">
-      <%= form_for new_excel, url: path, html: {multipart: true} do |f| %>
-          <%= f.file_field :file, title: "选择文件", accept: 'application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' %>
-          <%= f.submit '上传', class: "btn btn-info" %>
-      <% end %>
-    </div>
+<!--</div>-->
 
-  </div>
-</div>
 
 <script type="text/javascript">
   $('input[type=file]').bootstrapFileInput();

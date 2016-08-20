@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "worksheet") do |sheet|
+  sheet.add_row ["产品名", "供应公司","供应数量","输出公司","输出数量"]
+  @stock_dbs.each do |db|
+    sheet.add_row [db.product, db.import_company, db.import_num,db.export_company,db.export_num]
+  end
+end

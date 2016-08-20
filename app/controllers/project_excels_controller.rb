@@ -1,8 +1,8 @@
-require 'roo'
-
 class ProjectExcelsController < ApplicationController
 
-  before_action :check_params,only:  :create
+  include SessionsHelper
+  before_action :admin_login
+  before_action :check_params, only: :create
 
   def create
     @project_excel = ProjectExcel.create(excel_params)
@@ -30,8 +30,9 @@ class ProjectExcelsController < ApplicationController
 
   def index
     @project_excels=ProjectExcel.paginate(:page => params[:excel_page], :per_page => 8).order('created_at DESC')
-    @project_dbs=ProjectDb.paginate(:page => params[:repertory_page], :per_page => 6)
     @project_excel=ProjectExcel.new
+    @new_users=User.new_users(true)
+    @users=User.new_users(false)
   end
 
   def destroy
@@ -60,6 +61,11 @@ class ProjectExcelsController < ApplicationController
   def excel_params
     params.require(:project_excel).permit(:file)
   end
+
+  def admin_login
+    admin?(current_user)
+  end
+
 
 
 end

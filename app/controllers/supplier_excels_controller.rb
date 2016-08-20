@@ -1,7 +1,7 @@
-require 'roo'
-
 class SupplierExcelsController < ApplicationController
 
+  include SessionsHelper
+  before_action :admin_login
   before_action :check_params, only: :create
 
   def create
@@ -24,9 +24,9 @@ class SupplierExcelsController < ApplicationController
 
   def index
     @supplier_excels=SupplierExcel.paginate(:page => params[:excel_page], :per_page => 8).order('created_at DESC')
-    @supplier_dbs=SupplierDb.filter(params[:label]).paginate(:page => params[:supplier_page], :per_page => 6)
     @supplier_excel=SupplierExcel.new
-    @supplier_labels=SupplierDb.label
+    @new_users=User.new_users(true)
+    @users=User.new_users(false)
   end
 
   def destroy
@@ -52,6 +52,10 @@ class SupplierExcelsController < ApplicationController
 
   def excel_params
     params.require(:supplier_excel).permit(:file)
+  end
+
+  def admin_login
+    admin?(current_user)
   end
 
 end

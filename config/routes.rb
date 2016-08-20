@@ -15,15 +15,36 @@ Rails.application.routes.draw do
   #   resources :products
 
   resources :supplier_excels, only: [:index, :destroy, :create]
-  resources :supplier_dbs, only: :index
-  resources :repertory_dbs, only: :index
-  resources :repertory_excels, only: [:index, :destroy, :create]
-  resources :project_dbs, only: :index
-  resources :project_excels, only: [:index, :destroy, :create]
-  resources :admins, only: :update
+  resources :supplier_dbs, only: :index do
+    collection do
+      get :export
+    end
+  end
 
-  post 'sessions/login' => 'sessions#create_admin'
-  delete 'sessions/logout' => 'sessions#destroy_admin'
+  resources :repertory_excels, only: [:index, :destroy, :create]
+  resources :repertory_dbs, only: :index do
+    collection do
+      get :export
+    end
+  end
+
+  resources :project_excels, only: [:index, :destroy, :create]
+  resources :project_dbs, only: :index do
+    collection do
+      get :export
+    end
+  end
+
+  resources :stock_excels, only: [:index, :destroy, :create]
+  resources :stock_dbs, only: :index do
+    collection do
+      get :export
+    end
+  end
+
+  resources :users, except: [:show]
+  post 'sessions/login' => 'sessions#create'
+  delete 'sessions/logout' => 'sessions#destroy'
 
 
   # Example resource route with options:

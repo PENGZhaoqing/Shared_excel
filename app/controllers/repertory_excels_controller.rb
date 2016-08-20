@@ -1,5 +1,7 @@
 class RepertoryExcelsController < ApplicationController
 
+  include SessionsHelper
+  before_action :admin_login
   before_action :check_params, only: :create
 
   def create
@@ -27,8 +29,9 @@ class RepertoryExcelsController < ApplicationController
 
   def index
     @repertory_excels=RepertoryExcel.paginate(:page => params[:excel_page], :per_page => 8).order('created_at DESC')
-    @repertory_dbs=RepertoryDb.paginate(:page => params[:repertory_page], :per_page => 6)
     @repertory_excel=RepertoryExcel.new
+    @new_users=User.new_users(true)
+    @users=User.new_users(false)
   end
 
   def destroy
@@ -50,10 +53,15 @@ class RepertoryExcelsController < ApplicationController
   end
 
 
+
   private
 
   def excel_params
     params.require(:repertory_excel).permit(:file)
+  end
+
+  def admin_login
+    admin?(current_user)
   end
 
 end

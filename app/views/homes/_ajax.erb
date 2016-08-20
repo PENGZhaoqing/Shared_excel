@@ -7,7 +7,7 @@
         <div class="panel-heading">
           <text class="lead">供应商展示</text>
           <%= button_to '详细', supplier_dbs_path, :method => :get, class: 'btn-sm btn-success pull-right' %>
-          <% if current_admin %>
+          <% if admin?(current_user) %>
               <%= button_to '管理', supplier_excels_path, :method => :get, class: 'btn-sm btn-info pull-right' %>
           <% end %>
 
@@ -21,7 +21,7 @@
         <div class="panel-heading">
           <text class="lead">新增立项数据</text>
           <%= button_to '详细', project_dbs_path, :method => :get, class: 'btn-sm btn-success pull-right' %>
-          <% if current_admin %>
+          <% if admin?(current_user) %>
               <%= button_to '管理', project_excels_path, :method => :get, class: 'btn-sm btn-info pull-right' %>
           <% end %>
         </div>
@@ -38,7 +38,7 @@
       <div class="panel-heading">
         <text class="lead">库存展示</text>
         <%= button_to '详细', repertory_dbs_path, :method => :get, class: 'btn-sm btn-success pull-right' %>
-        <% if current_admin %>
+        <% if admin?(current_user) %>
             <%= button_to '管理', repertory_excels_path, :method => :get, class: 'btn-sm btn-info pull-right' %>
         <% end %>
       </div>

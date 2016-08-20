@@ -4,8 +4,24 @@
       <div class="panel-heading">
         <h3 class="panel-title">库存明细</h3>
         <div class="pull-right">
-          <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> 筛选
-          </button>
+
+          <div class="row">
+            <div class="col-sm-5">
+              <%= form_tag export_repertory_dbs_path, :method => :get do %>
+                  <%= hidden_field_tag :name, params[:name] %>
+                  <%= hidden_field_tag :standard, params[:standard] %>
+                  <%= hidden_field_tag :supplier, params[:supplier] %>
+                  <%= button_tag(type: "submit", class: "btn btn-default btn-xs") do %>
+                      <span class="glyphicon glyphicon-floppy-save"></span> 导出
+                  <% end %>
+              <% end %>
+            </div>
+            <div class="col-sm-5">
+              <button id="filter" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-filter"></span>
+                筛选
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -47,54 +63,63 @@
         <%= will_paginate @repertory_dbs, :param_name => 'page',
                           :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
 
-
       </div>
     </div>
   </div>
 </div>
 
-<script style="text/javascript">
 
+<!-- Modal -->
+<div class="modal fade" id="filter_modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div id="filter-header">
+        <div class="modal-header" style="padding:35px 50px;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4><span class="glyphicon glyphicon-filter"></span> 筛选</h4>
+        </div>
+      </div>
+      <div class="modal-body" style="padding:30px 50px;">
+
+        <%= form_tag repertory_dbs_path, :method => 'get', role: 'form', class: "form-horizontal" do %>
+            <div class="form-group">
+              <%= label_tag :name, "产品", class: "control-label col-sm-2" %>
+              <div class="col-sm-10">
+                <%= text_field_tag :name, params[:name], placeholder: "产品", class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= label_tag :standard, "规格", class: "control-label col-sm-2" %>
+              <div class="col-sm-10">
+                <%= text_field_tag :standard, params[:standard], placeholder: "规格", class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= label_tag :supplier, "供应商", class: "control-label col-sm-2" %>
+              <div class="col-sm-10">
+                <%= text_field_tag :supplier, params[:supplier], placeholder: "供应商", class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <%= button_tag(type: "submit", class: "btn btn-default btn-block") do %>
+                  <span class="glyphicon glyphicon-search"></span>查找
+              <% end %>
+            </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
   $(document).ready(function () {
-    $('.filterable .btn-filter').click(function () {
-      var $panel = $(this).parents('.filterable'),
-          $filters = $panel.find('.filters input'),
-          $tbody = $panel.find('.table tbody');
-      if ($filters.prop('disabled') == true) {
-        $filters.prop('disabled', false);
-        $filters.first().focus();
-      } else {
-        $filters.val('').prop('disabled', true);
-        $tbody.find('.no-result').remove();
-        $tbody.find('tr').show();
-      }
-    });
-
-    $('.filterable .filters input').keyup(function (e) {
-      /* Ignore tab key */
-      var code = e.keyCode || e.which;
-      if (code == '9') return;
-      /* Useful DOM data and selectors */
-      var $input = $(this),
-          inputContent = $input.val().toLowerCase(),
-          $panel = $input.parents('.filterable'),
-          column = $panel.find('.filters th').index($input.parents('th')),
-          $table = $panel.find('.table'),
-          $rows = $table.find('tbody tr');
-      /* Dirtiest filter function ever ;) */
-      var $filteredRows = $rows.filter(function () {
-        var value = $(this).find('td').eq(column).text().toLowerCase();
-        return value.indexOf(inputContent) === -1;
-      });
-      /* Clean previous no-result if exist */
-      $table.find('tbody .no-result').remove();
-      /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
-      $rows.show();
-      $filteredRows.hide();
-      /* Prepend no-result row if all rows are filtered */
-      if ($filteredRows.length === $rows.length) {
-        $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="' + $table.find('.filters th').length + '">No result found</td></tr>'));
-      }
+    $("#filter").click(function () {
+      $("#filter_modal").modal();
     });
   });
 </script>

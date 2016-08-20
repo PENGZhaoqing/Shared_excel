@@ -1,20 +1,20 @@
 class SessionsController < ApplicationController
   include SessionsHelper
 
-  def create_admin
-    admin = Admin.find_by(email: params[:session][:email].downcase)
-    if admin && admin.authenticate(params[:session][:password])
-      admin_log_in admin
-      params[:session][:remember_me] == '1' ? remember_admin(admin) : forget_admin(admin)
-       flash= {:info => "欢迎登录: #{admin.name} :)"}
+  def create
+    user = User.find_by(email: params[:session][:email].downcase)
+    if user && user.authenticate(params[:session][:password])
+      log_in user
+      params[:session][:remember_me] == '1' ? remember_user(user) : forget_user(user)
+       flash= {:info => "欢迎登录: #{user.name} :)"}
     else
       flash= { :danger => '账号或密码错误' }
     end
-      redirect_to root_url(login_role: 'admin'), :flash =>flash
+      redirect_to root_url, :flash =>flash
   end
 
-  def destroy_admin
-    admin_log_out if admin_logged_in?
+  def destroy
+    log_out if logged_in?
     redirect_to root_url
   end
 

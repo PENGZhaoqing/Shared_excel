@@ -11,16 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160723113257) do
-
-  create_table "admins", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "password_digest"
-    t.string   "remember_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
+ActiveRecord::Schema.define(version: 20160820115544) do
 
   create_table "project_dbs", force: :cascade do |t|
     t.string   "company"
@@ -62,6 +53,25 @@ ActiveRecord::Schema.define(version: 20160723113257) do
     t.datetime "updated_at",        null: false
   end
 
+  create_table "stock_dbs", force: :cascade do |t|
+    t.string   "product"
+    t.string   "import_company"
+    t.string   "import_num"
+    t.string   "export_company"
+    t.string   "export_num"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "stock_excels", force: :cascade do |t|
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
   create_table "supplier_dbs", force: :cascade do |t|
     t.string   "product"
     t.string   "supplier"
@@ -77,5 +87,20 @@ ActiveRecord::Schema.define(version: 20160723113257) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "role"
+    t.string   "company"
+    t.string   "password_digest"
+    t.string   "remember_digest"
+    t.boolean  "admin",           default: false
+    t.boolean  "new",             default: true
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
 
 end
