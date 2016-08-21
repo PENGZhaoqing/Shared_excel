@@ -1,4 +1,5 @@
 class StockDbsController < ApplicationController
+
   def index
     @stock_dbs=StockDb.search(search_params).paginate(:page => params[:page],:per_page => 20)
   end

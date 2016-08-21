@@ -37,7 +37,7 @@ module SessionsHelper
   end
 
   def remember_user(user)
-    user.admin_remember
+    user.user_remember
     # Because it places the id as plain text, this method exposes the form of the application’s cookies
     # and makes it easier for an attacker to compromise user accounts. To avoid this problem,
     # we’ll use a signed cookie, which securely encrypts the cookie before placing it on the browser:

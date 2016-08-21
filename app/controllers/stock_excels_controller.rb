@@ -15,7 +15,7 @@ class StockExcelsController < ApplicationController
       stockdb=StockDb.new
       stockdb.product=workbook.row(row_index)[1]
       stockdb.import_company=workbook.row(row_index)[2]
-      stockdb.export_num=workbook.row(row_index)[3]
+      stockdb.import_num=workbook.row(row_index)[3]
       stockdb.export_company=workbook.row(row_index)[4]
       stockdb.export_num=workbook.row(row_index)[5]
       stockdb.save
