@@ -14,37 +14,92 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  resources :supplier_excels, only: [:index, :destroy, :create]
+  resources :supplier_excels, only: [:index, :destroy, :create] do
+    collection do
+      get :clean
+    end
+    member do
+      get :parse
+    end
+  end
+
   resources :supplier_dbs, only: :index do
     collection do
       get :export
     end
   end
 
-  resources :repertory_excels, only: [:index, :destroy, :create]
+  resources :repertory_excels, only: [:index, :destroy, :create] do
+    collection do
+      get :clean
+    end
+    member do
+      get :parse
+    end
+  end
+
   resources :repertory_dbs, only: :index do
     collection do
       get :export
     end
   end
 
-  resources :project_excels, only: [:index, :destroy, :create]
+  resources :project_excels, only: [:index, :destroy, :create] do
+    collection do
+      get :clean
+    end
+    member do
+      get :parse
+    end
+  end
+
+
   resources :project_dbs, only: :index do
     collection do
       get :export
     end
   end
 
-  resources :stock_excels, only: [:index, :destroy, :create]
+  resources :stock_excels, only: [:index, :destroy, :create] do
+    collection do
+      get :clean
+    end
+    member do
+      get :parse
+    end
+  end
+
   resources :stock_dbs, only: :index do
     collection do
       get :export
     end
   end
 
-  resources :users, except: [:show]
+  resources :mapping_excels, only: [:index, :destroy, :create] do
+    collection do
+      get :clean
+    end
+    member do
+      get :parse
+    end
+  end
+
+  resources :mapping_dbs, only: :index do
+    collection do
+      get :export
+    end
+  end
+
+  resources :users, except: [:show] do
+    member do
+      patch :admin_update
+    end
+  end
+
   post 'sessions/login' => 'sessions#create'
+  post 'sessions/visit' => 'sessions#visit'
   delete 'sessions/logout' => 'sessions#destroy'
+  delete 'sessions/visit_out' => 'sessions#destroy_visit'
 
 
   # Example resource route with options:

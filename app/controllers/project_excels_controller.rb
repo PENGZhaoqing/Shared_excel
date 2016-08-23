@@ -6,10 +6,19 @@ class ProjectExcelsController < ApplicationController
 
   def create
     @project_excel = ProjectExcel.create(excel_params)
+    flash="文件:#{@project_excel.file_file_name} 已经成功上传"
+    redirect_to project_excels_path, flash: {success: flash}
+  end
+
+  def clean
+    ProjectDb.delete_all
+    redirect_to project_excels_path, flash: {success: "立项数据已全部清空"}
+  end
+
+  def parse
+    @project_excel=ProjectExcel.find_by(id: params[:id])
     workbook=Roo::Excelx.new(@project_excel.file.path)
     workbook.default_sheet = workbook.sheets[0]
-
-    ProjectDb.delete_all
 
     ((workbook.first_row + 4)..workbook.last_row).each do |row_index|
       projectdb=ProjectDb.new
@@ -22,17 +31,11 @@ class ProjectExcelsController < ApplicationController
       projectdb.end_at=workbook.row(row_index)[8]
       projectdb.save
     end
-
-    flash="文件:#{@project_excel.file_file_name} 已经成功上传"
-    redirect_to project_excels_path, flash: {success: flash}
-
+    redirect_to project_excels_path, flash: {success: "Excel文件中的数据已成功解析"}
   end
 
   def index
     @project_excels=ProjectExcel.paginate(:page => params[:excel_page], :per_page => 8).order('created_at DESC')
-    @project_excel=ProjectExcel.new
-    @new_users=User.new_users(true)
-    @users=User.new_users(false)
   end
 
   def destroy
@@ -42,18 +45,18 @@ class ProjectExcelsController < ApplicationController
     redirect_to project_excels_path, flash: {success: flash}
   end
 
+  private
+
   def check_params
     if params[:project_excel].nil?
       flash="请选择要上传的文件"
       redirect_to project_excels_path, flash: {warning: flash}
-    elsif !["application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","application/octet-stream"]
+    elsif !["application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/octet-stream"]
                .include?(params[:project_excel][:file].content_type)
       flash="请上传excel格式的文件(xlsx/xlsm/xls)"
       redirect_to project_excels_path, flash: {danger: flash}
     end
   end
-
-  private
 
 # Use strong_parameters for attribute whitelisting
 # Be sure to update your create() and update() controller methods.
@@ -65,7 +68,5 @@ class ProjectExcelsController < ApplicationController
   def admin_login
     admin?(current_user)
   end
-
-
 
 end

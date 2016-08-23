@@ -6,30 +6,38 @@ class StockExcelsController < ApplicationController
 
   def create
     @stock_excel = StockExcel.create(excel_params)
-    workbook=Roo::Spreadsheet.open(@stock_excel.file.path)
-    workbook.default_sheet = workbook.sheets[0]
-
-    StockDb.delete_all
-
-    ((workbook.first_row + 1)..workbook.last_row).each do |row_index|
-      stockdb=StockDb.new
-      stockdb.product=workbook.row(row_index)[1]
-      stockdb.import_company=workbook.row(row_index)[2]
-      stockdb.import_num=workbook.row(row_index)[3]
-      stockdb.export_company=workbook.row(row_index)[4]
-      stockdb.export_num=workbook.row(row_index)[5]
-      stockdb.save
-    end
-
     flash="文件:#{@stock_excel.file_file_name} 已经成功上传"
     redirect_to stock_excels_path, flash: {success: flash}
   end
 
   def index
     @stock_excels=StockExcel.paginate(:page => params[:stock_page], :per_page => 8).order('created_at DESC')
-    @stock_excel=StockExcel.new
-    @new_users=User.new_users(true)
-    @users=User.new_users(false)
+  end
+
+  def clean
+    StockDb.delete_all
+    redirect_to stock_excels_path, flash: {success: "出库数据已全部清空"}
+  end
+
+  def parse
+    @stock_excel=StockExcel.find_by(id: params[:id])
+    workbook=Roo::Spreadsheet.open(@stock_excel.file.path)
+    workbook.default_sheet = workbook.sheets[0]
+
+    ((workbook.first_row + 1)..workbook.last_row).each do |row_index|
+      stockdb=StockDb.new
+      stockdb.complete_time=workbook.row(row_index)[12]
+      stockdb.client_name=workbook.row(row_index)[13]
+      stockdb.product_code=workbook.row(row_index)[19]
+      stockdb.product_name=workbook.row(row_index)[20]
+      stockdb.standard=workbook.row(row_index)[22]
+      stockdb.kind=workbook.row(row_index)[37]
+      stockdb.supplier=workbook.row(row_index)[39]
+      stockdb.export_num=workbook.row(row_index)[41]
+      stockdb.save
+    end
+
+    redirect_to stock_excels_path, flash: {success: "Excel文件中的数据已成功解析"}
   end
 
   def destroy
@@ -39,19 +47,19 @@ class StockExcelsController < ApplicationController
     redirect_to stock_excels_path, flash: {success: flash}
   end
 
+  private
+
+
   def check_params
     if params[:stock_excel].nil?
       flash="请选择要上传的文件"
       redirect_to stock_excels_path, flash: {warning: flash}
-    elsif !["application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","application/octet-stream"]
+    elsif !["application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/octet-stream"]
                .include?(params[:stock_excel][:file].content_type)
       flash="请上传excel格式的文件(xlsx/xlsm)"
       redirect_to stock_excels_path, flash: {danger: flash}
     end
   end
-
-
-  private
 
   def excel_params
     params.require(:stock_excel).permit(:file)

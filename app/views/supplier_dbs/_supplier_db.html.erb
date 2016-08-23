@@ -1,7 +1,7 @@
 <div class="container">
   <div class="panel panel-primary filterable">
     <div class="panel-heading">
-      <h3 class="panel-title">供应商</h3>
+      <h3 class="panel-title">遴选信息</h3>
       <div class="pull-right">
         <div class="row">
           <div class="col-sm-5">
@@ -20,11 +20,9 @@
           </div>
         </div>
       </div>
-
-
     </div>
 
-    <div class="panel-body" style="min-height:750px;max-height: 750px;overflow: scroll;">
+    <div class="panel-body" style="min-height:750px">
       <table class="table table-responsive table-condensed table-hover">
         <thead>
         <tr class="filters">
@@ -43,6 +41,7 @@
               <td>
                 <text style="font-size: small"><%= dbs.supplier %></text>
               </td>
+
             </tr>
         <% end %>
 
@@ -60,7 +59,6 @@
   </div>
 </div>
 
-
 <!-- Modal -->
 <div class="modal fade" id="filter_modal" role="dialog">
   <div class="modal-dialog">
@@ -74,7 +72,6 @@
         </div>
       </div>
       <div class="modal-body" style="padding:30px 50px;">
-
 
         <%= form_tag supplier_dbs_path, :method => 'get', role: 'form', class: "form-horizontal" do %>
             <div class="form-group">
@@ -96,9 +93,7 @@
                   <span class="glyphicon glyphicon-search"></span>查找
               <% end %>
             </div>
-
         <% end %>
-
       </div>
     </div>
   </div>

@@ -22,8 +22,8 @@ class User < ActiveRecord::Base
     User.where("role = :type",type: type)
   end
 
-  def self.new_users(flag)
-    User.where("new = :type",type: flag)
+  def self.none_hidden_users
+    User.where("hidden = :type",type: false)
   end
 
   # Returns the hash digest of the given string.
@@ -41,7 +41,6 @@ class User < ActiveRecord::Base
     self.remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(remember_token))
   end
-
 
   def user_forget
     update_attribute(:remember_digest, nil)

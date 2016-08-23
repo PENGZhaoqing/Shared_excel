@@ -1,4 +1,5 @@
 <div class="panel-group" id="accordion">
+
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
@@ -10,30 +11,23 @@
       <ul class="list-group">
 
         <li class="list-group-item">
-          <%= link_to users_path(new: true) do %>
-              <span class="glyphicon glyphicon-chevron-right"></span> 新增用户
-              <span class="label label-info pull-right"><%= @new_users.count %></span>
+          <%= link_to users_path do %>
+              <span class="glyphicon glyphicon-chevron-right"></span> 用户列表
+              <span class="label label-info pull-right"><%= User.none_hidden_users.length %></span>
           <% end %>
         </li>
-
-        <li class="list-group-item">
-          <%= link_to users_path(new: false) do %>
-              <span class="glyphicon glyphicon-chevron-right"></span> 已有用户
-              <span class="label label-info pull-right"><%= @users.count %></span>
-          <% end %>
-        </li>
-
       </ul>
     </div>
   </div>
+
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-folder-close">
-                    </span> 信息管理</a>
+                    </span> 数据管理</a>
       </h4>
     </div>
-    <div id="collapseFour" class="panel-collapse collapse <%= "in" if params[:controller]!="users" %>">
+    <div id="collapseFour" class="panel-collapse collapse <%= "in" if ["stock_excels", "project_excels", "repertory_excels", "supplier_excels"].include?(params[:controller]) %>">
       <div class="list-group">
 
         <li class="list-group-item">
@@ -56,7 +50,7 @@
 
         <li class="list-group-item">
           <%= link_to stock_excels_path do %>
-              <span class="glyphicon glyphicon-chevron-right"></span> 出入库数据管理
+              <span class="glyphicon glyphicon-chevron-right"></span> 出库数据管理
           <% end %>
         </li>
 
@@ -64,4 +58,30 @@
     </div>
   </div>
 
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-list">
+                    </span> 授权码管理</a>
+      </h4>
+    </div>
+
+    <div id="collapseTwo" class="panel-collapse collapse <%= "in" if ["mapping_excels", "mapping_dbs"].include?(params[:controller]) %> %>">
+
+      <div class="list-group">
+        <li class="list-group-item">
+          <%= link_to mapping_excels_path do %>
+              <span class="glyphicon glyphicon-chevron-right"></span> 映射文件管理
+          <% end %>
+        </li>
+
+        <li class="list-group-item">
+          <%= link_to mapping_dbs_path  do %>
+              <span class="glyphicon glyphicon-chevron-right"></span> 授权码列表
+          <% end %>
+        </li>
+
+      </div>
+    </div>
+  </div>
 </div>

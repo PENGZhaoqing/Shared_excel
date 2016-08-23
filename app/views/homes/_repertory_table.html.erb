@@ -4,6 +4,7 @@
   <tr>
     <th>名称</th>
     <th>规格</th>
+    <th>供应商</th>
     <th>库存数量</th>
   </tr>
 
@@ -14,7 +15,10 @@
           <%= truncate(db.name,length: 25) %>
         </td>
         <td>
-          <%= truncate(db.standard,length: 10) %>
+          <%= truncate(db.standard,length: 25) %>
+        </td>
+        <td>
+          <%= db.supplier %>
         </td>
         <td>
           <%= db.num%>

@@ -1,7 +1,7 @@
 module SessionsHelper
 
-  def log_in(admin)
-    session[:user_id] = admin.id
+  def log_in(user)
+    session[:user_id] = user.id
   end
 
   def logged_in?
@@ -12,7 +12,7 @@ module SessionsHelper
   def log_out
     forget_user(current_user)
     session.delete(:user_id)
-    @current_admin = nil
+    @current_visit = nil
   end
 
   def admin?(user)
@@ -27,7 +27,7 @@ module SessionsHelper
   def current_user
     if session[:user_id]
       @current_user||= User.find_by(id: session[:user_id])
-    elsif cookies.signed[:admin_id]
+    elsif cookies.signed[:user_id]
       user = User.find_by(id: cookies.signed[:user_id])
       if user && user.user_authenticated?(:remember, cookies[:remember_token])
         log_in user
@@ -41,7 +41,7 @@ module SessionsHelper
     # Because it places the id as plain text, this method exposes the form of the application’s cookies
     # and makes it easier for an attacker to compromise user accounts. To avoid this problem,
     # we’ll use a signed cookie, which securely encrypts the cookie before placing it on the browser:
-    cookies.signed[:admin_id] = {value: user.id, expires: 1.years.from_now.utc}
+    cookies.signed[:user_id] = {value: user.id, expires: 1.years.from_now.utc}
     cookies[:remember_token] = {value: user.remember_token, expires: 1.years.from_now.utc}
   end
 
@@ -54,5 +54,29 @@ module SessionsHelper
   def current_user?(user)
     user == current_user
   end
+
+
+  def login_visit(mappingdb)
+    session[:visit_id]=mappingdb.id
+  end
+
+  def current_visit
+    if session[:visit_id]
+      @current_visit||= MappingDb.find_by(id: session[:visit_id])
+    end
+  end
+
+  def log_out_visit
+    session.delete(:visit_id)
+    @current_visit = nil
+  end
+
+  def logged_in_visit?
+    !current_visit.nil?
+  end
+
+
+
+
 
 end

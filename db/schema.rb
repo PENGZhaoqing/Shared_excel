@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160820115544) do
+ActiveRecord::Schema.define(version: 20160822054131) do
+
+  create_table "mapping_dbs", force: :cascade do |t|
+    t.string   "supplier1"
+    t.string   "supplier2"
+    t.string   "auth_token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "mapping_excels", force: :cascade do |t|
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
 
   create_table "project_dbs", force: :cascade do |t|
     t.string   "company"
@@ -37,11 +54,12 @@ ActiveRecord::Schema.define(version: 20160820115544) do
   create_table "repertory_dbs", force: :cascade do |t|
     t.string   "name"
     t.string   "standard"
-    t.string   "kind"
     t.integer  "num"
     t.string   "supplier"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "product_code"
+    t.string   "product_kind"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "repertory_excels", force: :cascade do |t|
@@ -54,13 +72,16 @@ ActiveRecord::Schema.define(version: 20160820115544) do
   end
 
   create_table "stock_dbs", force: :cascade do |t|
-    t.string   "product"
-    t.string   "import_company"
-    t.string   "import_num"
-    t.string   "export_company"
-    t.string   "export_num"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "complete_time"
+    t.string   "client_name"
+    t.string   "product_code"
+    t.string   "product_name"
+    t.string   "standard"
+    t.string   "kind"
+    t.string   "supplier"
+    t.integer  "export_num"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "stock_excels", force: :cascade do |t|
@@ -91,12 +112,11 @@ ActiveRecord::Schema.define(version: 20160820115544) do
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
-    t.string   "role"
     t.string   "company"
     t.string   "password_digest"
     t.string   "remember_digest"
     t.boolean  "admin",           default: false
-    t.boolean  "new",             default: true
+    t.boolean  "hidden",          default: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
   end

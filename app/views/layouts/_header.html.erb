@@ -10,10 +10,16 @@
       <ul class="nav navbar-nav">
 
         <li class=<%= "active" if params[:controller]=="homes" %>> <%= link_to "主页", root_path %></li>
-        <li class=<%= "active" if params[:controller]=="supplier_dbs" %>> <%= link_to "供应商资料", supplier_dbs_path %></li>
+        <li class=<%= "active" if params[:controller]=="supplier_dbs" %>> <%= link_to "遴选信息", supplier_dbs_path %></li>
         <li class= <%= "active" if params[:controller]=="project_dbs" %>> <%= link_to "立项数据", project_dbs_path %></li>
-        <li class=<%= "active" if params[:controller]=="repertory_dbs" %>> <%= link_to "库存明细", repertory_dbs_path %></li>
-        <li class=<%= "active" if params[:controller]=="stock_dbs" %>> <%= link_to "出入库明细", stock_dbs_path %></li>
+
+        <% if current_user || current_visit %>
+            <li class=<%= "active" if params[:controller]=="repertory_dbs" %>> <%= link_to "库存明细", repertory_dbs_path %></li>
+        <% end %>
+
+        <% if current_user || current_visit %>
+            <li class=<%= "active" if params[:controller]=="stock_dbs" %>> <%= link_to "出库明细", stock_dbs_path %></li>
+        <% end %>
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -42,23 +48,36 @@
 
             <% if admin?(current_user) %>
                 <li>
-                  <%= link_to users_path(new: true), method: :get do %>
+                  <%= link_to users_path, method: :get do %>
                       后台管理 <span class="glyphicon glyphicon-eye-open"></span>
                   <% end %>
                 </li>
             <% end %>
 
-
             <li>
               <%= link_to sessions_logout_path, method: :delete do %>
-                  <span class="	glyphicon glyphicon-log-out"></span>
+                  退出 <span class="	glyphicon glyphicon-off"></span>
+              <% end %>
+            </li>
+
+        <% elsif current_visit %>
+
+            <li>
+              <%= link_to do %>
+                  <span class="glyphicon glyphicon-home"></span> <%= current_visit.supplier1 %>
+              <% end %>
+            </li>
+
+            <li>
+              <%= link_to sessions_visit_out_path, method: :delete do %>
+                   退出 <span class="	glyphicon glyphicon-off"></span>
               <% end %>
             </li>
 
         <% else %>
             <li>
-              <button type="button" id="login_panel" class="btn btn-link navbar-btn">
-                <span class="glyphicon glyphicon-log-in"></span>登录
+              <button type="button" id="login_panel" class="btn btn-link navbar-btn" style="color: #BBBBBB">
+                <span class="glyphicon glyphicon-log-in"></span> 登录
               </button>
             </li>
         <% end %>

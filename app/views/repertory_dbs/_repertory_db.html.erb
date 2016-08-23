@@ -9,8 +9,10 @@
             <div class="col-sm-5">
               <%= form_tag export_repertory_dbs_path, :method => :get do %>
                   <%= hidden_field_tag :name, params[:name] %>
-                  <%= hidden_field_tag :standard, params[:standard] %>
                   <%= hidden_field_tag :supplier, params[:supplier] %>
+                  <%= hidden_field_tag :standard, params[:standard] %>
+                  <%= hidden_field_tag :product_code, params[:product_code] %>
+                  <%= hidden_field_tag :product_kind, params[:product_kind] %>
                   <%= button_tag(type: "submit", class: "btn btn-default btn-xs") do %>
                       <span class="glyphicon glyphicon-floppy-save"></span> 导出
                   <% end %>
@@ -25,13 +27,15 @@
         </div>
       </div>
 
-      <div class="panel-body" style="min-height:750px;max-height: 750px;overflow: scroll;">
+      <div class="panel-body" style="min-height:750px">
 
         <table class="table table-responsive table-condensed table-hover">
           <thead>
           <tr class="filters">
             <th><input type="text" class="form-control" placeholder="产品名" disabled></th>
             <th><input type="text" class="form-control" placeholder="规格" disabled></th>
+            <th><input type="text" class="form-control" placeholder="物料编码" disabled></th>
+            <th><input type="text" class="form-control" placeholder="物资类别" disabled></th>
             <th><input type="text" class="form-control" placeholder="供应商" disabled></th>
             <th><input type="text" class="form-control" placeholder="库存数量" disabled></th>
 
@@ -47,6 +51,12 @@
                 </td>
                 <td>
                   <text style="font-size: small"><%= db.standard %></text>
+                </td>
+                <td>
+                  <text style="font-size: small"><%= db.product_code %></text>
+                </td>
+                <td>
+                  <text style="font-size: small"><%= db.product_kind %></text>
                 </td>
                 <td>
                   <text style="font-size: small"><%= db.supplier %></text>
@@ -101,6 +111,20 @@
               <%= label_tag :supplier, "供应商", class: "control-label col-sm-2" %>
               <div class="col-sm-10">
                 <%= text_field_tag :supplier, params[:supplier], placeholder: "供应商", class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= label_tag :product_code, "物料编码", class: "control-label col-sm-2" %>
+              <div class="col-sm-10">
+                <%= text_field_tag :product_code, params[:product_code], placeholder: "物料编码", class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= label_tag :product_kind, "物资类别", class: "control-label col-sm-2" %>
+              <div class="col-sm-10">
+                <%= text_field_tag :product_kind, params[:product_kind], placeholder: "物资类别", class: 'form-control' %>
               </div>
             </div>
 

@@ -1,7 +1,7 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "worksheet") do |sheet|
-  sheet.add_row ["产品名", "规格","供应商","库存数量"]
+  sheet.add_row ["产品名", "供应商","规格","物料编码","物资类别","库存数量"]
   @repertory_dbs.each do |db|
-    sheet.add_row [db.name, db.standard, db.supplier,db.num]
+    sheet.add_row [db.name, db.supplier,db.standard, db.product_code,db.product_kind,db.num]
   end
 end

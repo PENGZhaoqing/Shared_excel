@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   include SessionsHelper
-  before_action :logged_in, except: [:new, :create]
-  # before_action :correct_user, except: [:new, :create,:dashboard]
-  before_action :set_user
+  before_action :logged_in, only: :update
+  before_action :correct_user, only: :update
+  before_action :admin_logged_in, only: [:admin_update, :index, :destroy]
 
   def new
     @user=User.new
@@ -19,31 +19,42 @@ class UsersController < ApplicationController
   end
 
   def index
-    @new_users=User.new_users(true).paginate(:page => params[:new_users_page], :per_page => 10)
-    @users=User.new_users(false).paginate(:page => params[:users_page], :per_page => 10)
-    if !params[:user_id].blank?
+    @users=User.none_hidden_users.paginate(:page => params[:users_page], :per_page => 10)
+    unless params[:user_id].blank?
       @user=User.find_by(id: params[:user_id].to_i)
     end
   end
 
-
-  def update
+  def admin_update
+    @user = User.find_by_id(params[:id])
     if @user.update_attributes(user_params)
       flash={:info => "更新成功"}
     else
       flash={:warning => "更新失败"}
     end
 
-    if admin?(current_user) && @user.id!=current_user.id
-      @user.update_attribute(:new, false)
-      @user.update_attribute(:role, params[:user][:role])
-      redirect_to users_path(new: false), flash: flash
-    else
-      redirect_to root_path, flash: flash
+    if @user.id!=current_user.id
+      if params[:user][:admin]=="管理员"
+        @user.update_attribute(:admin, true)
+      elsif params[:user][:admin]=="普通"
+        @user.update_attribute(:admin, false)
+      end
     end
+    redirect_to users_path, flash: flash
+  end
+
+  def update
+    @user = User.find_by_id(params[:id])
+    if @user.update_attributes(user_params)
+      flash={:info => "更新成功"}
+    else
+      flash={:warning => "更新失败"}
+    end
+    redirect_to root_path, flash: flash
   end
 
   def destroy
+    @user = User.find_by_id(params[:id])
     @user.destroy
     redirect_to users_path(new: false), flash: {success: "用户删除"}
   end
@@ -55,7 +66,6 @@ class UsersController < ApplicationController
                                  :password_confirmation)
   end
 
-
   # Confirms a logged-in user.
   def logged_in
     unless logged_in?
@@ -63,6 +73,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def admin_logged_in
+    unless admin?(current_user)
+      redirect_to root_url, flash: {danger: '请登陆'}
+    end
+  end
 
   # Confirms the correct user.
   def correct_user
@@ -72,8 +87,5 @@ class UsersController < ApplicationController
     end
   end
 
-  def set_user
-    @user = User.find_by_id(params[:id])
-  end
 
 end

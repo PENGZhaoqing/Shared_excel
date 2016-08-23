@@ -4,13 +4,12 @@ class CreateUsers < ActiveRecord::Migration
 
       t.string :name
       t.string :email
-      t.string :role
       t.string :company
       t.string :password_digest
       t.string :remember_digest
-      t.boolean :admin, default: false
-      t.boolean :new, default: true
 
+      t.boolean :admin, default: false
+      t.boolean :hidden, default: false
       t.timestamps null: false
     end
 
