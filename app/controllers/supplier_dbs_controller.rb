@@ -5,7 +5,7 @@ class SupplierDbsController < ApplicationController
 
   def export
     @supplier_dbs=SupplierDb.search(search_params)
-    render xlsx: "导出_#{DateTime.now.to_date}", template: "supplier_dbs/export.xlsx.axlsx"
+    render xlsx: "供应商数据_#{DateTime.now}", template: "supplier_dbs/export.xlsx.axlsx"
   end
 
   private

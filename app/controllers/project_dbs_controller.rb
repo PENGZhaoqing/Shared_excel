@@ -6,7 +6,7 @@ class ProjectDbsController < ApplicationController
 
   def export
     @project_dbs=ProjectDb.search(search_params)
-    render xlsx: "导出_#{DateTime.now.to_date}", template: "project_dbs/export.xlsx.axlsx"
+    render xlsx: "立项数据_#{DateTime.now}", template: "project_dbs/export.xlsx.axlsx"
   end
 
   private

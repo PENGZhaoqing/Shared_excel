@@ -8,7 +8,7 @@ class MappingDbsController < ApplicationController
 
   def export
     @mapping_dbs=MappingDb.search(search_params)
-    render xlsx: "导出_#{DateTime.now}", template: "mapping_dbs/export.xlsx.axlsx"
+    render xlsx: "供应商映射_#{DateTime.now}", template: "mapping_dbs/export.xlsx.axlsx"
   end
 
   private

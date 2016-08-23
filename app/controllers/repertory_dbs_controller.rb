@@ -18,7 +18,7 @@ class RepertoryDbsController < ApplicationController
     elsif logged_in?
       @repertory_dbs=RepertoryDb.search(search_params)
     end
-    render xlsx: "导出_#{DateTime.now.to_date}", template: "repertory_dbs/export.xlsx.axlsx"
+    render xlsx: "库存数据_#{DateTime.now}", template: "repertory_dbs/export.xlsx.axlsx"
   end
 
   private

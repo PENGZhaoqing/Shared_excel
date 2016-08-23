@@ -18,7 +18,7 @@ class StockDbsController < ApplicationController
     elsif logged_in?
       @stock_dbs=StockDb.search(search_params)
     end
-    render xlsx: "导出_#{DateTime.now.to_date}", template: "stock_dbs/export.xlsx.axlsx"
+    render xlsx: "出库数据_#{DateTime.now}", template: "stock_dbs/export.xlsx.axlsx"
   end
 
   private
