@@ -1,11 +1,16 @@
-== README
+# VMI_InfoSharing
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple and lightweight web app for sharing the data of VMI (Ventor Managed Inventory)
 
-Things you may want to cover:
+## Dependencies
+* [Bundler](http://bundler.io/)
+* [Git](https://help.github.com/articles/set-up-git)
+* [Rails 4.2.x](http://rubyonrails.org/download)
+* [RubyGems](https://rubygems.org/)
+* [Ruby 2.2.x](https://www.ruby-lang.org/en/downloads/)
 
-* Ruby version
+
+
 
 * System dependencies
 
