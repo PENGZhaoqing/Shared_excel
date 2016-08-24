@@ -15,25 +15,25 @@ A simple and lightweight web app for sharing the data of VMI (Ventor Managed Inv
 
 ## Installation
 1. Enter the path you want to put your code in
-```
-cd myapp
-```
+
+        $ cd myapp
 
 2. Clone the code file into your local machine, you will be require to install git first
-```
-git clone https://github.com/PENGZhaoqing/VMI_InfoSharing
-```
+
+
+        $ git clone https://github.com/PENGZhaoqing/VMI_InfoSharing
+
 
 3. Enter the root path of cloned code
-```
-cd VMI_InfoSharing
-```
+
+        $ cd VMI_InfoSharing
+
 4. Install the all dependent libraries used by this project
-```
-bundle install
-```
+
+        $ bundle install
+
 5. Excute the following code to start the web server, 
-```
-rails server
-```
+
+        $ rails server
+
 6. Using a browser, go to `http://localhost:3000` and you'll see this project is being hosted.
