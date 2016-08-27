@@ -30,10 +30,18 @@ A simple and lightweight web app for sharing the data of VMI (Ventor Managed Inv
 
 4. Install the all dependent libraries used by this project
 
-        $ bundle install
+        $  bundle install
 
-5. Excute the following code to start the web server, 
+5. Rake database migration 
+
+        $  rake db:migrate
+
+6. load the seed data
+
+        $  rake db:seed
+
+7. Excute the following code to start the web server, 
 
         $ rails server
 
-6. Using a browser, go to `http://localhost:3000` and you'll see this project is being hosted.
+8. Using a browser, go to `http://localhost:3000` and you'll see this project is being hosted.
