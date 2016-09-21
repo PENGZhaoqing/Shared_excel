@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   include SessionsHelper
   before_action :logged_in, only: :update
   before_action :correct_user, only: :update
-  before_action :admin_logged_in, only: [:admin_update, :index, :destroy]
+  before_action :admin_logged_in, only: [:admin_update, :index, :destroy,:admin_create]
 
   def new
     @user=User.new
@@ -17,6 +17,18 @@ class UsersController < ApplicationController
       render 'new'
     end
   end
+
+  def update
+    @user = User.find_by_id(params[:id])
+    if @user.update_attributes(user_params)
+      flash={:info => "更新成功"}
+    else
+      flash={:warning => "更新失败"}
+    end
+    redirect_to root_path, flash: flash
+  end
+
+  # -------------------------------------- admin
 
   def index
     @users=User.none_hidden_users.paginate(:page => params[:users_page], :per_page => 10)
@@ -45,15 +57,18 @@ class UsersController < ApplicationController
     redirect_to users_path, flash: flash
   end
 
-  def update
-    @user = User.find_by_id(params[:id])
-    if @user.update_attributes(user_params)
-      flash={:info => "更新成功"}
+  def admin_create
+    @user = User.new(user_params)
+    @user.admin=true if params[:user][:admin]=="管理员"
+    @user.admin=false if params[:user][:admin]=="普通"
+    if @user.save
+      flash={:info => "创建成功"}
     else
-      flash={:warning => "更新失败"}
+      flash={:warning => "创建失败"}
     end
-    redirect_to root_path, flash: flash
+    redirect_to users_path, flash: flash
   end
+
 
   def destroy
     @user = User.find_by_id(params[:id])

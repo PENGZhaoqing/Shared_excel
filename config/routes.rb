@@ -91,6 +91,9 @@ Rails.application.routes.draw do
   end
 
   resources :users, except: [:show] do
+    collection do
+      post :admin_create
+    end
     member do
       patch :admin_update
     end
