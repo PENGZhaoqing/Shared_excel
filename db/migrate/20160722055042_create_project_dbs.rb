@@ -4,10 +4,7 @@ class CreateProjectDbs < ActiveRecord::Migration
       t.string :company
       t.string :build_way
       t.string :project_name
-      t.string :code
       t.string :approve_time
-      t.string :begin_at
-      t.string :end_at
 
       t.timestamps null: false
     end

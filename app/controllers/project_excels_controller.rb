@@ -25,10 +25,7 @@ class ProjectExcelsController < ApplicationController
       projectdb.company=workbook.row(row_index)[1]
       projectdb.build_way=workbook.row(row_index)[2]
       projectdb.project_name=workbook.row(row_index)[3]
-      projectdb.code=workbook.row(row_index)[4]
       projectdb.approve_time=workbook.row(row_index)[5]
-      projectdb.begin_at=workbook.row(row_index)[7]
-      projectdb.end_at=workbook.row(row_index)[8]
       projectdb.save
     end
     redirect_to project_excels_path, flash: {success: "Excel文件中的数据已成功解析"}

@@ -1,7 +1,7 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "worksheet") do |sheet|
-  sheet.add_row ["公司名", "建造方式","项目名称","项目编码","审批时间","开始时间","结束时间"]
+  sheet.add_row ["公司名", "建造方式","项目名称","审批时间",]
   @project_dbs.each do |db|
-    sheet.add_row [db.company, db.build_way, db.project_name,db.code,db.approve_time,db.begin_at,db.end_at]
+    sheet.add_row [db.company, db.build_way, db.project_name,db.approve_time]
   end
 end

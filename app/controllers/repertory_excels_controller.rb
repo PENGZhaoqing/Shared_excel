@@ -17,17 +17,21 @@ class RepertoryExcelsController < ApplicationController
 
     ((workbook.first_row + 1)..workbook.last_row).each do |row_index|
 
-      name=workbook.row(row_index)[1]
-      standard=workbook.row(row_index)[2]
-      num=workbook.row(row_index)[5]
-      supplier=workbook.row(row_index)[7]
-      product_code=workbook.row(row_index)[11]
       product_kind=workbook.row(row_index)[20]
 
-      if @repertory_db=RepertoryDb.find_by(supplier: supplier, product_code: product_code, product_kind: product_kind)
-        @repertory_db.update_attribute(:num, @repertory_db.num+num)
-      else
-        RepertoryDb.create!(name: name, standard: standard, num: num, supplier: supplier, product_kind: product_kind, product_code: product_code)
+      if product_kind=="VMI物资"
+
+        name=workbook.row(row_index)[1]
+        standard=workbook.row(row_index)[2]
+        num=workbook.row(row_index)[5]
+        supplier=workbook.row(row_index)[7]
+        product_code=workbook.row(row_index)[11]
+        if @repertory_db=RepertoryDb.find_by(supplier: supplier, product_code: product_code, product_kind: product_kind)
+          @repertory_db.update_attribute(:num, @repertory_db.num+num)
+        else
+          RepertoryDb.create!(name: name, standard: standard, num: num, supplier: supplier, product_kind: product_kind, product_code: product_code)
+        end
+
       end
     end
     redirect_to repertory_excels_path, flash: {success: "Excel文件数据解析成功"}

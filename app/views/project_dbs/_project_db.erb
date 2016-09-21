@@ -10,7 +10,6 @@
               <%= form_tag export_project_dbs_path, :method => :get do %>
                   <%= hidden_field_tag :company, params[:company] %>
                   <%= hidden_field_tag :build_way, params[:build_way] %>
-                  <%= hidden_field_tag :code, params[:code] %>
                   <%= hidden_field_tag :project_name, params[:project_name] %>
                   <%= hidden_field_tag :approve_time, params[:approve_time] %>
                   <%= button_tag(type: "submit", class: "btn btn-default btn-xs") do %>
@@ -35,10 +34,7 @@
             <th><input type="text" class="form-control" placeholder="企业" disabled></th>
             <th><input type="text" class="form-control" placeholder="建造方式" disabled></th>
             <th><input type="text" class="form-control" placeholder="项目名字" disabled></th>
-            <th><input type="text" class="form-control" placeholder="项目编码" disabled></th>
             <th><input type="text" class="form-control" placeholder="审批时间" disabled></th>
-            <th><input type="text" class="form-control" placeholder="开始时间" disabled></th>
-            <th><input type="text" class="form-control" placeholder="结束时间" disabled></th>
           </tr>
           </thead>
 
@@ -57,17 +53,9 @@
                   <text style="font-size: small"><%= dbs.project_name %></text>
                 </td>
                 <td>
-                  <text style="font-size: small"><%= dbs.code %></text>
-                </td>
-                <td>
                   <text style="font-size: small"><%= dbs.approve_time %></text>
                 </td>
-                <td>
-                  <text style="font-size: small"><%= dbs.begin_at %></text>
-                </td>
-                <td>
-                  <text style="font-size: small"> <%= dbs.end_at %></text>
-                </td>
+
               </tr>
           <% end %>
 
@@ -98,7 +86,6 @@
       </div>
       <div class="modal-body" style="padding:30px 50px;">
 
-
         <%= form_tag project_dbs_path, :method => 'get', role: 'form', class: "form-horizontal" do %>
             <div class="form-group">
               <%= label_tag :company, "公司名", class: "control-label col-sm-2" %>
@@ -118,13 +105,6 @@
               <%= label_tag :project_name, "项目名字", class: "control-label col-sm-2" %>
               <div class="col-sm-10">
                 <%= text_field_tag :project_name, params[:project_name], placeholder: "项目名字", class: 'form-control' %>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <%= label_tag :code, "项目编码", class: "control-label col-sm-2" %>
-              <div class="col-sm-10">
-                <%= text_field_tag :code, params[:code], placeholder: "项目编码", class: 'form-control' %>
               </div>
             </div>
 
