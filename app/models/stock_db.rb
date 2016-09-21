@@ -8,7 +8,7 @@ class StockDb < ActiveRecord::Base
         .where('stock_dbs.standard LIKE ?', "%#{params[:standard]}%")
         .where('stock_dbs.kind LIKE ?', "%#{params[:kind]}%")
         .where('stock_dbs.supplier LIKE ?', "%#{params[:supplier]}%")
-        .where('stock_dbs.export_num = ?', "#{params[:export_num]}")
+        .where('stock_dbs.export_num = ?', params[:export_num])
   end
 
 
