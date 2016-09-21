@@ -90,7 +90,7 @@
             <td><%= link_to '解析', parse_supplier_excel_path(excel), class: 'btn-xs btn-primary pull-right' %></td>
         <% elsif params[:controller]=="mapping_excels" %>
             <td><%= link_to '解析', parse_mapping_excel_path(excel), class: 'btn-xs btn-primary pull-right' %></td>
-      <% end %>
+        <% end %>
 
         <% if params[:controller]=="stock_excels" %>
             <td><%= link_to '删除', stock_excel_path(excel), :method => :delete, :data => {confirm: '确定删除?'}, class: 'btn-xs btn-danger pull-right' %></td>
@@ -102,7 +102,7 @@
             <td><%= link_to '删除', supplier_excel_path(excel), :method => :delete, :data => {confirm: '确定删除?'}, class: 'btn-xs btn-danger pull-right' %></td>
         <% elsif params[:controller]=="mapping_excels" %>
             <td><%= link_to '删除', mapping_excel_path(excel), :method => :delete, :data => {confirm: '确定删除?'}, class: 'btn-xs btn-danger pull-right' %></td>
-      <% end %>
+        <% end %>
 
       </tr>
   <% end %>
@@ -113,8 +113,6 @@
                   :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
 
 <script type="text/javascript">
-  $(document).ready(function () {
-    $('input[type=file]').bootstrapFileInput();
-    $('.file-inputs').bootstrapFileInput();
-  })
+  $('input[type=file]').bootstrapFileInput();
+  $('.file-inputs').bootstrapFileInput();
 </script>

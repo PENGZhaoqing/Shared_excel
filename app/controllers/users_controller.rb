@@ -20,8 +20,10 @@ class UsersController < ApplicationController
 
   def index
     @users=User.none_hidden_users.paginate(:page => params[:users_page], :per_page => 10)
-    unless params[:user_id].blank?
+    if !params[:user_id].blank?
       @user=User.find_by(id: params[:user_id].to_i)
+    elsif params[:new_user]=="true"
+      @user=User
     end
   end
 

@@ -1,14 +1,14 @@
 <% supplier_labels.each do |label, num| %>
-    <%= link_to label: label do %>
-        <span class="label label-info" style="margin-left: 4px;margin-top: 2px;">
+
+    <span class="label label-info" style="margin-left: 4px;margin-top: 2px;">
           <!--<span class="badge" style=" background-color: cornflowerblue;color: WHITE; font-size: 10px">-->
-          <%= label %>
-          <text style="color: black">
-            <%= num %>
-          </text>
-          <!--</span>-->
-        </span>
-    <% end %>
+      <%= link_to label: label do %>
+          <textr style="color: white"><%= label %></textr>
+          <text style="color: black"><%= num %></text>
+      <% end %>
+      <!--</span>-->
+    </span>
+
 <% end %>
 
 
