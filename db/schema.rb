@@ -34,10 +34,7 @@ ActiveRecord::Schema.define(version: 20160822054131) do
     t.string   "company"
     t.string   "build_way"
     t.string   "project_name"
-    t.string   "code"
     t.string   "approve_time"
-    t.string   "begin_at"
-    t.string   "end_at"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end

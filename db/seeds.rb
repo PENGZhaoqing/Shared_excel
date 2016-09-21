@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.create(
-    name: "张山",
+    name: "管理员1",
     email: "admin1@test.com",
     company: "中国铁塔公司",
     password: "password",
@@ -15,15 +15,15 @@ User.create(
     admin: true,
 )
 
-(1..20).each do |i|
-  User.create(
-      name: Faker::Name.name,
-      company: "中国铁塔公司",
-      email: "user#{i}@test.com",
-      password: "password",
-      password_confirmation: "password",
-  )
-end
+# (1..20).each do |i|
+#   User.create(
+#       name: Faker::Name.name,
+#       company: "中国铁塔公司",
+#       email: "user#{i}@test.com",
+#       password: "password",
+#       password_confirmation: "password",
+#   )
+# end
 
 User.create(
     name: "zhaoqing",
