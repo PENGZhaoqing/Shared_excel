@@ -10,7 +10,7 @@ class StockDb < ActiveRecord::Base
                   .where('stock_dbs.kind LIKE ?', "%#{params[:kind]}%")
                   .where('stock_dbs.supplier LIKE ?', "%#{params[:supplier]}%")
     else
-      @result.where('stock_dbs.export_num = ?', params[:export_num])
+      @result.find_by(:export_num, params[:export_num])
     end
 
     return @result
