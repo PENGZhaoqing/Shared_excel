@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.save
+    if @user.save!
       redirect_to root_url, flash: {success: "新账号注册成功,请登陆"}
     else
       flash[:warning] = "账号信息填写有误,请重试"
@@ -61,14 +61,13 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.admin=true if params[:user][:admin]=="管理员"
     @user.admin=false if params[:user][:admin]=="普通"
-    if @user.save
+    if @user.save!
       flash={:info => "创建成功"}
     else
       flash={:warning => "创建失败"}
     end
     redirect_to users_path, flash: flash
   end
-
 
   def destroy
     @user = User.find_by_id(params[:id])

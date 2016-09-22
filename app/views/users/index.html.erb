@@ -18,6 +18,7 @@
             <thead>
             <tr>
               <th>姓名</th>
+              <th>邮箱</th>
               <th>公司</th>
               <th>角色</th>
               <th>注册时间</th>
@@ -29,13 +30,14 @@
             <% @users.each do |user| %>
                 <tr>
                   <td><%= user.name %></td>
+                  <td><%= user.email %></td>
                   <td><%= user.company %></td>
                   <% if user.admin %>
                       <td>管理员</td>
                   <% else %>
                       <td>普通</td>
                   <% end %>
-                  <td><%= user.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+                  <td><%= user.created_at.strftime("%Y/%m/%d") %></td>
 
                   <% if !params[:users_page].blank? %>
                       <td><%= link_to "编辑", users_path(user_id: user.id, users_page: params[:users_page].to_i), class: 'btn-sm btn-info' %></td>
