@@ -3,7 +3,6 @@
   <br>
 
   <%= form_for User.new, url: admin_create_users_path, method: :post, html: {class: 'form', role: 'form'} do |f| %>
-      <%= render 'shared/error_messages', :object => @user %>
 
       <div class="row">
         <div class="form-group col-sm-5">
