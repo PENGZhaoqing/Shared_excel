@@ -26,14 +26,16 @@ class StockExcelsController < ApplicationController
 
     ((workbook.first_row + 1)..workbook.last_row).each do |row_index|
       stockdb=StockDb.new
-      stockdb.complete_time=workbook.row(row_index)[12]
+      stockdb.complete_time=workbook.row(row_index)[10]
+      stockdb.supplier=workbook.row(row_index)[12]
       stockdb.client_name=workbook.row(row_index)[13]
-      stockdb.product_code=workbook.row(row_index)[19]
-      stockdb.product_name=workbook.row(row_index)[20]
-      stockdb.standard=workbook.row(row_index)[22]
-      stockdb.kind=workbook.row(row_index)[37]
-      stockdb.supplier=workbook.row(row_index)[39]
-      stockdb.export_num=workbook.row(row_index)[41]
+      stockdb.product_code=workbook.row(row_index)[18]
+      stockdb.product_name=workbook.row(row_index)[19]
+      stockdb.standard=workbook.row(row_index)[20]
+      stockdb.kind=workbook.row(row_index)[33]
+      stockdb.export_num=workbook.row(row_index)[34]
+      stockdb.project_code=workbook.row(row_index)[40]
+
       stockdb.save
     end
 

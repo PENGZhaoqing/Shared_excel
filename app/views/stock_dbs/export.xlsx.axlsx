@@ -1,7 +1,7 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "worksheet") do |sheet|
-  sheet.add_row ["发货完成时间", "分公司名称","物料代码","物料名称","规格","铁塔物资类别","供应商","发货数量"]
+  sheet.add_row ["分公司名称", "出货时间","物料编码码","物料名称","规格","铁塔物资类别","供应商","发货数量","项目编号"]
   @stock_dbs.each do |db|
-    sheet.add_row [db.complete_time, db.client_name,db.product_code,db.product_name,db.standard,db.kind,db.supplier,db.export_num]
+    sheet.add_row [db.client_name, db.complete_time,db.product_code,db.product_name,db.standard,db.kind,db.supplier,db.export_num,db.project_code]
   end
 end

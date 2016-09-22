@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20160822054131) do
     t.string   "kind"
     t.string   "supplier"
     t.integer  "export_num"
+    t.string   "project_code"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end

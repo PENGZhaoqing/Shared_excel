@@ -9,7 +9,7 @@ class CreateStockDbs < ActiveRecord::Migration
       t.string :kind
       t.string :supplier
       t.integer :export_num
-
+      t.string :project_code
       t.timestamps null: false
     end
   end

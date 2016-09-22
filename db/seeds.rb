@@ -15,15 +15,30 @@ User.create(
     admin: true,
 )
 
-# (1..20).each do |i|
-#   User.create(
-#       name: Faker::Name.name,
-#       company: "中国铁塔公司",
-#       email: "user#{i}@test.com",
-#       password: "password",
-#       password_confirmation: "password",
-#   )
-# end
+MAP={
+    chaoyang: '朝阳',
+    tongzhou: '通州',
+    chengbei: '城北',
+    chengxi: '城西',
+    zhongxinchengqu: '中心城区',
+    huairou: '怀柔',
+    pinggu: '密云',
+    yanqing: '延庆',
+    shunyi: '顺义',
+    daxing: '大兴',
+    fangshan: '房山',
+    changping: '昌平',
+}
+
+MAP.each do |item|
+  User.create!(
+      name: "#{item[1]}分公司",
+      company: "#{item[1]}分公司",
+      email: "#{item[0]}@qq.com",
+      password: item[0],
+      password_confirmation: item[0]
+  )
+end
 
 User.create(
     name: "zhaoqing",
