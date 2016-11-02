@@ -16,25 +16,26 @@ User.create(
 )
 
 MAP={
-    chaoyang: '朝阳',
-    tongzhou: '通州',
-    chengbei: '城北',
-    chengxi: '城西',
-    zhongxinchengqu: '中心城区',
-    huairou: '怀柔',
-    pinggu: '密云',
-    yanqing: '延庆',
-    shunyi: '顺义',
-    daxing: '大兴',
-    fangshan: '房山',
-    changping: '昌平',
+    cy: '朝阳',
+    tz: '通州',
+    cb: '城北',
+    cx: '城西',
+    zxcq: '中心城区',
+    hr: '怀柔',
+    pg: '平谷'
+    my: '密云',
+    yq: '延庆',
+    sy: '顺义',
+    dx: '大兴',
+    fs: '房山',
+    cp: '昌平',
 }
 
 MAP.each do |item|
   User.create!(
       name: "#{item[1]}分公司",
       company: "#{item[1]}分公司",
-      email: "#{item[0]}@qq.com",
+      email: "#{item[0]}@chinatowercom.cn",
       password: item[0],
       password_confirmation: item[0]
   )

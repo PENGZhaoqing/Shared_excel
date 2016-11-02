@@ -14,9 +14,12 @@
 
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
-@import 'bootstrap/theme';
 @import 'homes';
 @import 'tabel_db';
+@import 'metisMenu.min';
+@import 'morris.scss';
+@import 'sb-admin-2.min.scss';
+@import 'font-awesome';
 
 .table{
   margin-bottom: 10px;
@@ -26,28 +29,27 @@
   background-color: #C0C0C0;
 }
 
-
 //.dropdown-menu {
 //  min-width: 0px !important;
 //}
 
-footer {
-  background-color: #2E2F30;
-  color: white;
-  padding: 10px;
-}
+//footer {
+//  background-color: #2E2F30;
+//  color: white;
+//  padding: 10px;
+//}
 
-body{
+//body{
   //background-image: image-url("background.jpg");
   //background-color: ghostwhite;
   //background-repeat: no-repeat;
   //background-size: 100% 100%;
-}
+//}
 
-body {
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
+//body {
+//  padding-top: 50px;
+//  padding-bottom: 50px;
+//}
 
 html {
   height: 100%;
@@ -57,14 +59,14 @@ html {
 //  padding-top:10px
 //}
 
-.navbar-inverse .navbar-nav>li>a {
-  color: white;
-}
+//.navbar-inverse .navbar-nav>li>a {
+//  color: white;
+//}
 
 
-.navbar-inverse .navbar-header>a {
-  color: white;
-}
+//.navbar-inverse .navbar-header>a {
+//  color: white;
+//}
 
 //.nav >li>a {
 //  padding-top:20px

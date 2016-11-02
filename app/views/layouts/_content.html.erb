@@ -1,13 +1,18 @@
-<br>
-<div class="container">
+<div id="wrapper">
+  <div id="page-wrapper">
 
-  <% flash.each do |message_type, message| %>
-      <div class="alert alert-<%= message_type %>">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong> <%= message %></strong>
-      </div>
-  <% end %>
+    <div class="container">
+
+      <% flash.each do |message_type, message| %>
+          <div class="alert alert-<%= message_type %>">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong> <%= message %></strong>
+          </div>
+      <% end %>
+    </div>
+
+    <%= yield %>
+
+  </div>
 </div>
-
-<%= yield %>
 
