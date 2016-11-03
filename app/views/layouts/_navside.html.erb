@@ -3,7 +3,7 @@
     <ul class="nav" id="side-menu">
 
       <li>
-        <%= link_to root_path, method: :get do %>
+        <%= link_to root_path, id: "nav-first-level" do %>
             <i class="fa fa-desktop fa-fw"></i> 铁塔主页
         <% end %>
       </li>
@@ -11,16 +11,28 @@
       <li>
         <a href="#"><i class="fa fa-bars fa-fw"></i> 遴选信息 <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
-          <li><%= link_to "详细信息", supplier_dbs_path %></li>
-          <li><%= link_to "数据管理", supplier_excels_path %></li>
+          <li><%= link_to supplier_dbs_path do %>
+                <i class="fa fa-angle-right fa-fw"></i>详细信息
+            <% end %>
+          </li>
+          <li><%= link_to supplier_excels_path do %>
+                <i class="fa fa-angle-right fa-fw"></i>数据管理
+            <% end %>
+          </li>
         </ul>
       </li>
 
       <li>
         <a href="#"><i class="fa fa-database fa-fw"></i> 立项数据 <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
-          <li> <%= link_to "详细信息", project_dbs_path %></li>
-          <li><%= link_to "数据管理", project_excels_path %></li>
+          <li> <%= link_to project_dbs_path do %>
+                <i class="fa fa-angle-right fa-fw"></i>详细信息
+            <% end %>
+          </li>
+          <li><%= link_to project_excels_path do %>
+                <i class="fa fa-angle-right fa-fw"></i>数据管理
+            <% end %>
+          </li>
         </ul>
       </li>
 
@@ -29,16 +41,28 @@
           <li>
             <a href="#"><i class="fa fa-cubes fa-fw"></i> 库存明细 <span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
-              <li> <%= link_to "详细信息", repertory_dbs_path %></li>
-              <li><%= link_to "数据管理", repertory_excels_path %></li>
+              <li> <%= link_to repertory_dbs_path do %>
+                    <i class="fa fa-angle-right fa-fw"></i>详细信息
+                <% end %>
+              </li>
+              <li><%= link_to repertory_excels_path do %>
+                    <i class="fa fa-angle-right fa-fw"></i>数据管理
+                <% end %>
+              </li>
             </ul>
           </li>
 
           <li>
             <a href="#"><i class="fa fa-truck fa-fw"></i> 出库明细 <span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
-              <li> <%= link_to "详细信息", stock_dbs_path %></li>
-              <li><%= link_to "数据管理", stock_excels_path %></li>
+              <li> <%= link_to stock_dbs_path do %>
+                    <i class="fa fa-angle-right fa-fw"></i>详细信息
+                <% end %>
+              </li>
+              <li><%= link_to stock_excels_path do %>
+                    <i class="fa fa-angle-right fa-fw"></i>数据管理
+                <% end %>
+              </li>
             </ul>
           </li>
       <% end %>
@@ -47,18 +71,28 @@
         <a href="#"><i class="fa fa-users fa-fw"></i> 用户管理 <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
           <li> <%= link_to users_path do %>
-                所有用户
+                <i class="fa fa-angle-right fa-fw"></i>所有用户
                 <span class="label label-info pull-right"><%= User.none_hidden_users.length %></span>
             <% end %></li>
-          <li> <%= link_to "新增用户", new_user_path %></li>
+          <li> <%= link_to new_user_path do %>
+                <i class="fa fa-angle-right fa-fw"></i>新增用户
+            <% end %>
+          </li>
+
         </ul>
       </li>
 
       <li>
-        <a href="#"><i class="fa fa-eye fa-fw"></i> 授权码管理 <span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-eye fa-fw"></i> 授权管理 <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
-          <li> <%= link_to "映射管理", mapping_excels_path %></li>
-          <li> <%= link_to "授权列表", mapping_dbs_path %></li>
+          <li> <%= link_to mapping_dbs_path do %>
+                <i class="fa fa-angle-right fa-fw"></i>授权列表
+            <% end %>
+          </li>
+          <li> <%= link_to mapping_excels_path do %>
+                <i class="fa fa-angle-right fa-fw"></i>映射管理
+            <% end %>
+          </li>
         </ul>
       </li>
     </ul>

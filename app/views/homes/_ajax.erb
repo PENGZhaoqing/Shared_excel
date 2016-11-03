@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-sm-6">
     <div class="panel panel-default">
-      <div class="panel-heading">遴选信息</div>
+      <div class="panel-heading"><i class="fa fa-bars fa-fw"></i> 遴选信息</div>
       <div class="panel-body" style="min-height:320px;max-height: 320px;overflow: scroll; padding-top: 5px ;">
         <%= render "supplier_table", :supplier_dbs => @supplier_dbs, :supplier_labels => @supplier_labels %>
       </div>
@@ -10,7 +10,7 @@
 
   <div class="col-sm-6">
     <div class="panel panel-default">
-      <div class="panel-heading">新增立项数据</div>
+      <div class="panel-heading"><i class="fa fa-database fa-fw"></i> 新增立项数据</div>
       <div class="panel-body" style="min-height:320px;max-height: 320px;overflow-y: scroll;">
         <%= render "project_table", :project_dbs => @project_dbs %>
       </div>
@@ -20,7 +20,7 @@
 
 <% if current_visit || current_user %>
     <div class="panel panel-default">
-      <div class="panel-heading">库存展示</div>
+      <div class="panel-heading"><i class="fa fa-cubes fa-fw"></i> 库存展示</div>
       <div class="panel-body" style="min-height:500px;max-height: 500px;overflow: scroll;">
         <%= render "repertory_table", :repertory_dbs => @repertory_dbs %>
       </div>

@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    出库明细-数据管理
+    <i class="fa fa-truck fa-fw"></i> 出库明细
   </div>
   <div class="panel-body" style="min-height: 600px">
     <%= render "shared/excel_list", :excels => @stock_excels, :new_excel => StockExcel.new, :path => stock_excels_path %>

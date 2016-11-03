@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    出库纪录
+    <i class="fa fa-truck fa-fw"></i> 出库纪录
     <div class="pull-right">
       <%= form_tag export_stock_dbs_path, :method => :get do %>
           <%= hidden_field_tag :complete_time, params[:complete_time] %>
