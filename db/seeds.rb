@@ -22,7 +22,7 @@ MAP={
     cx: '城西',
     zxcq: '中心城区',
     hr: '怀柔',
-    pg: '平谷'
+    pg: '平谷',
     my: '密云',
     yq: '延庆',
     sy: '顺义',
@@ -36,8 +36,8 @@ MAP.each do |item|
       name: "#{item[1]}分公司",
       company: "#{item[1]}分公司",
       email: "#{item[0]}@chinatowercom.cn",
-      password: item[0],
-      password_confirmation: item[0]
+      password: "password",
+      password_confirmation: "password"
   )
 end
 

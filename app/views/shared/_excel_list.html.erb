@@ -38,7 +38,7 @@
 <% elsif params[:controller]=="supplier_excels" %>
     <div class="alert alert-warning pull-right">
       目前供应商数据的行数: <%= SupplierDb.all.size %>行
-      <%= link_to clean_supplier_excels_path, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
+      <%= link_to clean_supplier_excels_path, :method => :get, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
           <span class="glyphicon glyphicon-trash"></span> 清空数据
       <% end %>
     </div>
@@ -81,13 +81,27 @@
         <td><%= link_to '下载', excel.file.url(:original, false), class: 'btn-xs btn-success pull-right' %></td>
 
         <% if params[:controller]=="stock_excels" %>
-            <td><%= link_to '解析', parse_stock_excel_path(excel), class: 'btn-xs btn-primary pull-right' %></td>
+
+            <% if excel.parse %>
+                <button type="button" class="btn-xs btn-primary disabled">Active Primary</button>
+            <% else %>
+                <td><%= link_to '解析', parse_stock_excel_path(excel), class: 'btn-xs btn-primary pull-right' %></td>
+            <% end %>
+
         <% elsif params[:controller]=="repertory_excels" %>
             <td><%= link_to '解析', parse_repertory_excel_path(excel), class: 'btn-xs btn-primary pull-right' %></td>
         <% elsif params[:controller]=="project_excels" %>
             <td><%= link_to '解析', parse_project_excel_path(excel), class: 'btn-xs btn-primary pull-right' %></td>
         <% elsif params[:controller]=="supplier_excels" %>
-            <td><%= link_to '解析', parse_supplier_excel_path(excel), class: 'btn-xs btn-primary pull-right' %></td>
+
+            <% if excel.parse %>
+                <td>
+                  <button type="button" class="btn btn-xs pull-right disabled">已解析</button>
+                </td>
+            <% else %>
+                <td><%= link_to '解析', parse_supplier_excel_path(excel), method: :get, class: 'btn-xs btn-primary pull-right' %></td>
+            <% end %>
+
         <% elsif params[:controller]=="mapping_excels" %>
             <td><%= link_to '解析', parse_mapping_excel_path(excel), class: 'btn-xs btn-primary pull-right' %></td>
         <% end %>

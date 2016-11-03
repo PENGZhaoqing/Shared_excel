@@ -27,8 +27,9 @@
         <%= button_tag(type: "submit", class: "btn btn-sm btn-info", id: "filter-button") do %>
             <span class="glyphicon glyphicon-search"></span>查找
         <% end %>
-    <% end %>
 
+        <%= link_to "重置", supplier_dbs_path, class: "btn btn-sm btn-warning", id: "filter-link", method: :get %>
+    <% end %>
 
     <br>
 
@@ -76,8 +77,8 @@
       $(this).css({'margin-top': '10px', 'margin-right': '10px'});
     });
 
-    $('#filter-button').css({'margin-top': '10px', 'margin-right': '10px'});
-
+    $('#filter-button').css({'margin-top': '10px', 'margin-right': '5px'});
+    $('#filter-link').css({'margin-top': '10px'});
     $('.filter-panel').css({'margin-left': '20px', 'margin-right': '20px'});
 
     $('.table tbody td').css({});

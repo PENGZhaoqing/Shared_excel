@@ -1,15 +1,8 @@
-<% supplier_labels.each do |label, num| %>
-
-    <span class="label label-info" style="margin-left: 4px;margin-bottom: 2px;">
-          <!--<span class="badge" style=" background-color: cornflowerblue;color: WHITE; font-size: 10px">-->
-      <%= link_to label: label do %>
-          <textr style="color: white"><%= label %></textr>
-          <text style="color: black"><%= num %></text>
-      <% end %>
-      <!--</span>-->
-    </span>
-
-<% end %>
+<div class="label-panel">
+  <% supplier_labels.each do |label, num| %>
+      <a href="<%= root_path(label: label) %>"><span class="label label-info"><%= label %> <%= num %></span></a>
+  <% end %>
+</div>
 
 
 <table class='table table-responsive table-condensed table-hover' style="margin-top: 5px">
@@ -31,12 +24,19 @@
       </tr>
   <% end %>
   </tbody>
-
 </table>
 
 <%= will_paginate supplier_dbs, :param_name => 'supplier_page',
                   :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
 
-
+<script>
+  $(document).ready(function () {
+    $("body").on("click", '.label-panel a', function (e) {
+      e.preventDefault();
+      $.getScript(this.href);
+      return false;
+    });
+  });
+</script>
 
 

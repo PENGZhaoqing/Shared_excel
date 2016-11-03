@@ -20,11 +20,15 @@ class SupplierExcelsController < ApplicationController
       supplierdb.supplier=workbook.row(row_index)[2]
       supplierdb.save
     end
+    @supplier_excel.update_attribute(:parse, true)
     redirect_to supplier_excels_path, flash: {success: "Excel文件中的数据已解析"}
   end
 
   def clean
     SupplierDb.delete_all
+    SupplierExcel.all.each do |excel|
+      excel.update_attribute(:parse, false)
+    end
     redirect_to supplier_excels_path, flash: {success: "遴选数据已清空"}
   end
 
