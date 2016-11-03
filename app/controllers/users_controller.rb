@@ -34,8 +34,6 @@ class UsersController < ApplicationController
     @users=User.none_hidden_users.paginate(:page => params[:users_page], :per_page => 10)
     if !params[:user_id].blank?
       @user=User.find_by(id: params[:user_id].to_i)
-    elsif params[:new_user]=="true"
-      @user=User
     end
   end
 

@@ -1,33 +1,48 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">控制面板</h3>
+    授权码管理
+    <div class="pull-right">
+      <%= form_tag export_mapping_dbs_path, :method => :get do %>
+          <%= hidden_field_tag :query, params[:query] %>
+          <%= button_tag(type: "submit", class: "btn btn-success btn-xs") do %>
+              <span class="glyphicon glyphicon-floppy-save"></span> 导出
+          <% end %>
+      <% end %>
+    </div>
   </div>
+
   <div class="panel-body" style="min-height: 600px">
 
-    <h4 class="text-muted">授权码列表</h4>
-    <hr>
+    <div class="filter-panel">
+      <%= form_tag mapping_dbs_path, :method => 'get', role: 'form', class: "form-inline" do %>
 
-    <% unless params[:query].blank? %>
-        <text class="text-danger">搜索结果显示:
-          <mark><%= params[:query] %></mark>
-        </text>
-    <% end %>
-
-    <%= form_tag export_mapping_dbs_path, :method => :get, class: "pull-right" do %>
-        <%= hidden_field_tag :query, params[:query] %>
-        <%= button_tag(type: "submit", class: "btn btn-success btn") do %>
-            <span class="glyphicon glyphicon-floppy-save"></span> 导出
-        <% end %>
-    <% end %>
-
-    <%= form_tag mapping_dbs_path, method: 'get', class: "col-sm-4 pull-right", role: "search" do %>
-        <div class="input-group">
-          <%= text_field_tag 'query', params[:query], class: "form-control", placeholder: "搜索供应商/授权码" %>
-          <div class="input-group-btn">
-            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+          <div class="form-group">
+            <%= text_field_tag :query, params[:query], placeholder: "搜索供应商/授权码", class: 'form-control input-sm' %>
           </div>
-        </div>
-    <% end %>
+
+          <%= button_tag(type: "submit", class: "btn btn-info btn-sm", id: "filter-button") do %>
+              <span class="glyphicon glyphicon-search"></span>查找
+          <% end %>
+
+      <% end %>
+      </br>
+
+      <text class="text-muted">显示纪录:
+        <mark><%= @mapping_dbs.length %></mark>
+        条
+      </text>
+
+      <% unless params[:query].blank? %>
+          <text class="text-danger">搜索结果显示:
+            <mark><%= params[:query] %></mark>
+          </text>
+      <% end %>
+
+      <div class="pull-right">
+        <%= will_paginate @mapping_dbs, :param_name => 'mapping_page',
+                          :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
+      </div>
+    </div>
 
     <table class="table table-responsive table-condensed table-hover">
       <thead>
@@ -42,28 +57,43 @@
       <% @mapping_dbs.each do |dbs| %>
           <tr>
             <td>
-              <text style="font-size: small"><%= dbs.supplier1 %></text>
+              <%= dbs.supplier1 %>
             </td>
             <td>
-              <text style="font-size: small"><%= dbs.supplier2 %></text>
+              <%= dbs.supplier2 %>
             </td>
             <td>
-              <text style="font-size: small"><%= dbs.auth_token %></text>
+              <%= dbs.auth_token %>
             </td>
           </tr>
       <% end %>
-
       </tbody>
     </table>
-
-    <%= will_paginate @mapping_dbs, :param_name => 'mapping_page',
-                      :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
 
   </div>
 
 </div>
 
+<script>
+  $(function () {
+    $('.form-inline div').each(function () {
+      $(this).css({'margin-top': '10px', 'margin-right': '10px'});
+    });
+
+    $('#filter-button').css({'margin-top': '10px', 'margin-right': '10px'});
+
+    $('.filter-panel').css({'margin-left': '10px', 'margin-right': '10px'});
+
+    $('.table tbody td').css({});
+  });
+</script>
 
 
-
-
+<%#= form_tag mapping_dbs_path, method: 'get', class: "col-sm-3", role: "search" do %>
+<!--<div class="input-group">-->
+<!--<%#= text_field_tag 'query', params[:query], class: "form-control input-sm", placeholder: "搜索供应商/授权码" %>-->
+<!--<div class="input-group-btn">-->
+<!--<button class="btn btn-default btn-sm" type="submit"><i class="glyphicon glyphicon-search"></i></button>-->
+<!--</div>-->
+<!--</div>-->
+<%# end %>

@@ -1,0 +1,11 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    映射文件管理
+  </div>
+  <div class="panel-body" style="min-height: 600px">
+    <%= render "shared/excel_list", :excels => @mapping_excels, :new_excel => MappingExcel.new, :path => mapping_excels_path %>
+  </div>
+
+</div>
+
+

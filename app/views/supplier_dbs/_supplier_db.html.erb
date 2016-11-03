@@ -12,8 +12,7 @@
     </div>
   </div>
 
-  <div style="margin-left:20px;margin-right: 20px">
-    </br>
+  <div class="filter-panel">
     <%= form_tag supplier_dbs_path, :method => 'get', role: 'form', class: "form-inline" do %>
         <div class="form-group">
           <%= label_tag :product, "产品:" %>
@@ -25,7 +24,7 @@
           <%= text_field_tag :supplier, params[:supplier], placeholder: "供应商", class: 'form-control input-sm' %>
         </div>
 
-        <%= button_tag(type: "submit", class: "btn btn-sm btn-info") do %>
+        <%= button_tag(type: "submit", class: "btn btn-sm btn-info", id: "filter-button") do %>
             <span class="glyphicon glyphicon-search"></span>查找
         <% end %>
     <% end %>
@@ -59,10 +58,10 @@
       <% @supplier_dbs.each do |dbs| %>
           <tr>
             <td>
-              <text style="font-size: small"><%= dbs.product %></text>
+              <%= dbs.product %>
             </td>
             <td>
-              <text style="font-size: small"><%= dbs.supplier %></text>
+              <%= dbs.supplier %>
             </td>
           </tr>
       <% end %>
@@ -70,5 +69,19 @@
     </table>
   </div>
 </div>
+
+<script>
+  $(function () {
+    $('.form-inline div').each(function () {
+      $(this).css({'margin-top': '10px', 'margin-right': '10px'});
+    });
+
+    $('#filter-button').css({'margin-top': '10px', 'margin-right': '10px'});
+
+    $('.filter-panel').css({'margin-left': '20px', 'margin-right': '20px'});
+
+    $('.table tbody td').css({});
+  });
+</script>
 
 

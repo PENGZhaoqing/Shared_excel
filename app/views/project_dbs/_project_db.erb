@@ -14,8 +14,7 @@
     </div>
   </div>
 
-  <div style="margin-left:20px;margin-right: 20px">
-    </br>
+  <div class="filter-panel">
     <%= form_tag project_dbs_path, :method => 'get', role: 'form', class: "form-inline" do %>
         <div class="form-group">
           <%= label_tag :company, "公司名:" %>
@@ -23,7 +22,7 @@
         </div>
 
         <div class="form-group">
-          <%= label_tag :build_way, "建造方式:"%>
+          <%= label_tag :build_way, "建造方式:" %>
           <%= text_field_tag :build_way, params[:build_way], placeholder: "建造方式", class: 'form-control input-sm' %>
         </div>
 
@@ -37,7 +36,7 @@
           <%= text_field_tag :approve_time, params[:approve_time], placeholder: "审批时间", class: 'form-control input-sm' %>
         </div>
 
-        <%= button_tag(type: "submit", class: "btn btn-info btn-sm") do %>
+        <%= button_tag(type: "submit", class: "btn btn-info btn-sm", id: "filter-button") do %>
             <span class="glyphicon glyphicon-search"></span>查找
         <% end %>
 
@@ -92,6 +91,21 @@
     </table>
   </div>
 </div>
+
+
+<script>
+  $(function () {
+    $('.form-inline div').each(function () {
+      $(this).css({'margin-top': '10px', 'margin-right': '5px'});
+    });
+
+    $('#filter-button').css({'margin-top': '10px'});
+
+    $('.filter-panel').css({'margin-left': '20px', 'margin-right': '20px'});
+
+    $('.table tbody td').css({});
+  });
+</script>
 
 
 
