@@ -13,7 +13,7 @@
   </div>
 
   <div class="filter-panel">
-    <%= form_tag supplier_dbs_path, :method => 'get', role: 'form', class: "form-inline" do %>
+    <%= form_tag supplier_dbs_path, :method => 'get', role: 'form', class: "form-inline", remote: true do %>
         <div class="form-group">
           <%= label_tag :product, "产品:" %>
           <%= text_field_tag :product, params[:product], placeholder: "产品", class: 'form-control input-sm' %>
@@ -28,7 +28,7 @@
             <i class="fa fa-search"></i>查找
         <% end %>
 
-        <%= link_to supplier_dbs_path, class: "btn btn-sm btn-warning", id: "filter-link", method: :get do %>
+        <%= link_to supplier_dbs_path, class: "btn btn-sm btn-warning", id: "filter-link", remote: true do %>
             <i class="fa fa-refresh"></i> 重置
         <% end %>
     <% end %>

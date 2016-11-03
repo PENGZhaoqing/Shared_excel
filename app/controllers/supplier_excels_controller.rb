@@ -21,7 +21,8 @@ class SupplierExcelsController < ApplicationController
       supplierdb.save
     end
     @supplier_excel.update_attribute(:parse, true)
-    redirect_to supplier_excels_path, flash: {success: "Excel文件中的数据已解析"}
+    flash[:success]="Excel文件中的数据已解析"
+    redirect_to supplier_excels_path
   end
 
   def clean
@@ -34,6 +35,12 @@ class SupplierExcelsController < ApplicationController
 
   def index
     @supplier_excels=SupplierExcel.paginate(:page => params[:excel_page], :per_page => 8).order('created_at DESC')
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
   end
 
   def destroy

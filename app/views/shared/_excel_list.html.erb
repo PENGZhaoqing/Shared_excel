@@ -5,7 +5,7 @@
 
     <div class="alert alert-warning pull-right">
       目前出库数据的行数: <%= StockDb.all.size %>行
-      <%= link_to clean_stock_excels_path, :method => :get, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
+      <%= link_to clean_stock_excels_path, :remote => true, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
           <span class="glyphicon glyphicon-trash"></span> 清空数据
       <% end %>
     </div>
@@ -13,7 +13,7 @@
 <% elsif params[:controller]=="repertory_excels" %>
     <div class="alert alert-warning pull-right">
       目前库存数据的行数: <%= RepertoryDb.all.size %>行
-      <%= link_to clean_repertory_excels_path, :method => :get, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
+      <%= link_to clean_repertory_excels_path, :remote => true, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
           <span class="glyphicon glyphicon-trash"></span> 清空数据
       <% end %>
     </div>
@@ -21,7 +21,7 @@
 <% elsif params[:controller]=="project_excels" %>
     <div class="alert alert-warning pull-right">
       目前立项数据的行数: <%= ProjectDb.all.size %>行
-      <%= link_to clean_project_excels_path, :method => :get, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
+      <%= link_to clean_project_excels_path, :remote => true, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
           <span class="glyphicon glyphicon-trash"></span> 清空数据
       <% end %>
     </div>
@@ -30,7 +30,7 @@
 <% elsif params[:controller]=="mapping_excels" %>
     <div class="alert alert-warning pull-right">
       目前映射数据的行数: <%= MappingDb.all.size %>行
-      <%= link_to clean_mapping_excels_path, :method => :get, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
+      <%= link_to clean_mapping_excels_path, :remote => true, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
           <span class="glyphicon glyphicon-trash"></span> 清空数据
       <% end %>
     </div>
@@ -38,7 +38,7 @@
 <% elsif params[:controller]=="supplier_excels" %>
     <div class="alert alert-warning pull-right">
       目前供应商数据的行数: <%= SupplierDb.all.size %>行
-      <%= link_to clean_supplier_excels_path, :method => :get, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
+      <%= link_to clean_supplier_excels_path, :remote => true, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
           <span class="glyphicon glyphicon-trash"></span> 清空数据
       <% end %>
     </div>
@@ -85,7 +85,7 @@
                   <button type="button" class="btn btn-xs pull-right disabled">已解析</button>
                 </td>
             <% else %>
-                <td><%= link_to '解析', parse_stock_excel_path(excel), method: :get, class: 'btn-xs btn-primary pull-right' %></td>
+                <td><%= link_to '解析', parse_stock_excel_path(excel), remote: true, class: 'btn-xs btn-primary pull-right' %></td>
             <% end %>
         <% elsif params[:controller]=="repertory_excels" %>
             <% if excel.parse %>
@@ -93,7 +93,7 @@
                   <button type="button" class="btn btn-xs pull-right disabled">已解析</button>
                 </td>
             <% else %>
-                <td><%= link_to '解析', parse_repertory_excel_path(excel), method: :get, class: 'btn-xs btn-primary pull-right' %></td>
+                <td><%= link_to '解析', parse_repertory_excel_path(excel), remote: true, class: 'btn-xs btn-primary pull-right' %></td>
             <% end %>
         <% elsif params[:controller]=="project_excels" %>
             <% if excel.parse %>
@@ -101,7 +101,7 @@
                   <button type="button" class="btn btn-xs pull-right disabled">已解析</button>
                 </td>
             <% else %>
-                <td><%= link_to '解析', parse_project_excel_path(excel), method: :get, class: 'btn-xs btn-primary pull-right' %></td>
+                <td><%= link_to '解析', parse_project_excel_path(excel), remote: true, class: 'btn-xs btn-primary pull-right' %></td>
             <% end %>
         <% elsif params[:controller]=="supplier_excels" %>
 
@@ -110,7 +110,7 @@
                   <button type="button" class="btn btn-xs pull-right disabled">已解析</button>
                 </td>
             <% else %>
-                <td><%= link_to '解析', parse_supplier_excel_path(excel), method: :get, class: 'btn-xs btn-primary pull-right' %></td>
+                <td><%= link_to '解析', parse_supplier_excel_path(excel), remote: true, class: 'btn-xs btn-primary pull-right' %></td>
             <% end %>
 
         <% elsif params[:controller]=="mapping_excels" %>
@@ -119,20 +119,20 @@
                   <button type="button" class="btn btn-xs pull-right disabled">已解析</button>
                 </td>
             <% else %>
-                <td><%= link_to '解析', parse_mapping_excel_path(excel), method: :get,class: 'btn-xs btn-primary pull-right' %></td>
+                <td><%= link_to '解析', parse_mapping_excel_path(excel), remote: true, class: 'btn-xs btn-primary pull-right' %></td>
             <% end %>
         <% end %>
 
         <% if params[:controller]=="stock_excels" %>
-            <td><%= link_to '删除', stock_excel_path(excel), :method => :delete, :data => {confirm: '确定删除?'}, class: 'btn-xs btn-danger pull-right' %></td>
+            <td><%= link_to '删除', stock_excel_path(excel), method: :delete, :data => {confirm: '确定删除?'}, class: 'btn-xs btn-danger pull-right' %></td>
         <% elsif params[:controller]=="repertory_excels" %>
-            <td><%= link_to '删除', repertory_excel_path(excel), :method => :delete, :data => {confirm: '确定删除?'}, class: 'btn-xs btn-danger pull-right' %></td>
+            <td><%= link_to '删除', repertory_excel_path(excel), method: :delete, :data => {confirm: '确定删除?'}, class: 'btn-xs btn-danger pull-right' %></td>
         <% elsif params[:controller]=="project_excels" %>
-            <td><%= link_to '删除', project_excel_path(excel), :method => :delete, :data => {confirm: '确定删除?'}, class: 'btn-xs btn-danger pull-right' %></td>
+            <td><%= link_to '删除', project_excel_path(excel), method: :delete, :data => {confirm: '确定删除?'}, class: 'btn-xs btn-danger pull-right' %></td>
         <% elsif params[:controller]=="supplier_excels" %>
-            <td><%= link_to '删除', supplier_excel_path(excel), :method => :delete, :data => {confirm: '确定删除?'}, class: 'btn-xs btn-danger pull-right' %></td>
+            <td><%= link_to '删除', supplier_excel_path(excel), method: :delete, :data => {confirm: '确定删除?'}, class: 'btn-xs btn-danger pull-right' %></td>
         <% elsif params[:controller]=="mapping_excels" %>
-            <td><%= link_to '删除', mapping_excel_path(excel), :method => :delete, :data => {confirm: '确定删除?'}, class: 'btn-xs btn-danger pull-right' %></td>
+            <td><%= link_to '删除', mapping_excel_path(excel), method: :delete, :data => {confirm: '确定删除?'}, class: 'btn-xs btn-danger pull-right' %></td>
         <% end %>
 
       </tr>
