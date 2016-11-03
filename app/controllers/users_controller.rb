@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   include SessionsHelper
   before_action :logged_in, only: :update
   before_action :correct_user, only: :update
-  before_action :admin_logged_in, only: [:admin_update, :index, :destroy,:admin_create]
+  before_action :admin_logged_in, only: [:admin_update, :index, :destroy, :admin_create]
 
   def new
     @user=User.new
@@ -10,11 +10,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.save!
+    if @user.save
       redirect_to root_url, flash: {success: "新账号注册成功,请登陆"}
     else
       flash[:warning] = "账号信息填写有误,请重试"
-      render 'user_new'
+      render 'new'
     end
   end
 
@@ -37,8 +37,8 @@ class UsersController < ApplicationController
     end
   end
 
-  def user_new
-
+  def admin_new
+    @user=User.new
   end
 
   def admin_update
@@ -63,12 +63,12 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.admin=true if params[:user][:admin]=="管理员"
     @user.admin=false if params[:user][:admin]=="普通"
-    if @user.save!
-      flash={:info => "创建成功"}
+    if @user.save
+      redirect_to users_path, flash: {:info => "创建成功"}
     else
-      flash={:warning => "创建失败"}
+      flash[:warning]= "创建失败"
+      render 'admin_new'
     end
-    redirect_to users_path, flash: flash
   end
 
   def destroy

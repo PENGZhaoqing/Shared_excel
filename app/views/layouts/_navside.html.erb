@@ -15,10 +15,12 @@
                 <i class="fa fa-angle-right fa-fw"></i>详细信息
             <% end %>
           </li>
-          <li><%= link_to supplier_excels_path do %>
-                <i class="fa fa-angle-right fa-fw"></i>数据管理
-            <% end %>
-          </li>
+          <% if current_user %>
+              <li><%= link_to supplier_excels_path do %>
+                    <i class="fa fa-angle-right fa-fw"></i>数据管理
+                <% end %>
+              </li>
+          <% end %>
         </ul>
       </li>
 
@@ -29,10 +31,12 @@
                 <i class="fa fa-angle-right fa-fw"></i>详细信息
             <% end %>
           </li>
-          <li><%= link_to project_excels_path do %>
-                <i class="fa fa-angle-right fa-fw"></i>数据管理
-            <% end %>
-          </li>
+          <% if current_user %>
+              <li><%= link_to project_excels_path do %>
+                    <i class="fa fa-angle-right fa-fw"></i>数据管理
+                <% end %>
+              </li>
+          <% end %>
         </ul>
       </li>
 
@@ -45,10 +49,13 @@
                     <i class="fa fa-angle-right fa-fw"></i>详细信息
                 <% end %>
               </li>
-              <li><%= link_to repertory_excels_path do %>
-                    <i class="fa fa-angle-right fa-fw"></i>数据管理
-                <% end %>
-              </li>
+
+              <% if admin?(current_user) || current_user %>
+                  <li><%= link_to repertory_excels_path do %>
+                        <i class="fa fa-angle-right fa-fw"></i>数据管理
+                    <% end %>
+                  </li>
+              <% end %>
             </ul>
           </li>
 
@@ -59,42 +66,47 @@
                     <i class="fa fa-angle-right fa-fw"></i>详细信息
                 <% end %>
               </li>
-              <li><%= link_to stock_excels_path do %>
-                    <i class="fa fa-angle-right fa-fw"></i>数据管理
-                <% end %>
-              </li>
+              <% if admin?(current_user) || current_user %>
+                  <li><%= link_to stock_excels_path do %>
+                        <i class="fa fa-angle-right fa-fw"></i>数据管理
+                    <% end %>
+                  </li>
+              <% end %>
             </ul>
           </li>
       <% end %>
 
-      <li>
-        <a href="#"><i class="fa fa-users fa-fw"></i> 用户管理 <span class="fa arrow"></span></a>
-        <ul class="nav nav-second-level">
-          <li> <%= link_to users_path do %>
-                <i class="fa fa-angle-right fa-fw"></i>所有用户
-                <span class="label label-info pull-right"><%= User.none_hidden_users.length %></span>
-            <% end %></li>
-          <li> <%= link_to new_user_path do %>
-                <i class="fa fa-angle-right fa-fw"></i>新增用户
-            <% end %>
+      <% if admin?(current_user) %>
+
+          <li>
+            <a href="#"><i class="fa fa-users fa-fw"></i> 用户管理 <span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              <li> <%= link_to users_path do %>
+                    <i class="fa fa-angle-right fa-fw"></i>所有用户
+                    <span class="label label-info pull-right"><%= User.none_hidden_users.length %></span>
+                <% end %></li>
+              <li> <%= link_to admin_new_users_path do %>
+                    <i class="fa fa-angle-right fa-fw"></i>新增用户
+                <% end %>
+              </li>
+            </ul>
           </li>
 
-        </ul>
-      </li>
+          <li>
+            <a href="#"><i class="fa fa-eye fa-fw"></i> 授权管理 <span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              <li> <%= link_to mapping_dbs_path do %>
+                    <i class="fa fa-angle-right fa-fw"></i>授权列表
+                <% end %>
+              </li>
+              <li> <%= link_to mapping_excels_path do %>
+                    <i class="fa fa-angle-right fa-fw"></i>映射管理
+                <% end %>
+              </li>
+            </ul>
+          </li>
 
-      <li>
-        <a href="#"><i class="fa fa-eye fa-fw"></i> 授权管理 <span class="fa arrow"></span></a>
-        <ul class="nav nav-second-level">
-          <li> <%= link_to mapping_dbs_path do %>
-                <i class="fa fa-angle-right fa-fw"></i>授权列表
-            <% end %>
-          </li>
-          <li> <%= link_to mapping_excels_path do %>
-                <i class="fa fa-angle-right fa-fw"></i>映射管理
-            <% end %>
-          </li>
-        </ul>
-      </li>
+      <% end %>
     </ul>
   </div>
 </div>
