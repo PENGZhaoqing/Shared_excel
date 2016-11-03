@@ -113,20 +113,27 @@
   margin-right: 10px
 }
 
-
 //filter
 #filter-button {
   margin-top: 10px;
   margin-right: 5px
 }
 
-#filter-link{
+#filter-link {
   margin-top: 10px
 }
 
-.filter-panel{
+.filter-panel {
   margin-left: 20px;
   margin-right: 20px
+}
+
+#small-table tbody td {
+  font-size: 12px;
+}
+
+#small-table thead th {
+  font-size: 13px;
 }
 
 
