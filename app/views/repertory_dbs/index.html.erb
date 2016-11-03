@@ -2,14 +2,3 @@
   <%= render 'repertory_db' %>
 </div>
 
-<script style="text/javascript">
-
-  $(document).ready(function () {
-    $("body").on("click", '.sort_paginate_ajax .pagination a', function (e) {
-      e.preventDefault();
-      $.getScript(this.href);
-      return false;
-    });
-  });
-
-</script>

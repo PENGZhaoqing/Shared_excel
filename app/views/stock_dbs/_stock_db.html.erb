@@ -1,194 +1,155 @@
-<div class="container-fluid">
-  <div class="panel panel-primary filterable">
-    <div class="panel-heading">
-      <h3 class="panel-title">出入库记录</h3>
-      <div class="pull-right">
-        <div class="row">
-          <div class="col-sm-5">
-            <%= form_tag export_stock_dbs_path, :method => :get do %>
-                <%= hidden_field_tag :complete_time, params[:complete_time] %>
-                <%= hidden_field_tag :client_name, params[:client_name] %>
-                <%= hidden_field_tag :product_code, params[:product_code] %>
-                <%= hidden_field_tag :product_name, params[:product_name] %>
-                <%= hidden_field_tag :standard, params[:standard] %>
-                <%= hidden_field_tag :kind, params[:kind] %>
-                <%= hidden_field_tag :supplier, params[:supplier] %>
-                <%= hidden_field_tag :export_num, params[:export_num] %>
-                <%= hidden_field_tag :project_code, params[:project_code] %>
-
-                <%= button_tag(type: "submit", class: "btn btn-default btn-xs") do %>
-                    <span class="glyphicon glyphicon-floppy-save"></span> 导出
-                <% end %>
-            <% end %>
-          </div>
-          <div class="col-sm-5">
-            <button id="filter" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-filter"></span>
-              筛选
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel-body" style="min-height:750px">
-      <table class="table table-responsive table-condensed table-hover">
-        <thead>
-        <tr class="filters">
-          <th><input type="text" class="form-control" placeholder="分公司名称" disabled></th>
-          <th><input type="text" class="form-control" placeholder="出库日期" disabled></th>
-          <th><input type="text" class="form-control" placeholder="物料编码" disabled></th>
-          <th><input type="text" class="form-control" placeholder="物料名称" disabled></th>
-          <th><input type="text" class="form-control" placeholder="规格型号" disabled></th>
-          <th><input type="text" class="form-control" placeholder="物资类别" disabled></th>
-          <th><input type="text" class="form-control" placeholder="供应商" disabled></th>
-          <th><input type="text" class="form-control" placeholder="发货数量" disabled></th>
-          <th><input type="text" class="form-control" placeholder="项目编号" disabled></th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-        <% @stock_dbs.each do |dbs| %>
-            <tr>
-
-              <td>
-                <text style="font-size: small"><%= dbs.client_name %></text>
-              </td>
-              <td>
-                <text style="font-size: small"><%= dbs.complete_time %></text>
-              </td>
-              <td>
-                <text style="font-size: small"><%= dbs.product_code %></text>
-              </td>
-              <td>
-                <text style="font-size: small"><%= dbs.product_name %></text>
-              </td>
-              <td>
-                <text style="font-size: small"><%= dbs.standard %></text>
-              </td>
-              <td>
-                <text style="font-size: small"><%= dbs.kind %></text>
-              </td>
-              <td>
-                <text style="font-size: small"><%= dbs.supplier %></text>
-              </td>
-              <td>
-                <text style="font-size: small"><%= dbs.export_num %></text>
-              </td>
-              <td>
-                <text style="font-size: small"><%= dbs.project_code %></text>
-              </td>
-            </tr>
-        <% end %>
-
-        </tbody>
-      </table>
-
-      <%= will_paginate @stock_dbs, :param_name => 'page',
-                        :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
-
-
-      <!--<%#= will_paginate @supplier_dbs, :param_name => 'page',-->
-                          <!--:previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>-->
-
+<div class="panel panel-default">
+  <div class="panel-heading">
+    出库纪录
+    <div class="pull-right">
+      <%= form_tag export_stock_dbs_path, :method => :get do %>
+          <%= hidden_field_tag :complete_time, params[:complete_time] %>
+          <%= hidden_field_tag :client_name, params[:client_name] %>
+          <%= hidden_field_tag :product_code, params[:product_code] %>
+          <%= hidden_field_tag :product_name, params[:product_name] %>
+          <%= hidden_field_tag :standard, params[:standard] %>
+          <%= hidden_field_tag :kind, params[:kind] %>
+          <%= hidden_field_tag :supplier, params[:supplier] %>
+          <%= hidden_field_tag :export_num, params[:export_num] %>
+          <%= hidden_field_tag :project_code, params[:project_code] %>
+          <%= button_tag(type: "submit", class: "btn btn-success btn-xs") do %>
+              <span class="glyphicon glyphicon-floppy-save"></span> 导出
+          <% end %>
+      <% end %>
     </div>
   </div>
-</div>
 
-<div class="modal fade" id="filter_modal" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div id="filter-header">
-        <div class="modal-header" style="padding:35px 50px;">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4><span class="glyphicon glyphicon-filter"></span> 筛选</h4>
+  <div class="filter-panel">
+    <%= form_tag stock_dbs_path, :method => 'get', role: 'form', class: "form-inline" do %>
+
+        <div class="form-group">
+          <%= label_tag :client_name, "分公司" %>
+          <%= text_field_tag :client_name, params[:client_name], placeholder: "输入分公司名称", class: 'form-control input-sm' %>
         </div>
-      </div>
-      <div class="modal-body" style="padding:30px 50px;">
 
-        <%= form_tag stock_dbs_path, :method => 'get', role: 'form', class: "form-horizontal" do %>
+        <div class="form-group">
+          <%= label_tag :complete_time, "出库日期" %>
+          <%= text_field_tag :complete_time, params[:complete_time], placeholder: "输入发货完成时间", class: 'form-control input-sm' %>
+        </div>
 
+        <div class="form-group">
+          <%= label_tag :product_code, "物料编码" %>
+          <%= text_field_tag :product_code, params[:product_code], placeholder: "输入物料编码", class: 'form-control input-sm' %>
+        </div>
 
-            <div class="form-group">
-              <%= label_tag :client_name, "分公司", class: "control-label col-sm-2" %>
-              <div class="col-sm-10">
-                <%= text_field_tag :client_name, params[:client_name], placeholder: "输入分公司名称", class: 'form-control' %>
-              </div>
-            </div>
+        <div class="form-group">
+          <%= label_tag :product_name, "物料名称" %>
+          <%= text_field_tag :product_name, params[:product_name], placeholder: "输入物料名称", class: 'form-control input-sm' %>
+        </div>
 
-            <div class="form-group">
-              <%= label_tag :complete_time, "出库日期", class: "control-label col-sm-2" %>
-              <div class="col-sm-10">
-                <%= text_field_tag :complete_time, params[:complete_time], placeholder: "输入发货完成时间", class: 'form-control' %>
-              </div>
-            </div>
+        <div class="form-group">
+          <%= label_tag :standard, "规格型号" %>
+          <%= text_field_tag :standard, params[:standard], placeholder: "输入规格", class: 'form-control input-sm' %>
+        </div>
 
-            <div class="form-group">
-              <%= label_tag :product_code, "物料编码", class: "control-label col-sm-2" %>
-              <div class="col-sm-10">
-                <%= text_field_tag :product_code, params[:product_code], placeholder: "输入物料编码", class: 'form-control' %>
-              </div>
-            </div>
+        <div class="form-group">
+          <%= label_tag :kind, "物资类别" %>
+          <%= text_field_tag :kind, params[:kind], placeholder: "输入铁塔物资类别", class: 'form-control input-sm' %>
+        </div>
 
-            <div class="form-group">
-              <%= label_tag :product_name, "物料名称", class: "control-label col-sm-2" %>
-              <div class="col-sm-10">
-                <%= text_field_tag :product_name, params[:product_name], placeholder: "输入物料名称", class: 'form-control' %>
-              </div>
-            </div>
+        <div class="form-group">
+          <%= label_tag :supplier, "供应商" %>
+          <%= text_field_tag :supplier, params[:supplier], placeholder: "输入供应商", class: 'form-control input-sm' %>
+        </div>
 
-            <div class="form-group">
-              <%= label_tag :standard, "规格型号", class: "control-label col-sm-2" %>
-              <div class="col-sm-10">
-                <%= text_field_tag :standard, params[:standard], placeholder: "输入规格", class: 'form-control' %>
-              </div>
-            </div>
+        <div class="form-group">
+          <%= label_tag :export_num, "发货数量" %>
+          <%= text_field_tag :export_num, params[:export_num], placeholder: "输入发货数量", class: 'form-control input-sm' %>
+        </div>
 
-            <div class="form-group">
-              <%= label_tag :kind, "物资类别", class: "control-label col-sm-2" %>
-              <div class="col-sm-10">
-                <%= text_field_tag :kind, params[:kind], placeholder: "输入铁塔物资类别", class: 'form-control' %>
-              </div>
-            </div>
+        <div class="form-group">
+          <%= label_tag :project_code, "项目编号" %>
+          <%= text_field_tag :export_num, params[:export_num], placeholder: "输入发货数量", class: 'form-control input-sm' %>
+        </div>
 
-            <div class="form-group">
-              <%= label_tag :supplier, "供应商", class: "control-label col-sm-2" %>
-              <div class="col-sm-10">
-                <%= text_field_tag :supplier, params[:supplier], placeholder: "输入供应商", class: 'form-control' %>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <%= label_tag :export_num, "发货数量", class: "control-label col-sm-2" %>
-              <div class="col-sm-10">
-                <%= text_field_tag :export_num, params[:export_num], placeholder: "输入发货数量", class: 'form-control' %>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <%= label_tag :project_code, "项目编号", class: "control-label col-sm-2" %>
-              <div class="col-sm-10">
-                <%= text_field_tag :export_num, params[:export_num], placeholder: "输入发货数量", class: 'form-control' %>
-              </div>
-            </div>
-
-            <div class="modal-footer">
-              <%= button_tag(type: "submit", class: "btn btn-default btn-block") do %>
-                  <span class="glyphicon glyphicon-search"></span>查找
-              <% end %>
-            </div>
-
+        <%= button_tag(type: "submit", class: "btn btn-info btn-sm", id: "filter-button") do %>
+            <span class="glyphicon glyphicon-search"></span>查找
         <% end %>
-      </div>
+
+    <% end %>
+    </br>
+
+    <text class="text-muted">显示纪录:
+      <mark><%= @stock_dbs.length %></mark>
+      条
+    </text>
+
+    <div class="pull-right">
+      <%= will_paginate @stock_dbs, :param_name => 'page',
+                        :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
     </div>
+  </div>
+  <div class="panel-body" style="min-height:750px">
+    <table class="table table-responsive table-condensed table-hover">
+      <thead>
+      <tr>
+        <th>分公司名称</th>
+        <th>出库日期</th>
+        <th>物料编码</th>
+        <th>物料名称</th>
+        <th>规格型号</th>
+        <th>物资类别</th>
+        <th>供应商</th>
+        <th>发货数量</th>
+        <th>项目编号</th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+      <% @stock_dbs.each do |dbs| %>
+          <tr>
+
+            <td>
+              <%= dbs.client_name %>
+            </td>
+            <td>
+              <%= dbs.complete_time %>
+            </td>
+            <td>
+              <%= dbs.product_code %>
+            </td>
+            <td>
+              <%= dbs.product_name %>
+            </td>
+            <td>
+              <%= dbs.standard %>
+            </td>
+            <td>
+              <%= dbs.kind %>
+            </td>
+            <td>
+              <%= dbs.supplier %>
+            </td>
+            <td>
+              <%= dbs.export_num %>
+            </td>
+            <td>
+              <%= dbs.project_code %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
 
 <script>
-  $(document).ready(function () {
-    $("#filter").click(function () {
-      $("#filter_modal").modal();
+  $(function () {
+    $('.form-inline div').each(function () {
+      $(this).css({'margin-top': '10px', 'margin-right': '10px'});
     });
+
+    $('#filter-button').css({'margin-top': '10px', 'margin-right': '10px'});
+
+    $('.filter-panel').css({'margin-left': '20px', 'margin-right': '20px'});
+
+    $('.table tbody td').css({});
   });
 </script>
+

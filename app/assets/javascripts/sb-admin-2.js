@@ -5,6 +5,7 @@
  */
 
 
+
 $(document).ready(function () {
     $("body").on("click", '.sort_paginate_ajax .pagination a', function (e) {
         e.preventDefault();
@@ -63,3 +64,4 @@ $(function() {
         }
     }
 });
+
