@@ -1,32 +1,31 @@
+<table class='table table-responsive table-condensed table-hover'>
 
-    <table class='table table-responsive table-condensed table-hover'>
+  <tr>
+    <th>建设单位</th>
+    <th>建设方式</th>
+    <th>项目名称</th>
+  </tr>
 
+  <tbody>
+  <% project_dbs.each do |db| %>
       <tr>
-        <th>建设单位</th>
-        <th>建设方式</th>
-        <th>项目名称</th>
+        <td>
+          <%= db.company %>
+        </td>
+        <td>
+          <%= db.build_way %>
+        </td>
+        <td>
+          <%= truncate(db.project_name, length: 26) %>
+        </td>
       </tr>
-
-      <tbody>
-      <% project_dbs.each do |db| %>
-          <tr>
-            <td>
-              <%= db.company %>
-            </td>
-            <td>
-              <%= db.build_way %>
-            </td>
-            <td>
-              <%= truncate(db.project_name, length: 26) %>
-            </td>
-          </tr>
-      <% end %>
-      </tbody>
+  <% end %>
+  </tbody>
 
 
-    </table>
+</table>
 
-    <%= will_paginate project_dbs, :param_name => 'project_page',
-                      :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
+<%= will_paginate project_dbs, :param_name => 'project_page',
+                  :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
 
 

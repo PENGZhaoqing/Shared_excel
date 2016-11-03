@@ -8,9 +8,7 @@
     <ul class="nav navbar-top-links navbar-right">
 
       <% if current_user %>
-
           <li class="navbar-text"><%= current_user.name %><span class="glyphicon glyphicon-user"></span></li>
-
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>修改账号</b>
               <span class="	glyphicon glyphicon-cog"></span></a>
@@ -35,7 +33,7 @@
           <li class="navbar-text">  <%= current_visit.supplier1 %><span class="glyphicon glyphicon-user"></span></li>
           <li>
             <%= link_to sessions_visit_out_path, method: :delete do %>
-                退出 <span class="	glyphicon glyphicon-off"></span>
+                <span class="	glyphicon glyphicon-off"></span>
             <% end %>
           </li>
 
