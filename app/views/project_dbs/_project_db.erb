@@ -1,138 +1,97 @@
-<div class="container">
-  <div class="row">
-    <div class="panel panel-primary filterable">
-      <div class="panel-heading">
-        <h3 class="panel-title">立项数据</h3>
-
-        <div class="pull-right">
-          <div class="row">
-            <div class="col-sm-5">
-              <%= form_tag export_project_dbs_path, :method => :get do %>
-                  <%= hidden_field_tag :company, params[:company] %>
-                  <%= hidden_field_tag :build_way, params[:build_way] %>
-                  <%= hidden_field_tag :project_name, params[:project_name] %>
-                  <%= hidden_field_tag :approve_time, params[:approve_time] %>
-                  <%= button_tag(type: "submit", class: "btn btn-default btn-xs") do %>
-                      <span class="glyphicon glyphicon-floppy-save"></span> 导出
-                  <% end %>
-              <% end %>
-            </div>
-            <div class="col-sm-5">
-              <button id="filter" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-filter"></span>
-                筛选
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel-body" style="min-height:750px">
-
-        <table class="table table-responsive table-condensed table-hover">
-          <thead>
-          <tr class="filters">
-            <th><input type="text" class="form-control" placeholder="企业" disabled></th>
-            <th><input type="text" class="form-control" placeholder="建造方式" disabled></th>
-            <th><input type="text" class="form-control" placeholder="项目名字" disabled></th>
-            <th><input type="text" class="form-control" placeholder="审批时间" disabled></th>
-          </tr>
-          </thead>
-
-          <tbody>
-
-
-          <% @project_dbs.each do |dbs| %>
-              <tr>
-                <td>
-                  <text style="font-size: small"><%= dbs.company %></text>
-                </td>
-                <td>
-                  <text style="font-size: small"><%= dbs.build_way %></text>
-                </td>
-                <td>
-                  <text style="font-size: small"><%= dbs.project_name %></text>
-                </td>
-                <td>
-                  <text style="font-size: small"><%= dbs.approve_time %></text>
-                </td>
-
-              </tr>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    立项数据
+    <div class="pull-right">
+      <%= form_tag export_project_dbs_path, :method => :get do %>
+          <%= hidden_field_tag :company, params[:company] %>
+          <%= hidden_field_tag :build_way, params[:build_way] %>
+          <%= hidden_field_tag :project_name, params[:project_name] %>
+          <%= hidden_field_tag :approve_time, params[:approve_time] %>
+          <%= button_tag(type: "submit", class: "btn btn-success btn-xs") do %>
+              <span class="glyphicon glyphicon-floppy-save"></span> 导出
           <% end %>
-
-
-          </tbody>
-        </table>
-
-        <%= will_paginate @project_dbs, :param_name => 'page',
-                          :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
-
-      </div>
+      <% end %>
     </div>
   </div>
-</div>
 
-
-<!-- Modal -->
-<div class="modal fade" id="filter_modal" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div id="filter-header">
-        <div class="modal-header" style="padding:35px 50px;">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4><span class="glyphicon glyphicon-filter"></span> 筛选</h4>
+  <div style="margin-left:20px;margin-right: 20px">
+    </br>
+    <%= form_tag project_dbs_path, :method => 'get', role: 'form', class: "form-inline" do %>
+        <div class="form-group">
+          <%= label_tag :company, "公司名:" %>
+          <%= text_field_tag :company, params[:company], placeholder: "公司名", class: 'form-control input-sm' %>
         </div>
-      </div>
-      <div class="modal-body" style="padding:30px 50px;">
 
-        <%= form_tag project_dbs_path, :method => 'get', role: 'form', class: "form-horizontal" do %>
-            <div class="form-group">
-              <%= label_tag :company, "公司名", class: "control-label col-sm-2" %>
-              <div class="col-sm-10">
-                <%= text_field_tag :company, params[:company], placeholder: "公司名", class: 'form-control' %>
-              </div>
-            </div>
+        <div class="form-group">
+          <%= label_tag :build_way, "建造方式:"%>
+          <%= text_field_tag :build_way, params[:build_way], placeholder: "建造方式", class: 'form-control input-sm' %>
+        </div>
 
-            <div class="form-group">
-              <%= label_tag :build_way, "建造方式", class: "control-label col-sm-2" %>
-              <div class="col-sm-10">
-                <%= text_field_tag :build_way, params[:build_way], placeholder: "建造方式", class: 'form-control' %>
-              </div>
-            </div>
+        <div class="form-group">
+          <%= label_tag :project_name, "项目名字:" %>
+          <%= text_field_tag :project_name, params[:project_name], placeholder: "项目名字", class: 'form-control input-sm' %>
+        </div>
 
-            <div class="form-group">
-              <%= label_tag :project_name, "项目名字", class: "control-label col-sm-2" %>
-              <div class="col-sm-10">
-                <%= text_field_tag :project_name, params[:project_name], placeholder: "项目名字", class: 'form-control' %>
-              </div>
-            </div>
+        <div class="form-group">
+          <%= label_tag :approve_time, "审批时间:" %>
+          <%= text_field_tag :approve_time, params[:approve_time], placeholder: "审批时间", class: 'form-control input-sm' %>
+        </div>
 
-            <div class="form-group">
-              <%= label_tag :approve_time, "审批时间", class: "control-label col-sm-2" %>
-              <div class="col-sm-10">
-                <%= text_field_tag :approve_time, params[:approve_time], placeholder: "审批时间", class: 'form-control' %>
-              </div>
-            </div>
-
-            <div class="modal-footer">
-              <%= button_tag(type: "submit", class: "btn btn-default btn-block") do %>
-                  <span class="glyphicon glyphicon-search"></span>查找
-              <% end %>
-            </div>
-
+        <%= button_tag(type: "submit", class: "btn btn-info btn-sm") do %>
+            <span class="glyphicon glyphicon-search"></span>查找
         <% end %>
 
-      </div>
+    <% end %>
+
+    <br>
+
+    <text class="text-muted">显示纪录:
+      <mark><%= @project_dbs.length %></mark>
+      条
+    </text>
+
+    <div class="pull-right">
+      <%= will_paginate @project_dbs, :param_name => 'page',
+                        :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
     </div>
+
+  </div>
+
+  <div class="panel-body" style="min-height:600px">
+    <table class="table table-responsive table-condensed table-hover">
+      <thead>
+      <tr class="filters">
+        <th>企业</th>
+        <th>建造方式</th>
+        <th>项目名字</th>
+        <th>审批时间</th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+
+      <% @project_dbs.each do |dbs| %>
+          <tr>
+            <td>
+              <text style="font-size: small"><%= dbs.company %></text>
+            </td>
+            <td>
+              <text style="font-size: small"><%= dbs.build_way %></text>
+            </td>
+            <td>
+              <text style="font-size: small"><%= dbs.project_name %></text>
+            </td>
+            <td>
+              <text style="font-size: small"><%= dbs.approve_time %></text>
+            </td>
+
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
 
-<script>
-  $(document).ready(function () {
-    $("#filter").click(function () {
-      $("#filter_modal").modal();
-    });
-  });
-</script>
+
 

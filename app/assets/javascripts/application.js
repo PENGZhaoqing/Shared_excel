@@ -16,4 +16,5 @@
 //= require bootstrap.min
 //= require metisMenu
 //= require sb-admin-2
+//= require bootstrap.file-input
 

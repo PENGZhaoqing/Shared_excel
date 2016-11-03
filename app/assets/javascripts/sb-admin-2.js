@@ -3,8 +3,26 @@
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
-$(function() {
+
+
+$(document).ready(function () {
+    $("body").on("click", '.sort_paginate_ajax .pagination a', function (e) {
+        e.preventDefault();
+        $.getScript(this.href);
+        return false;
+    });
+});
+
+$(document).ready(function() {
     $('#side-menu').metisMenu();
+});
+
+$(document).ready(function () {
+    $("body").on("click", '#side-menu .nav-second-level a', function (e) {
+        e.preventDefault();
+        $.getScript(this.href);
+        return false;
+    });
 });
 
 //Loads the correct sidebar on window load,
