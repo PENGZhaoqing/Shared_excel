@@ -14,7 +14,7 @@
   <div class="panel-body" style="min-height: 600px">
 
     <div class="filter-panel">
-      <%= form_tag mapping_dbs_path, :method => 'get', role: 'form', class: "form-inline" do %>
+      <%= form_tag mapping_dbs_path, remote: true, :method => 'get', role: 'form', class: "form-inline" do %>
 
           <div class="form-group">
             <%= text_field_tag :query, params[:query], placeholder: "搜索供应商/授权码", class: 'form-control input-sm' %>
@@ -24,7 +24,7 @@
               <i class="fa fa-refresh"></i></span>查找
           <% end %>
 
-          <%= link_to mapping_dbs_path, class: "btn btn-sm btn-warning", id: "filter-link", method: :get do %>
+          <%= link_to mapping_dbs_path, class: "btn btn-sm btn-warning", id: "filter-link", remote: true do %>
               <i class="fa fa-refresh"></i> 重置
           <% end %>
 

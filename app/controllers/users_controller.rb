@@ -44,19 +44,18 @@ class UsersController < ApplicationController
   def admin_update
     @user = User.find_by_id(params[:id])
     if @user.update_attributes(user_params)
-      flash={:info => "更新成功"}
-    else
-      flash={:warning => "更新失败"}
-    end
-
-    if @user.id!=current_user.id
-      if params[:user][:admin]=="管理员"
-        @user.update_attribute(:admin, true)
-      elsif params[:user][:admin]=="普通"
-        @user.update_attribute(:admin, false)
+      flash[:info]="更新成功"
+      if @user.id!=current_user.id
+        if params[:user][:admin]=="管理员"
+          @user.update_attribute(:admin, true)
+        elsif params[:user][:admin]=="普通"
+          @user.update_attribute(:admin, false)
+        end
       end
+    else
+      flash[:warning]="更新失败"
     end
-    redirect_to users_path, flash: flash
+    redirect_to users_path
   end
 
   def admin_create

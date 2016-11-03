@@ -31,9 +31,9 @@
             <td><%= user.created_at.strftime("%Y/%m/%d") %></td>
 
             <% if !params[:users_page].blank? %>
-                <td><%= link_to "编辑", users_path(user_id: user.id, users_page: params[:users_page].to_i), method: :get, class: 'btn-sm btn-info' %></td>
+                <td><%= link_to "编辑", users_path(user_id: user.id, users_page: params[:users_page].to_i), remote: true, class: 'btn-sm btn-info' %></td>
             <% else %>
-                <td><%= link_to "编辑", users_path(user_id: user.id), method: :get, class: 'btn-sm btn-info' %></td>
+                <td><%= link_to "编辑", users_path(user_id: user.id), remote: true, class: 'btn-sm btn-info' %></td>
             <% end %>
             <td><%= link_to "删除", user_path(user), method: :delete, class: 'btn-sm btn-danger' %></td>
 
