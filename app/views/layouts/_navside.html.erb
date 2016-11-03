@@ -3,42 +3,48 @@
     <ul class="nav" id="side-menu">
 
       <li>
-        <a href="#"><i class="fa fa-map-marker fa-fw"></i> 遴选信息 <span class="fa arrow"></span></a>
+        <%= link_to root_path, method: :get do %>
+            <i class="fa fa-desktop fa-fw"></i> 铁塔主页
+        <% end %>
+      </li>
+
+      <li>
+        <a href="#"><i class="fa fa-bars fa-fw"></i> 遴选信息 <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
-          <li> <%= link_to "详细", supplier_dbs_path %></li>
-          <li><%= link_to "管理", supplier_excels_path %></li>
+          <li><%= link_to "详细信息", supplier_dbs_path %></li>
+          <li><%= link_to "数据管理", supplier_excels_path %></li>
         </ul>
       </li>
 
       <li>
-        <a href="#"><i class="fa fa-map-marker fa-fw"></i> 立项数据 <span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-database fa-fw"></i> 立项数据 <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
-          <li> <%= link_to "详细", project_dbs_path %></li>
-          <li><%= link_to "管理", project_excels_path %></li>
+          <li> <%= link_to "详细信息", project_dbs_path %></li>
+          <li><%= link_to "数据管理", project_excels_path %></li>
         </ul>
       </li>
 
 
       <% if current_user || current_visit %>
           <li>
-            <a href="#"><i class="fa fa-map-marker fa-fw"></i> 库存明细 <span class="fa arrow"></span></a>
+            <a href="#"><i class="fa fa-cubes fa-fw"></i> 库存明细 <span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
-              <li> <%= link_to "详细", repertory_dbs_path %></li>
-              <li><%= link_to "管理", repertory_excels_path %></li>
+              <li> <%= link_to "详细信息", repertory_dbs_path %></li>
+              <li><%= link_to "数据管理", repertory_excels_path %></li>
             </ul>
           </li>
 
           <li>
-            <a href="#"><i class="fa fa-map-marker fa-fw"></i> 出库明细 <span class="fa arrow"></span></a>
+            <a href="#"><i class="fa fa-truck fa-fw"></i> 出库明细 <span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
-              <li> <%= link_to "详细", stock_dbs_path %></li>
-              <li><%= link_to "管理", stock_excels_path %></li>
+              <li> <%= link_to "详细信息", stock_dbs_path %></li>
+              <li><%= link_to "数据管理", stock_excels_path %></li>
             </ul>
           </li>
       <% end %>
 
       <li>
-        <a href="#"><i class="fa fa-map-marker fa-fw"></i> 用户管理 <span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-users fa-fw"></i> 用户管理 <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
           <li> <%= link_to users_path do %>
                 所有用户
@@ -49,10 +55,10 @@
       </li>
 
       <li>
-        <a href="#"><i class="fa fa-map-marker fa-fw"></i> 授权码管理 <span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-eye fa-fw"></i> 授权码管理 <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
-          <li> <%= link_to "映射文件管理", mapping_excels_path %></li>
-          <li> <%= link_to "授权码列表", mapping_dbs_path %></li>
+          <li> <%= link_to "映射管理", mapping_excels_path %></li>
+          <li> <%= link_to "授权列表", mapping_dbs_path %></li>
         </ul>
       </li>
     </ul>

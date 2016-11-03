@@ -92,7 +92,7 @@
   color: white;
 }
 
-.navbar-top-links li a:hover{
+.navbar-top-links li a:hover, a:active, a:visited {
   background: #59b5fa;
 }
 
@@ -103,6 +103,14 @@
 .dropdown-toggle:visited, .open .dropdown-toggle {
   background: #59b5fa !important;
 }
+
+#side-menu li a{
+  color: #585858;
+}
+
+
+
+
 
 
 
