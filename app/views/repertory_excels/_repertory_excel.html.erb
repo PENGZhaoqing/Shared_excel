@@ -1,3 +1,12 @@
+<% if request.xhr? %>
+    <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong> <%= message %></strong>
+        </div>
+    <% end %>
+<% end %>
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <i class="fa fa-cubes fa-fw"></i>库存明细
