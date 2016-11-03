@@ -25,10 +25,12 @@
         </div>
 
         <%= button_tag(type: "submit", class: "btn btn-sm btn-info", id: "filter-button") do %>
-            <span class="glyphicon glyphicon-search"></span>查找
+            <i class="fa fa-search"></i>查找
         <% end %>
 
-        <%= link_to "重置", supplier_dbs_path, class: "btn btn-sm btn-warning", id: "filter-link", method: :get %>
+        <%= link_to supplier_dbs_path, class: "btn btn-sm btn-warning", id: "filter-link", method: :get do %>
+            <i class="fa fa-refresh"></i> 重置
+        <% end %>
     <% end %>
 
     <br>

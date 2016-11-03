@@ -11,10 +11,10 @@
 
       <% if current_user %>
           <li class="navbar-text" style="color: white"><%= current_user.name %>
-            <span class="glyphicon glyphicon-user"></span></li>
+            <i class="fa fa-user" aria-hidden="true"></i></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>修改账号</b>
-              <span class="	glyphicon glyphicon-cog"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              账号 <i class="fa fa-caret-down" aria-hidden="true"></i></a>
             <ul id="login-dp" class="dropdown-menu">
               <li>
                 <div class="row">
@@ -28,7 +28,7 @@
 
           <li>
             <%= link_to sessions_logout_path, method: :delete do %>
-                退出 <span class="	glyphicon glyphicon-off"></span>
+                退出 <i class="fa fa-power-off" aria-hidden="true"></i></span>
             <% end %>
           </li>
 
@@ -37,7 +37,7 @@
             <span class="glyphicon glyphicon-user"></span></li>
           <li>
             <%= link_to sessions_visit_out_path, method: :delete do %>
-                <span class="	glyphicon glyphicon-off"></span>
+                退出 <i class="fa fa-power-off" aria-hidden="true"></i></span>
             <% end %>
           </li>
 
