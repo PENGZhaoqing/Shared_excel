@@ -45,7 +45,7 @@ $.fn.bootstrapFileInput = function() {
   // This is important because the in order to give the illusion that this is a button in FF we actually need to move the button from the file input under the cursor. Ugh.
   .promise().done( function(){
 
-    // As the cursor moves over our new Bootstrap button we need to adjust the position of the invisible file input Browse button to be under the cursor.
+    // As the cursor moves over our user_new Bootstrap button we need to adjust the position of the invisible file input Browse button to be under the cursor.
     // This gives us the pointer cursor that FF denies us
     $('.file-input-wrapper').mousemove(function(cursor) {
 

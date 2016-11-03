@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       redirect_to root_url, flash: {success: "新账号注册成功,请登陆"}
     else
       flash[:warning] = "账号信息填写有误,请重试"
-      render 'new'
+      render 'user_new'
     end
   end
 
@@ -37,6 +37,10 @@ class UsersController < ApplicationController
     elsif params[:new_user]=="true"
       @user=User
     end
+  end
+
+  def user_new
+
   end
 
   def admin_update
@@ -72,7 +76,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find_by_id(params[:id])
     @user.destroy
-    redirect_to users_path(new: false), flash: {success: "用户删除"}
+    redirect_to users_path(user_new: false), flash: {success: "用户删除"}
   end
 
   private

@@ -44,7 +44,7 @@
                 所有用户
                 <span class="label label-info pull-right"><%= User.none_hidden_users.length %></span>
             <% end %></li>
-          <li> <%= link_to "新增用户", users_path(new_user: true) %></li>
+          <li> <%= link_to "新增用户", new_user_path %></li>
         </ul>
       </li>
 

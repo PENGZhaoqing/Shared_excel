@@ -89,7 +89,7 @@
                 return true;
             }
 
-            //does not exists, add a new class and return false
+            //does not exists, add a user_new class and return false
             if (elem.parent().children("ul").length) {
                  //first remove all other class
                 $this.find(".doubleTapToGo").removeClass("doubleTapToGo");
