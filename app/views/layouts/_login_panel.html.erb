@@ -76,10 +76,10 @@
 
 <script>
   $(document).ready(function () {
-    $("#login_panel").click(function () {
+    $("#login_panel").click(function (e) {
+      e.preventDefault();
       $("#panel_modal").modal();
     });
   });
-
 </script>
 
