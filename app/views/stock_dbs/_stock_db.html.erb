@@ -68,7 +68,11 @@
         </div>
 
         <%= button_tag(type: "submit", class: "btn btn-info btn-sm", id: "filter-button") do %>
-            <span class="glyphicon glyphicon-search"></span>查找
+            <i class="fa fa-search"></i> 查找
+        <% end %>
+
+        <%= link_to stock_dbs_path, class: "btn btn-sm btn-warning", id: "filter-link", method: :get do %>
+            <i class="fa fa-refresh"></i> 重置
         <% end %>
 
     <% end %>
@@ -139,17 +143,4 @@
   </div>
 </div>
 
-<script>
-  $(function () {
-    $('.form-inline div').each(function () {
-      $(this).css({'margin-top': '10px', 'margin-right': '10px'});
-    });
-
-    $('#filter-button').css({'margin-top': '10px', 'margin-right': '10px'});
-
-    $('.filter-panel').css({'margin-left': '20px', 'margin-right': '20px'});
-
-    $('.table tbody td').css({});
-  });
-</script>
 
