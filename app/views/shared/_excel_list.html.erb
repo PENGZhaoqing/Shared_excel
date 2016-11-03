@@ -5,7 +5,7 @@
 
     <div class="alert alert-warning pull-right">
       目前出库数据的行数: <%= StockDb.all.size %>行
-      <%= link_to clean_stock_excels_path, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
+      <%= link_to clean_stock_excels_path, :method => :get, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
           <span class="glyphicon glyphicon-trash"></span> 清空数据
       <% end %>
     </div>
@@ -13,7 +13,7 @@
 <% elsif params[:controller]=="repertory_excels" %>
     <div class="alert alert-warning pull-right">
       目前库存数据的行数: <%= RepertoryDb.all.size %>行
-      <%= link_to clean_repertory_excels_path, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
+      <%= link_to clean_repertory_excels_path, :method => :get, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
           <span class="glyphicon glyphicon-trash"></span> 清空数据
       <% end %>
     </div>
@@ -21,7 +21,7 @@
 <% elsif params[:controller]=="project_excels" %>
     <div class="alert alert-warning pull-right">
       目前立项数据的行数: <%= ProjectDb.all.size %>行
-      <%= link_to clean_project_excels_path, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
+      <%= link_to clean_project_excels_path, :method => :get, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
           <span class="glyphicon glyphicon-trash"></span> 清空数据
       <% end %>
     </div>
@@ -30,7 +30,7 @@
 <% elsif params[:controller]=="mapping_excels" %>
     <div class="alert alert-warning pull-right">
       目前映射数据的行数: <%= MappingDb.all.size %>行
-      <%= link_to clean_mapping_excels_path, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
+      <%= link_to clean_mapping_excels_path, :method => :get, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
           <span class="glyphicon glyphicon-trash"></span> 清空数据
       <% end %>
     </div>
@@ -73,7 +73,6 @@
         <td>
           <%= excel.file_updated_at.strftime("%Y/%m/%d %H:%M") if !excel.file_updated_at.nil? %>
         </td>
-
         <td>
           <%= number_to_human_size(excel.file_file_size) %>
         </td>
@@ -81,17 +80,29 @@
         <td><%= link_to '下载', excel.file.url(:original, false), class: 'btn-xs btn-success pull-right' %></td>
 
         <% if params[:controller]=="stock_excels" %>
-
             <% if excel.parse %>
-                <button type="button" class="btn-xs btn-primary disabled">Active Primary</button>
+                <td>
+                  <button type="button" class="btn btn-xs pull-right disabled">已解析</button>
+                </td>
             <% else %>
-                <td><%= link_to '解析', parse_stock_excel_path(excel), class: 'btn-xs btn-primary pull-right' %></td>
+                <td><%= link_to '解析', parse_stock_excel_path(excel), method: :get, class: 'btn-xs btn-primary pull-right' %></td>
             <% end %>
-
         <% elsif params[:controller]=="repertory_excels" %>
-            <td><%= link_to '解析', parse_repertory_excel_path(excel), class: 'btn-xs btn-primary pull-right' %></td>
+            <% if excel.parse %>
+                <td>
+                  <button type="button" class="btn btn-xs pull-right disabled">已解析</button>
+                </td>
+            <% else %>
+                <td><%= link_to '解析', parse_repertory_excel_path(excel), method: :get, class: 'btn-xs btn-primary pull-right' %></td>
+            <% end %>
         <% elsif params[:controller]=="project_excels" %>
-            <td><%= link_to '解析', parse_project_excel_path(excel), class: 'btn-xs btn-primary pull-right' %></td>
+            <% if excel.parse %>
+                <td>
+                  <button type="button" class="btn btn-xs pull-right disabled">已解析</button>
+                </td>
+            <% else %>
+                <td><%= link_to '解析', parse_project_excel_path(excel), method: :get, class: 'btn-xs btn-primary pull-right' %></td>
+            <% end %>
         <% elsif params[:controller]=="supplier_excels" %>
 
             <% if excel.parse %>
@@ -103,7 +114,13 @@
             <% end %>
 
         <% elsif params[:controller]=="mapping_excels" %>
-            <td><%= link_to '解析', parse_mapping_excel_path(excel), class: 'btn-xs btn-primary pull-right' %></td>
+            <% if excel.parse %>
+                <td>
+                  <button type="button" class="btn btn-xs pull-right disabled">已解析</button>
+                </td>
+            <% else %>
+                <td><%= link_to '解析', parse_mapping_excel_path(excel), method: :get,class: 'btn-xs btn-primary pull-right' %></td>
+            <% end %>
         <% end %>
 
         <% if params[:controller]=="stock_excels" %>

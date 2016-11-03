@@ -12,6 +12,9 @@ class ProjectExcelsController < ApplicationController
 
   def clean
     ProjectDb.delete_all
+    ProjectExcel.all.each do |excel|
+      excel.update_attribute(:parse, false)
+    end
     redirect_to project_excels_path, flash: {success: "立项数据已全部清空"}
   end
 
@@ -28,6 +31,8 @@ class ProjectExcelsController < ApplicationController
       projectdb.approve_time=workbook.row(row_index)[5]
       projectdb.save
     end
+
+    @project_excel.update_attribute(:parse, true)
     redirect_to project_excels_path, flash: {success: "Excel文件中的数据已成功解析"}
   end
 

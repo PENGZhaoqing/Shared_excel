@@ -16,6 +16,9 @@ class StockExcelsController < ApplicationController
 
   def clean
     StockDb.delete_all
+    StockExcel.all.each do |excel|
+      excel.update_attribute(:parse, false)
+    end
     redirect_to stock_excels_path, flash: {success: "出库数据已全部清空"}
   end
 
@@ -35,10 +38,9 @@ class StockExcelsController < ApplicationController
       stockdb.kind=workbook.row(row_index)[33]
       stockdb.export_num=workbook.row(row_index)[34]
       stockdb.project_code=workbook.row(row_index)[40]
-
       stockdb.save
     end
-
+    @stock_excel.update_attribute(:parse, true)
     redirect_to stock_excels_path, flash: {success: "Excel文件中的数据已成功解析"}
   end
 

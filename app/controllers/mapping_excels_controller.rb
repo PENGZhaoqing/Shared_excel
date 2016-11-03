@@ -19,11 +19,15 @@ class MappingExcelsController < ApplicationController
       auth_token=MappingDb.new_token
       MappingDb.create!(supplier1: supplier1, supplier2: supplier2, auth_token: auth_token)
     end
+    @mapping_excel.update_attribute(:parse, true)
     redirect_to mapping_excels_path, flash: {success: "Excel文件中的数据已解析"}
   end
 
   def clean
     MappingDb.delete_all
+    MappingExcel.all.each do |excel|
+      excel.update_attribute(:parse, false)
+    end
     redirect_to mapping_excels_path, flash: {success: "映射数据已清空"}
   end
 

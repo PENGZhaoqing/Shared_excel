@@ -34,11 +34,16 @@ class RepertoryExcelsController < ApplicationController
 
       end
     end
+
+    @repertory_excel.update_attribute(:parse, true)
     redirect_to repertory_excels_path, flash: {success: "Excel文件数据解析成功"}
   end
 
   def clean
     RepertoryDb.delete_all
+    RepertoryExcel.all.each do |excel|
+      excel.update_attribute(:parse, false)
+    end
     redirect_to repertory_excels_path, flash: {success: "库存数据已全部清空"}
   end
 

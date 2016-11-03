@@ -3,6 +3,6 @@
     <i class="fa fa-database fa-fw"></i> 立项数据
   </div>
   <div class="panel-body" style="min-height: 600px">
-    <%= render "shared/excel_list", :excels => @project_excels, :new_excel => SupplierExcel.new, :path => supplier_excels_path %>
+    <%= render "shared/excel_list", :excels => @project_excels, :new_excel => ProjectExcel.new, :path => project_excels_path %>
   </div>
 </div>
