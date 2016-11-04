@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822054131) do
+ActiveRecord::Schema.define(version: 20161104041647) do
 
   create_table "mapping_dbs", force: :cascade do |t|
     t.string   "supplier1"
@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 20160822054131) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
-    t.boolean  "parse",             default: false
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
+    t.boolean  "parse",             default: false
   end
 
   create_table "project_dbs", force: :cascade do |t|
@@ -45,9 +45,9 @@ ActiveRecord::Schema.define(version: 20160822054131) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
-    t.boolean  "parse",             default: false
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
+    t.boolean  "parse",             default: false
   end
 
   create_table "repertory_dbs", force: :cascade do |t|
@@ -66,9 +66,9 @@ ActiveRecord::Schema.define(version: 20160822054131) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
-    t.boolean  "parse",             default: false
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
+    t.boolean  "parse",             default: false
   end
 
   create_table "stock_dbs", force: :cascade do |t|
@@ -90,9 +90,9 @@ ActiveRecord::Schema.define(version: 20160822054131) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
-    t.boolean  "parse",             default: false
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
+    t.boolean  "parse",             default: false
   end
 
   create_table "supplier_dbs", force: :cascade do |t|
@@ -107,9 +107,9 @@ ActiveRecord::Schema.define(version: 20160822054131) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
-    t.boolean  "parse",             default: false
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
+    t.boolean  "parse",             default: false
   end
 
   create_table "users", force: :cascade do |t|
