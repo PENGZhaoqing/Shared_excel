@@ -39,6 +39,7 @@ class StockExcelsController < ApplicationController
       stockdb.kind=workbook.row(row_index)[33]
       stockdb.export_num=workbook.row(row_index)[34]
       stockdb.project_code=workbook.row(row_index)[40]
+      stockdb.bill_name=workbook.row(row_index)[5]
       stockdb.save
     end
     @stock_excel.update_attribute(:parse, true)

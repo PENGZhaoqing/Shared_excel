@@ -20,16 +20,18 @@ class RepertoryExcelsController < ApplicationController
       product_kind=workbook.row(row_index)[20]
 
       if product_kind=="VMI物资"
-
         name=workbook.row(row_index)[1]
         standard=workbook.row(row_index)[2]
         num=workbook.row(row_index)[5]
+        unit=workbook.row(row_index)[6]
         supplier=workbook.row(row_index)[7]
-        product_code=workbook.row(row_index)[11]
+        product_code=workbook.row(row_index)[18]
+        available=workbook.row()[34]
         if @repertory_db=RepertoryDb.find_by(supplier: supplier, product_code: product_code, product_kind: product_kind)
           @repertory_db.update_attribute(:num, @repertory_db.num+num)
+          @repertory_db.update_attribute(:available, @repertory_db.available+available)
         else
-          RepertoryDb.create!(name: name, standard: standard, num: num, supplier: supplier, product_kind: product_kind, product_code: product_code)
+          RepertoryDb.create!(name: name, standard: standard, num: num, supplier: supplier, product_kind: product_kind, product_code: product_code, unit: unit, available: available)
         end
 
       end

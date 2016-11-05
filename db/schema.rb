@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161104041647) do
+ActiveRecord::Schema.define(version: 20161105163023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,8 @@ ActiveRecord::Schema.define(version: 20161104041647) do
     t.string   "product_kind"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "available"
+    t.string   "unit"
   end
 
   create_table "repertory_excels", force: :cascade do |t|
@@ -86,6 +88,7 @@ ActiveRecord::Schema.define(version: 20161104041647) do
     t.string   "project_code"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "bill_name"
   end
 
   create_table "stock_excels", force: :cascade do |t|
