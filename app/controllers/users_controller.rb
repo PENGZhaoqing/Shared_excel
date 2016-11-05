@@ -4,10 +4,6 @@ class UsersController < ApplicationController
   before_action :correct_user, only: :update
   before_action :admin_logged_in, only: [:admin_update, :index, :destroy, :admin_create]
 
-  def new
-    @user=User.new
-  end
-
   def create
     @user = User.new(user_params)
     if @user.save
