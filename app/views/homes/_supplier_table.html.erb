@@ -1,9 +1,13 @@
-<div class="label-panel">
-  <% supplier_labels.each do |label, num| %>
-      <a href="<%= root_path(label: label) %>"><span class="label label-info"><%= label %> <%= num %></span></a>
-  <% end %>
-</div>
+<% supplier_labels.each do |label, num| %>
+    <a href="<%= root_path(label: label) %>"><span class="label label-info" style="margin-bottom: 30px;"><%= label %> <%= num %></span></a>
+<% end %>
 
+<span class="label label-default">Default Label</span>
+<span class="label label-primary">Primary Label</span>
+<span class="label label-success">Success Label</span>
+<span class="label label-info">Info Label</span>
+<span class="label label-warning">Warning Label</span>
+<span class="label label-danger">Danger Label</span>
 
 <table class='table table-responsive table-condensed table-hover' style="margin-top: 5px">
 
