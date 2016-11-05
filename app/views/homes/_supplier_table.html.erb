@@ -1,5 +1,5 @@
 <% supplier_labels.each do |label, num| %>
-    <a href="<%= root_path(label: label) %>"><span class="label label-info" style="display:inline-block;margin-bottom: 1px;"><%= label %> <%= num %></span></a>
+    <a href="<%= root_path(label: label) %>"><span class="label label-info" style="display:inline-block"><%= label %> <%= num %></span></a>
 <% end %>
 
 <table class='table table-responsive table-condensed table-hover' style="margin-top: 5px">
