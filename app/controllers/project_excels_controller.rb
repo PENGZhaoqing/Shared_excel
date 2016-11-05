@@ -12,6 +12,7 @@ class ProjectExcelsController < ApplicationController
 
   def clean
     ProjectDb.delete_all
+    ActiveRecord::Base.connection.reset_pk_sequence!('project_dbs')
     ProjectExcel.all.each do |excel|
       excel.update_attribute(:parse, false)
     end

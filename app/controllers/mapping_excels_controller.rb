@@ -25,6 +25,7 @@ class MappingExcelsController < ApplicationController
 
   def clean
     MappingDb.delete_all
+    ActiveRecord::Base.connection.reset_pk_sequence!('mapping_dbs')
     MappingExcel.all.each do |excel|
       excel.update_attribute(:parse, false)
     end

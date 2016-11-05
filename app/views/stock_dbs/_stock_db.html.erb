@@ -91,6 +91,7 @@
     <table class="table table-responsive table-condensed table-hover" id="small-table">
       <thead>
       <tr>
+        <th>ID</th>
         <th>分公司名称</th>
         <th>出库日期</th>
         <th>物料编码</th>
@@ -107,7 +108,9 @@
 
       <% @stock_dbs.each do |dbs| %>
           <tr>
-
+            <td>
+              <%= dbs.id %>
+            </td>
             <td>
               <%= dbs.client_name %>
             </td>

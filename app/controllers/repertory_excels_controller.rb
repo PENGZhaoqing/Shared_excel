@@ -41,6 +41,7 @@ class RepertoryExcelsController < ApplicationController
 
   def clean
     RepertoryDb.delete_all
+    ActiveRecord::Base.connection.reset_pk_sequence!('repertory_dbs')
     RepertoryExcel.all.each do |excel|
       excel.update_attribute(:parse, false)
     end

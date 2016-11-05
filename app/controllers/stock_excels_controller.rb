@@ -16,6 +16,7 @@ class StockExcelsController < ApplicationController
 
   def clean
     StockDb.delete_all
+    ActiveRecord::Base.connection.reset_pk_sequence!('stock_dbs')
     StockExcel.all.each do |excel|
       excel.update_attribute(:parse, false)
     end

@@ -67,12 +67,13 @@
     <table class="table table-responsive table-condensed table-hover" id="small-table">
       <thead>
       <tr>
-        <th>产品名</th>
+        <th>ID</th>
+        <th>产品</th>
         <th>规格</th>
         <th>物料编码</th>
         <th>物资类别</th>
         <th>供应商</th>
-        <th>库存数量</th>
+        <th>库存</th>
       </tr>
       </thead>
 
@@ -80,6 +81,9 @@
 
       <% @repertory_dbs.each do |db| %>
           <tr>
+            <td>
+              <%= db.id %>
+            </td>
             <td>
               <%= db.name %>
             </td>

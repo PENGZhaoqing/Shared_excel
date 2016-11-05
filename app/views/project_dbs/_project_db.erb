@@ -49,7 +49,10 @@
     <br>
 
     <text class="text-muted">总数据
-      <mark><%=@project_dbs.count%></mark>条,当前页显示:<mark><%= @project_dbs.length %></mark>条
+      <mark><%= @project_dbs.count %></mark>
+      条,当前页显示:
+      <mark><%= @project_dbs.length %></mark>
+      条
     </text>
 
     <div class="pull-right">
@@ -63,6 +66,7 @@
     <table class="table table-responsive table-condensed table-hover" id="small-table">
       <thead>
       <tr class="filters">
+        <th>ID</th>
         <th>企业</th>
         <th>建造方式</th>
         <th>项目名字</th>
@@ -76,16 +80,19 @@
       <% @project_dbs.each do |dbs| %>
           <tr>
             <td>
-              <text style="font-size: small"><%= dbs.company %></text>
+              <text><%= dbs.id %></text>
             </td>
             <td>
-              <text style="font-size: small"><%= dbs.build_way %></text>
+              <text><%= dbs.company %></text>
             </td>
             <td>
-              <text style="font-size: small"><%= dbs.project_name %></text>
+              <text><%= dbs.build_way %></text>
             </td>
             <td>
-              <text style="font-size: small"><%= dbs.approve_time %></text>
+              <text><%= dbs.project_name %></text>
+            </td>
+            <td>
+              <text><%= dbs.approve_time %></text>
             </td>
 
           </tr>
