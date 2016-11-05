@@ -11,42 +11,43 @@
     </div>
   </div>
 
-  <div class="panel-body" style="min-height: 600px">
 
-    <div class="filter-panel">
-      <%= form_tag mapping_dbs_path, remote: true, :method => 'get', role: 'form', class: "form-inline" do %>
+  <div class="filter-panel">
+    <%= form_tag mapping_dbs_path, remote: true, :method => 'get', role: 'form', class: "form-inline" do %>
 
-          <div class="form-group">
-            <%= text_field_tag :query, params[:query], placeholder: "搜索供应商/授权码", class: 'form-control input-sm' %>
-          </div>
+        <div class="form-group">
+          <%= text_field_tag :query, params[:query], placeholder: "搜索供应商/授权码", class: 'form-control input-sm' %>
+        </div>
 
-          <%= button_tag(type: "submit", class: "btn btn-info btn-sm", id: "filter-button") do %>
-              <i class="fa fa-refresh"></i></span>查找
-          <% end %>
+        <%= button_tag(type: "submit", class: "btn btn-info btn-sm", id: "filter-button") do %>
+            <i class="fa fa-refresh"></i></span>查找
+        <% end %>
 
-          <%= link_to mapping_dbs_path, class: "btn btn-sm btn-warning", id: "filter-link", remote: true do %>
-              <i class="fa fa-refresh"></i> 重置
-          <% end %>
+        <%= link_to mapping_dbs_path, class: "btn btn-sm btn-warning", id: "filter-link", remote: true do %>
+            <i class="fa fa-refresh"></i> 重置
+        <% end %>
 
-      <% end %>
-      </br>
+    <% end %>
+    </br>
 
-      <text class="text-muted">显示纪录:
-        <mark><%= @mapping_dbs.length %></mark>
-        条
-      </text>
+    <text class="text-muted">总数据
+      <mark><%=@mapping_dbs.count%></mark>条,当前页显示:<mark><%= @mapping_dbs.length %></mark>条
+    </text>
 
-      <% unless params[:query].blank? %>
-          <text class="text-danger">搜索结果显示:
-            <mark><%= params[:query] %></mark>
-          </text>
-      <% end %>
+    <% unless params[:query].blank? %>
+        <text class="text-danger">搜索结果显示:
+          <mark><%= params[:query] %></mark>
+        </text>
+    <% end %>
 
-      <div class="pull-right">
-        <%= will_paginate @mapping_dbs, :param_name => 'mapping_page',
-                          :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
-      </div>
+    <div class="pull-right">
+      <%= will_paginate @mapping_dbs, :param_name => 'mapping_page',
+                        :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
     </div>
+  </div>
+
+
+  <div class="panel-body" style="min-height: 600px">
 
     <table class="table table-responsive table-condensed table-hover" id="small-table">
       <thead>
