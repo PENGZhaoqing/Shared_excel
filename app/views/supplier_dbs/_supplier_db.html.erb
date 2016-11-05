@@ -58,10 +58,16 @@
 
       <tbody>
 
+      <% count= 0 %>
       <% @supplier_dbs.each do |dbs| %>
+          <% count= count+1 %>
           <tr>
             <td>
-              <%= dbs.id %>
+              <% if params[:page].nil? %>
+                  <%= count %>
+              <% else %>
+                  <%= count+(params[:page].to_i-1)*20 %>
+              <% end %>
             </td>
             <td>
               <%= dbs.product %>

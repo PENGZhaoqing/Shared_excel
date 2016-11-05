@@ -79,10 +79,16 @@
 
       <tbody>
 
+      <%count=0%>
       <% @repertory_dbs.each do |db| %>
+          <% count= count+1 %>
           <tr>
             <td>
-              <%= db.id %>
+              <% if params[:page].nil? %>
+                  <%= count %>
+              <% else %>
+                  <%= count+(params[:page].to_i-1)*20 %>
+              <% end %>
             </td>
             <td>
               <%= db.name %>

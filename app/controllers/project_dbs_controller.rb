@@ -1,7 +1,7 @@
 class ProjectDbsController < ApplicationController
 
   def index
-    @project_dbs=ProjectDb.search(search_params).paginate(:page => params[:page],:per_page => 20)
+    @project_dbs=ProjectDb.search(search_params).order(:id).paginate(:page => params[:page], :per_page => 20)
   end
 
   def export

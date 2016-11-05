@@ -4,9 +4,9 @@ class StockDbsController < ApplicationController
 
   def index
     if logged_in_visit?
-      @stock_dbs=StockDb.filter_by_type(current_visit.supplier2).search(search_params).paginate(:page => params[:page], :per_page => 20)
+      @stock_dbs=StockDb.filter_by_type(current_visit.supplier2).search(search_params).order(:id).paginate(:page => params[:page], :per_page => 20)
     elsif logged_in?
-      @stock_dbs=StockDb.search(search_params).paginate(:page => params[:page], :per_page => 20)
+      @stock_dbs=StockDb.search(search_params).order(:id).paginate(:page => params[:page], :per_page => 20)
     else
       redirect_to root_path, flash: {:danger => "Error: 请联系开发人员"}
     end

@@ -76,11 +76,16 @@
 
       <tbody>
 
-
+      <% count=0 %>
       <% @project_dbs.each do |dbs| %>
+          <% count= count+1 %>
           <tr>
             <td>
-              <text><%= dbs.id %></text>
+              <% if params[:page].nil? %>
+                  <%= count %>
+              <% else %>
+                  <%= count+(params[:page].to_i-1)*20 %>
+              <% end %>
             </td>
             <td>
               <text><%= dbs.company %></text>
