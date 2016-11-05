@@ -27,6 +27,7 @@ class SupplierExcelsController < ApplicationController
 
   def clean
     SupplierDb.delete_all
+    ActiveRecord::Base.connection.reset_pk_sequence!('supplier_dbs')
     SupplierExcel.all.each do |excel|
       excel.update_attribute(:parse, false)
     end

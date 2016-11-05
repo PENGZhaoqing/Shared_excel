@@ -50,6 +50,7 @@
     <table class="table table-responsive table-condensed table-hover" id="small-table">
       <thead>
       <tr class="filters">
+        <th>ID</th>
         <th>产品</th>
         <th>供应商</th>
       </tr>
@@ -59,6 +60,9 @@
 
       <% @supplier_dbs.each do |dbs| %>
           <tr>
+            <td>
+              <%= dbs.id %>
+            </td>
             <td>
               <%= dbs.product %>
             </td>

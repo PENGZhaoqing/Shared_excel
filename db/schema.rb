@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20161104041647) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "mapping_dbs", force: :cascade do |t|
     t.string   "supplier1"
     t.string   "supplier2"
@@ -124,6 +127,6 @@ ActiveRecord::Schema.define(version: 20161104041647) do
     t.datetime "updated_at",                      null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end
