@@ -31,6 +31,7 @@ MAP={
     cp: '昌平',
 }
 
+
 MAP.each do |item|
   User.create!(
       name: "#{item[1]}分公司",
