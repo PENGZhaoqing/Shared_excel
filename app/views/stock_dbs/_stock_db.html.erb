@@ -49,8 +49,8 @@
         </div>
 
         <!--<div class="form-group">-->
-          <%#= label_tag :supplier, "供应商" %>
-          <%# text_field_tag :supplier, params[:supplier], placeholder: "输入供应商", class: 'form-control input-sm' %>
+        <%#= label_tag :supplier, "供应商" %>
+        <%# text_field_tag :supplier, params[:supplier], placeholder: "输入供应商", class: 'form-control input-sm' %>
         <!--</div>-->
 
         <div class="form-group">
@@ -101,15 +101,15 @@
       <thead>
       <tr>
         <th>ID</th>
-        <th>分公司</th>
-        <th>物料代码</th>
-        <th>物料名称</th>
-        <th>规格型号</th>
-        <th>物资类别</th>
+        <th class="col-md-2">分公司</th>
+        <th class="col-md-1">物料代码</th>
+        <th class="col-md-2">物料名称</th>
+        <th class="col-md-1">规格型号</th>
+        <th class="col-md-1">物资类别</th>
         <th>数量</th>
-        <th>项目名称</th>
-        <th>项目编号</th>
-        <th>出库时间</th>
+        <th class="col-md-2">项目名称</th>
+        <th class="col-md-1" style="word-wrap: break-word">项目编号</th>
+        <th class="col-md-1">出库时间</th>
         <!--<th>供应商</th>-->
       </tr>
       </thead>
@@ -143,7 +143,7 @@
               <%= dbs.kind %>
             </td>
             <!--<td>-->
-              <!--<#%= dbs.supplier %>-->
+            <!--<#%= dbs.supplier %>-->
             <!--</td>-->
             <td>
               <%= dbs.export_num %>
@@ -163,5 +163,8 @@
     </table>
   </div>
 </div>
+
+
+
 
 

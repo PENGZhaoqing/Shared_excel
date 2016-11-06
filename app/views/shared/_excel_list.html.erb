@@ -1,4 +1,4 @@
-<div class="content">
+<div id="content">
   <h4 class="text-muted">数据管理</h4>
   <hr>
   <% if params[:controller]=="stock_excels" %>
@@ -150,107 +150,6 @@
   $('.file-inputs').bootstrapFileInput();
 </script>
 
-<style type="text/css">
+<%= render "shared/spanner"%>
 
-  .sk-wave {
-    margin: 40px auto;
-    width: 50px;
-    height: 40px;
-    text-align: center;
-    font-size: 10px;
-  }
-
-  .sk-wave .sk-rect {
-    background-color: #333;
-    height: 100%;
-    width: 6px;
-    display: inline-block;
-    -webkit-animation: sk-waveStretchDelay 1.2s infinite ease-in-out;
-    animation: sk-waveStretchDelay 1.2s infinite ease-in-out;
-  }
-
-  .sk-wave .sk-rect1 {
-    -webkit-animation-delay: -1.2s;
-    animation-delay: -1.2s;
-    background: #1abc9c;
-  }
-
-  .sk-wave .sk-rect2 {
-    -webkit-animation-delay: -1.1s;
-    animation-delay: -1.1s;
-    background: #1abc9c;
-  }
-
-  .sk-wave .sk-rect3 {
-    -webkit-animation-delay: -1s;
-    animation-delay: -1s;
-    background: #1abc9c;
-  }
-
-  .sk-wave .sk-rect4 {
-    -webkit-animation-delay: -0.9s;
-    animation-delay: -0.9s;
-    background: #1abc9c;
-  }
-
-  .sk-wave .sk-rect5 {
-    -webkit-animation-delay: -0.8s;
-    animation-delay: -0.8s;
-    background: #1abc9c;
-  }
-
-  @-webkit-keyframes sk-waveStretchDelay {
-    0%, 40%, 100% {
-      -webkit-transform: scaleY(0.4);
-      transform: scaleY(0.4);
-    }
-    20% {
-      -webkit-transform: scaleY(1);
-      transform: scaleY(1);
-    }
-  }
-
-  @keyframes sk-waveStretchDelay {
-    0%, 40%, 100% {
-      -webkit-transform: scaleY(0.4);
-      transform: scaleY(0.4);
-    }
-    20% {
-      -webkit-transform: scaleY(1);
-      transform: scaleY(1);
-    }
-  }
-
-</style>
-
-<!--<div class="spanner" style="background: #1abc9c; height: 100%">-->
-<div class="sk-wave" style="margin-top: 100px">
-  <div style="font-size: 15px">处理中</div>
-  <div class="sk-rect sk-rect1"></div>
-  <div class="sk-rect sk-rect2"></div>
-  <div class="sk-rect sk-rect3"></div>
-  <div class="sk-rect sk-rect4"></div>
-  <div class="sk-rect sk-rect5"></div>
-</div>
-<!--</div>-->
-
-<script>
-  $(document).ready(function () {
-
-    $(".sk-wave").hide();
-
-    // show spinner on AJAX start
-    $(document).ajaxStart(function () {
-      $(".sk-wave").show();
-      $(".content").hide();
-    });
-
-    // hide spinner on AJAX stop
-    $(document).ajaxStop(function () {
-      $(".content").show();
-      $(".sk-wave").hide();
-    });
-
-  });
-</script>
 
