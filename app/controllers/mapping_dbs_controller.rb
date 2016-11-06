@@ -3,7 +3,7 @@ class MappingDbsController < ApplicationController
   before_action :admin_login
 
   def index
-    @mapping_dbs=MappingDb.search(search_params).order(:id).paginate(:page => params[:mapping_page], :per_page => 12)
+    @mapping_dbs=MappingDb.search(search_params).order('created_at desc').paginate(:page => params[:mapping_page], :per_page => 12)
   end
 
   def export

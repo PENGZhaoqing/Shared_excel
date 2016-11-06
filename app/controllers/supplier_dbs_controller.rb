@@ -1,7 +1,7 @@
 class SupplierDbsController < ApplicationController
 
   def index
-    @supplier_dbs=SupplierDb.search(search_params).order(:id).paginate(:page => params[:page], :per_page => 20)
+    @supplier_dbs=SupplierDb.search(search_params).order('created_at desc').paginate(:page => params[:page], :per_page => 20)
   end
 
   def export
