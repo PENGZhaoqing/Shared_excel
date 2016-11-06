@@ -11,7 +11,7 @@ class StockExcelsController < ApplicationController
   end
 
   def index
-    @stock_excels=StockExcel.paginate(:page => params[:stock_page], :per_page => 8).order('created_at DESC')
+    @stock_excels=StockExcel.order('created_at DESC').paginate(:page => params[:stock_page], :per_page => 8)
   end
 
   def clean
@@ -54,7 +54,6 @@ class StockExcelsController < ApplicationController
   end
 
   private
-
 
   def check_params
     if params[:stock_excel].nil?
