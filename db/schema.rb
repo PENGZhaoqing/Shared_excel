@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20161105163023) do
     t.datetime "updated_at",   null: false
     t.integer  "available"
     t.string   "unit"
+    t.string   "model"
   end
 
   create_table "repertory_excels", force: :cascade do |t|
@@ -88,7 +89,7 @@ ActiveRecord::Schema.define(version: 20161105163023) do
     t.string   "project_code"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.string   "bill_name"
+    t.string   "project_name"
   end
 
   create_table "stock_excels", force: :cascade do |t|

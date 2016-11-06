@@ -8,6 +8,7 @@
           <%= hidden_field_tag :standard, params[:standard] %>
           <%= hidden_field_tag :product_code, params[:product_code] %>
           <%= hidden_field_tag :product_kind, params[:product_kind] %>
+          <%= hidden_field_tag :model, params[:model] %>
           <%= button_tag(type: "submit", class: "btn btn-success btn-xs") do %>
               <span class="glyphicon glyphicon-floppy-save"></span> 导出
           <% end %>
@@ -28,12 +29,17 @@
         </div>
 
         <div class="form-group">
+          <%= label_tag :model, "型号:" %>
+          <%= text_field_tag :model, params[:model], placeholder: "型号", class: 'form-control input-sm' %>
+        </div>
+
+        <div class="form-group">
           <%= label_tag :supplier, "供应商:" %>
           <%= text_field_tag :supplier, params[:supplier], placeholder: "供应商", class: 'form-control input-sm' %>
         </div>
 
         <div class="form-group">
-          <%= label_tag :product_code, "物料编码:" %>
+          <%= label_tag :product_code, "物料代码:" %>
           <%= text_field_tag :product_code, params[:product_code], placeholder: "物料编码", class: 'form-control input-sm' %>
         </div>
 
@@ -68,12 +74,15 @@
       <thead>
       <tr>
         <th>ID</th>
+        <th>物料代码</th>
         <th>产品</th>
         <th>规格</th>
-        <th>物料编码</th>
-        <th>物资类别</th>
+        <th>型号</th>
+        <th>库存数量</th>
+        <th>可用数量</th>
+        <th>单位</th>
         <th>供应商</th>
-        <th>库存</th>
+        <th>物资类别</th>
       </tr>
       </thead>
 
@@ -91,22 +100,31 @@
               <% end %>
             </td>
             <td>
+              <%= db.product_code %>
+            </td>
+            <td>
               <%= db.name %>
             </td>
             <td>
               <%= db.standard %>
             </td>
             <td>
-              <%= db.product_code %>
+              <%= db.model %>
             </td>
             <td>
-              <%= db.product_kind %>
+              <%= db.num %>
+            </td>
+            <td>
+              <%= db.available %>
+            </td>
+            <td>
+              <%= db.unit %>
             </td>
             <td>
               <%= db.supplier %>
             </td>
             <td>
-              <%= db.num %>
+              <%= db.product_kind %>
             </td>
           </tr>
       <% end %>

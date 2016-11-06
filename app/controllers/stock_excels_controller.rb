@@ -30,8 +30,9 @@ class StockExcelsController < ApplicationController
 
     ((workbook.first_row + 1)..workbook.last_row).each do |row_index|
       stockdb=StockDb.new
+      stockdb.project_name=workbook.row(row_index)[5]
       stockdb.complete_time=workbook.row(row_index)[10]
-      stockdb.supplier=workbook.row(row_index)[12]
+      # stockdb.supplier=workbook.row(row_index)[12]
       stockdb.client_name=workbook.row(row_index)[13]
       stockdb.product_code=workbook.row(row_index)[18]
       stockdb.product_name=workbook.row(row_index)[19]
@@ -39,7 +40,6 @@ class StockExcelsController < ApplicationController
       stockdb.kind=workbook.row(row_index)[33]
       stockdb.export_num=workbook.row(row_index)[34]
       stockdb.project_code=workbook.row(row_index)[40]
-      stockdb.bill_name=workbook.row(row_index)[5]
       stockdb.save
     end
     @stock_excel.update_attribute(:parse, true)
