@@ -32,7 +32,7 @@ class StockExcelsController < ApplicationController
       stockdb=StockDb.new
       stockdb.project_name=workbook.row(row_index)[5]
       stockdb.complete_time=workbook.row(row_index)[10]
-      # stockdb.supplier=workbook.row(row_index)[12]
+      stockdb.supplier=workbook.row(row_index)[12]
       stockdb.client_name=workbook.row(row_index)[13]
       stockdb.product_code=workbook.row(row_index)[18]
       stockdb.product_name=workbook.row(row_index)[19]
