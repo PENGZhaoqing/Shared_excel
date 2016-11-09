@@ -1,0 +1,50 @@
+
+<!--<a href="#" id="homepage_sidebar_toggle" class="expander_toggle">Hi there. Learn about this site and how to use it...</a>-->
+<div class="container-fluid">
+  <br/>
+  <div class="rows">
+
+    <div class="col-sm-3">
+      <div class="panel panel-success">
+        <div class="panel-body">
+          <%= render :partial => "description" %>
+          <strong> <%= render :partial => "sidebar_menu" %></strong>
+        </div>
+      </div>
+
+      <% if @overview.tags.present? %>
+          <div id="tagcloud">
+            <h4>Popular tags</h4>
+            <% tag_cloud @overview.tags, %w(tagcloud_level_0 tagcloud_level_1 tagcloud_level_2 tagcloud_level_3 tagcloud_level_4) do |tag, css_class| %>
+                <%= link_to tag.name, search_events_path(tag: tag.name), class: css_class %>
+                <span class="spacer">&middot;</span>
+            <% end %>
+          </div>
+      <% end %>
+
+    </div>
+
+
+    <!--0> events_path(:anchor=> "haha")-->
+    <!--=> "/events#haha"-->
+
+    <!--0> events_path(:anchr=> "haha")-->
+    <!--=> "/events?anchr=haha"-->
+
+    <div class="col-sm-9">
+      <h3>What's happening?</h3><br/>
+
+      <p><h4>Today</h4></p>
+      <p><%= render 'events/list', :events => @overview.today %></p>
+
+      <p><h4>Tomorrow</h4></p>
+      <p><%= render 'events/list', :events => @overview.tomorrow %></p>
+
+      <p><h4>Next two weeks</h4></p>
+      <p><%= render 'events/list', :events => @overview.later %></p>
+
+      <p><h4><%= link_to("View all events &raquo;".html_safe, events_path(:anchor => "event-#{@overview.more.id}")) if @overview.more %></h4></p>
+
+    </div>
+  </div>
+</div>

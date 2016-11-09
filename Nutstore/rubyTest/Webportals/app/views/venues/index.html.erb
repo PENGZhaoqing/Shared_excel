@@ -1,0 +1,113 @@
+<div class="container-fluid">
+  <h2>Venues</h2>
+
+  <div class="panel panel-success">
+    <div class="panel-body">
+      <%= form_tag venues_path, :method => 'get', class: "form-inline", role: "form" do %>
+
+          <div class="form-group">
+            <%= label_tag :query, "Find a venue: " %>
+            <%= text_field_tag :query, @search.query, class: "imput-small" %>
+          </div>
+
+          <div class="checkbox">
+            <label><%= check_box_tag :wifi, '1', @search.wifi %>Public Wifi</label>
+          </div>
+
+          <%= submit_tag "Search", class: "btn btn-default btn-sm" %>
+      <% end %>
+
+    </div>
+  </div>
+
+  <% if @search.results? %>
+
+      <% if @search.tag %>
+          <h4>Showing <strong><%= @venues.size %></strong> venues tagged with <strong><%= @search.tag %></strong>
+          </h4>
+      <% else -%>
+          <h4>
+            <% if @venues.size == 0 -%>
+                Sorry, there are no venues
+            <% else -%>
+                Showing <%= "all " if @search.all %>
+                <strong><%= @venues.size %></strong> <%= 'venue'.pluralize(@venues.size) %>
+            <% end %>
+            <% if @search.query.present? %>
+                matching &#8220;<%= @search.query %>&#8221;
+            <% end %>
+            <%= "with public WiFi" if @search.wifi %>
+          </h4>
+      <% end -%>
+
+      <table class='table table-striped table-responsive'>
+
+        <% @venues.each do |venue| %>
+            <tr>
+              <td class="has_hover">
+                <strong><%= link_to(venue.title, venue_url(venue)) %></strong>
+                <% if venue.full_address.present? %>
+                    <p><%= venue.full_address %></p>
+                <% end %>
+              </td>
+            </tr>
+        <% end %>
+
+      </table>
+
+  <% else %>
+
+      <div class="row">
+        <div class="col-sm-4">
+
+          <h4>Most Active</h4>
+          <table class='table table-striped table-responsive table-condensed'>
+
+            <% @search.most_active_venues.each do |venue| %>
+                <tr>
+                  <td class="has_hover">
+                    <strong><%= link_to(venue.title, venue_url(venue)) %></strong>
+                    <p class="text-muted"><%= venue.events_count %> events</p>
+                  <td>
+                </tr>
+            <% end %>
+
+          </table>
+
+        </div>
+
+        <div class="col-sm-4">
+          <h4>Newest</h4>
+
+          <table class='table table-striped table-responsive table-condensed'>
+            <% @search.newest_venues.each do |venue| %>
+                <tr>
+                  <td class="has_hover">
+                    <strong>   <%= link_to(venue.title, venue_url(venue)) %></strong>
+                    <p class="text-muted">Added <%= time_ago_in_words(venue.created_at) %> ago</p>
+                  </td>
+                </tr>
+            <% end %>
+          </table>
+
+        </div>
+
+        <div class="col-sm-4">
+          <br/><br/>
+          <strong>
+            <li><%= link_to 'List all venues', venues_path(:all => 1) %></li>
+            <li><%= link_to 'View a big map', map_venues_path %></li>
+          </strong>
+
+          <h4>Export venues</h4>
+
+          <strong>
+            <li><%= link_to 'KML', '/venues.kml' %></li>
+            <li><%= link_to 'JSON', '/venues.json' %></li>
+          </strong>
+
+        </div>
+      </div>
+
+  <% end %>
+</div>

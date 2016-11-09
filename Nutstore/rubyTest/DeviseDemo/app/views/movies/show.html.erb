@@ -1,0 +1,118 @@
+
+<div class="container-fluid">
+  <div id ='nav' class="row content">
+    <div class="col-sm-3 sidenav" id="myScrollspy">
+	  <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="70">
+		<br>
+        <li class="active"><a href="#section1">Overview</a></li>
+        <li><a href="#section2">Actors</a></li>
+        <li><a href="#section3">Gallery</a></li>
+        <li><a href="#section4">Related</a></li>
+        <li><a href="#section5">Comments</a></li>
+      </ul>
+      <!-- <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search Blog..">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+	 </div> -->
+    </div>
+
+
+    <div class="col-sm-9">
+		
+	 <div id="section1">
+      <hr>
+      <h2> <%=@movie.title%> </h2>
+      	<h5><span class="glyphicon glyphicon-time"></span> Released on: <%=@movie.release_date.strftime("%B %d, %Y")%></h5>
+	  	<h5><span class="glyphicon glyphicon-heart"></span> Rating: <%=@movie.rating%></h5>
+      	<h5><span class="label label-danger">Love</span>
+		  <span class="label label-primary">Campus</span>
+	 	</h5>
+	  <br>
+      <p><%=@movie.description%></p>
+      <br>
+  </div>
+
+	<div id="section2">
+		<hr>
+		<h2> Actors </h2>
+		...
+		<br>
+		<br>
+		<br>
+	</div>
+
+	<div id="section3">
+    	<hr>
+    	<h2> Gallery </h2>
+		...
+    	<br>
+		<br>
+		<br>
+	</div>
+
+	<div id="section4">
+    	<hr>
+    	<h2> Related </h2>
+		...
+    	<br>
+		<br>
+		<br>
+	</div>
+
+
+	  <br>
+	  <br>
+	  <%= link_to 'Edit Movie', edit_movie_path(@movie),:class=>"btn btn-success"%>
+	  <%= link_to 'Back to movie list', movies_path,:class=>"btn btn-info" %>
+	  <%= link_to 'Destroy',movie_path(@movie),:class=>"btn btn-danger",:method=>:delete,:data=>{confirm:'Are you sure?'}%>
+	  <br>
+	  <br>
+
+
+	 <div id="section5">
+
+      <h4>Leave a Comment:</h4>
+      <form role="form">
+        <div class="form-group">
+          <textarea class="form-control" rows="3" required></textarea>
+        </div>
+       <%= link_to 'Add Comment', new_movie_review_path(@movie),:class=>"btn btn-warning"%>
+      </form>
+      <br>
+	  <br>
+
+      <p><span class="badge">2</span> Comments:</p><br>
+
+      <div class="row">
+
+        <div class="col-sm-2 text-center">
+          <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+        </div>
+        <div class="col-sm-10">
+          <h4>John Row <small>Sep 25, 2015, 8:25 PM</small></h4>
+          <p>I am so happy for you man! Finally. I am looking forward to read about your trendy life. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <br>
+          <p><span class="badge">1</span> Comment:</p><br>
+          <div class="row">
+            <div class="col-sm-2 text-center">
+              <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+            </div>
+            <div class="col-xs-10">
+              <h4>Nested Bro <small>Sep 25, 2015, 8:28 PM</small></h4>
+              <p>Me too! WOW!</p>
+              <br>
+			  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

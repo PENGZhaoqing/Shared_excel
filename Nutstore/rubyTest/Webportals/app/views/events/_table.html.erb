@@ -1,0 +1,84 @@
+<%-
+  # Arguments:
+  # * events => Array of Event records.
+  # * scores => Offer a sort by score, like for search? Default to false.
+
+  scores = defined?(scores) ? scores : false
+  rowspans = calculate_rowspans(events)
+
+  # calculate rowspans array for events
+  # each entry is number of rows spanned by today_tomorrow_weekday entry, if any, to left of event
+  # entry will be > 0 for first event of day, 0 for other events
+
+-%>
+<table class='table table-striped table-responsive table-condensed' id='movies'>
+
+  <tr>
+    <th>Sort By: <%= link_to "Date", url_for(params.merge(:order => 'date')) %></th>
+    <th>
+      <%= events_sort_link('name') -%>,
+      <%= events_sort_link('venue') -%>
+      <%- if scores -%>,
+          <%= events_sort_link('score') -%>
+      <%- end -%>,
+      <%= events_sort_link(nil) -%>
+    </th>
+  </tr>
+
+  <tbody>
+  <% unless events.size==0 %>
+      <% events.each_with_index do |event, index| %>
+          <tr>
+            <% if rowspans[index] > 0 %>
+                <td rowspan="<%= rowspans[index] %>">
+
+                  <div class="text-right">
+                    <!--0> today_tomorrow_or_weekday(event)-->
+                    <!--=> "Monday"-->
+
+                    <strong>
+                      <text class="text-success"><%= today_tomorrow_or_weekday(event) %></text>
+                    </strong><br/>
+                    <% show_year = event.start_time.year != Time.now.year %>
+
+                    <!--0> datetime_format(event.start_time,'%b %d')-->
+                    <!--=> "Jun 20"-->
+                    <!--0> datetime_format(event.start_time,'%Y')-->
+                    <!--=> "2016"-->
+                    <%= datetime_format(event.start_time, '%b %d') -%><%= ", "+datetime_format(event.start_time, '%Y') if show_year %>
+                  </div>
+                </td>
+            <% end %>
+
+            <td class="has_hover">
+
+              <strong>
+                <a class="text-primary" href='<%= url_for event_url(event) %>' name='<%= "event-#{event.id}" %>' id='<%= "event-#{event.id}" %>'><%= event.title %></a><br/>
+              </strong>
+
+              <%= normalize_time(event, :context => event.start_time.to_date) -%>
+
+              <% if event.venue && !event.venue.title.blank? %>
+                  <a class="text-primary" href='<%= url_for venue_url(event.venue) %>'><%= event.venue.title -%></a>
+              <% end -%>
+
+              <% if !event.description.blank? %>
+                  <div class="text-muted">
+                    <!--显示一部分描述-->
+                    <%= truncate(event.description, length: 90) -%>
+                  </div>
+              <% end -%>
+
+            </td>
+          </tr>
+      <% end %>
+  <% else %>
+      <tr>
+        <td colspan=2>No events were found.</td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+

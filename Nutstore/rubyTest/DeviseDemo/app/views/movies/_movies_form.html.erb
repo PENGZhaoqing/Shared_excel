@@ -1,0 +1,32 @@
+  <%unless @movie.errors.empty?%>
+  
+  <div id="warning">
+  	<h2><%=pluralize(@movie.errors.count,"error")%> prevented this movie from being controller: <%=controller.action_name%></h2>
+	<ul>
+	    <% @movie.errors.full_messages.each do |error| %>
+	      <li><%= error %></li>
+	    <% end %>
+	</ul>
+  </div>
+  <%end%>
+  
+  <p>
+    <%= label :movie, :title, "Title" %><br>
+    <%= text_field :movie, :title %>
+  </p>
+  
+  <p>
+    <%= label :movie, :description, "Description" %><br>
+    <%= text_field :movie, :description %>
+  </p>
+ 
+  <p>
+    <%= label :movie, :rating, 'Rating' %><br>
+    <%= select :movie, :rating,['G','PG','PG-13','R','NC-17'] %>
+  </p>
+ 
+ <p>
+   <%= label :movie, :release_date, 'Released On' %><br>
+   <%= date_select :movie, :release_date,start_year: 1930 %>
+ </p>
+ 

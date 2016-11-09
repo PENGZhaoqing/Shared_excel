@@ -1,0 +1,190 @@
+<%
+  # USAGE: Display a form for creating or editing an event.
+  #
+  # VARIABLES:
+  # * event: An new or existing Event instance.
+%>
+
+<% if params[:preview]=="Preview" -%>
+    <h3 class="text-primary">Preview your event</h3>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= render :partial => "item", :locals => {:event => @event} %>
+
+      </div>
+    </div>
+<% end -%>
+
+<%
+  # :html 是为了在<form>..</form>中加入class和role元素,这些元素能被bootstrap识别渲染
+  # 这个partial被eidt和new共用,满足restful,rails能知道什么时候用 :url=> event_path(@event), :method=> :patch
+  # 什么时候用url: events_path, :method=> :post
+
+%>
+
+<%= form_for @event, :html => {:class => "form-horizontal", role: "form"} do |f| %>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <h3 class="text-primary"> <%= event.new_record? ? "Creating New Event " : "Editing: " %>
+          <%= event.title unless event.new_record? %></h3>
+
+        <p class="text-muted">You can <%= event.new_record? ? "enter" : "edit" %> the details of
+          your events below~<br/>
+          The more information we have about your events, the easier it will be for people to
+          find it.
+
+        </p><br/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag "Event Name*", nil, class: "control-label col-sm-2" %>
+      <div class="col-sm-8">
+        <%= f.text_field :title, class: "form-control", id: "title", placeholder: "Enter event title" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag "Venue", nil, class: "control-label col-sm-2" %>
+      <div class="col-sm-8">
+        <%= text_field_tag :venue_name, nil, class: "form-control autocomplete", id: "title", :value => !@event.venue.nil? ? @event.venue.title : params[:venue_name] %>
+        <%= hidden_field(:event, :venue_id, :value => (!@event.venue.nil? ? @event.venue.id : params[:event_venue_id])) %>
+        <p class="text-muted">Type the name of a venue to search. If it doesn't exist, we'll create it for you.</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag "When*", nil, class: "control-label col-sm-2" %>
+
+      <div class="col-sm-2">
+        <div class='input-group date' id='start_date_picker'>
+          <%= text_field_tag :start_date, format_event_date(@event.start_time), class: "form-control" %>
+          <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+        </div>
+      </div>
+
+      <div class='col-sm-2'>
+        <div class='input-group date' id='start_time_picker'>
+          <%= text_field_tag :start_time, format_event_time(@event.start_time), class: "form-control" %>
+          <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time"></span>
+              </span>
+        </div>
+      </div>
+
+      <div class="col-sm-2">
+        <div class='input-group date' id='end_date_picker'>
+          <%= text_field_tag :end_date, format_event_date(@event.end_time), class: "form-control" %>
+          <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+        </div>
+      </div>
+
+      <div class='col-sm-2'>
+        <div class='input-group date' id='end_time_picker'>
+          <%= text_field_tag :end_time, format_event_time(@event.end_time), class: "form-control" %>
+          <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time"></span>
+              </span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <%= label_tag "Website*", nil, class: "control-label col-sm-2" %>
+      <div class="col-sm-8">
+        <%= f.text_field :url, class: "form-control", id: "url", placeholder: "Enter the url" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag "Descripition", nil, class: "control-label col-sm-2" %>
+      <div class="col-sm-8">
+        <%= f.text_area :description, class: "form-control", id: "description", rows: "12" %>
+        <p class="text-muted">Format text
+          using <%= link_to("Markdown", "http://www.simpleeditions.com/59001/markdown-an-introduction") %> and
+          HTML</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag "Venue Details", nil, class: "control-label col-sm-2" %>
+      <div class="col-sm-8">
+        <%= f.text_area :venue_details, class: "form-control", id: "venue_details", rows: "5" %>
+        <p class="text-muted"> Event-specific details like the room number, or who to call to be let into the
+          building</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag "Tags", nil, class: "control-label col-sm-2" %>
+      <div class="col-sm-8">
+        <%= f.text_field :tag_list, class: "form-control", id: "tag_list" %>
+        <p class="text-muted"> Tags are comma-separated keywords that make it easier to find your event and boost
+          its position in searches. You can also use a tag like <code>plancast:plan=ABCD</code> to associate this
+          with a particular <a href='http://plancast.com/'>Plancast</a> event, or a tag like
+          <code>epdx:group=1234</code> to associate the event with a particular <a href='http://epdx.org/'>ePDX</a>
+          group</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag "Traps", nil, class: "control-label col-sm-2" %>
+      <div class="col-sm-8">
+        <%= text_field_tag :trap_field, params[:trap_field], class: "form-control", id: "trap_field" %>
+        <p class="text-danger"> Leave this field blank or we'll think you're a robot</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <%= submit_tag "Preview",:name=>"preview",class: "btn btn-primary"%>
+        <%= f.submit  class: "btn btn-success" %>
+
+        <% if event.new_record? %>
+            <%= link_to "Cancel", events_path, class: "btn btn-warning", role: "button" %>
+        <% else %>
+            <%= link_to "Cancel", event_path(event), class: "btn btn-warning", role: "button" %>
+        <% end %>
+
+      </div>
+    </div>
+
+<% end %>
+
+
+<script type="text/javascript">
+  $(function () {
+    $('#start_date_picker').datetimepicker({
+      format: 'YYYY-MM-DD'
+    });
+
+    $('#start_time_picker').datetimepicker({
+      format: 'LT'
+    });
+
+    $('#end_date_picker').datetimepicker({
+      format: 'YYYY-MM-DD'
+    });
+
+    $('#end_time_picker').datetimepicker({
+      format: 'LT'
+    });
+
+    $("#start_date_picker").on("dp.change", function (e) {
+      $('#end_date_picker').data("DateTimePicker").date(e.date);
+    });
+
+    $("#end_date_picker").on("dp.change", function (e) {
+      $('#start_date_picker').data("DateTimePicker").date(e.date);
+    });
+
+  });
+
+</script>
+

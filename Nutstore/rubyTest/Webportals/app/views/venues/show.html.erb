@@ -1,0 +1,116 @@
+<div class="container">
+  <br/>
+  <div class='row'>
+    <div class="col-sm-8">
+
+      <h2><%= @venue.title %></h2>
+      <% if @venue.closed? %>
+          <p class="text-danger">This venue is no longer open for business.</p>
+      <% end %>
+
+      <% if @venue.full_address.present? %>
+          <p>
+            <% if @venue.street_address.present? %>
+              <div><%= @venue.street_address %></div>
+          <% end %>
+          <% if @venue.locality.present? %>
+              <span><%= @venue.locality %></span><%= "," if @venue.region.present? or @venue.postal_code.present? or @venue.country.present? %>
+          <% end %>
+          <% if @venue.region.present? %>
+              <span><%= @venue.region %></span><%= "," if @venue.country.present? and not @venue.postal_code.present? %>
+          <% end %>
+          <% if @venue.postal_code.present? %>
+              <span><%= @venue.postal_code %></span><%= "," if @venue.country.present? %>
+          <% end %>
+          <% if @venue.country.present? %>
+              <span><%= @venue.country %></span>
+          <% end %>
+          (<a href='<%= google_maps_url(@venue.full_address) -%>'>map</a>)
+          </p>
+      <% else %>
+          <% if @venue.address.present? %>
+              <p>
+                <%= @venue.address %>
+                (<a href='<%= google_maps_url(@venue.address) -%>'>map</a>)
+              </p>
+          <% end %>
+      <% end %>
+
+      <p>
+        <% if @venue.url.present? %>
+          <div>Website: <%= link_to(truncate(url_for(@venue.url), :length => 60), url_for(@venue.url), :rel => "nofollow") %></div>
+      <% end %>
+
+      <% if @venue.email.present? %>
+          <div>Email: <%= mail_to @venue.email %></div>
+      <% end %>
+
+      <% if @venue.telephone.present? %>
+          <div>Contact Phone: <%= @venue.telephone %></div>
+      <% end %>
+
+      <% if @venue.wifi? %>
+          <div>Public WiFi</div>
+      <% end %>
+      </p>
+
+      <div class="well">
+        <p><%= map @venue %></p>
+
+        <% if @venue.description.present? || @venue.access_notes.present? %>
+            <p>
+            <h4>Description</h4>
+            <%= format_description(@venue.description) %>
+            <% if @venue.access_notes.present? %>
+                <p>
+                <h4>Access Notes</h4>
+                <%= format_description @venue.access_notes %>
+                </p>
+            <% end %>
+            </p>
+        <% end %>
+
+        <% if @venue.tags.present? -%>
+            <div class="tags">
+              <h2>Tags</h2>
+              <%= tag_links_for @venue %>
+            </div>
+        <% end %>
+
+      </div>
+
+      <div id='events'>
+        <div id='future_events'>
+          <h4>Future events happening here</h4>
+          <%= render partial: 'events/list', locals: {events: @venue.events.future} %>
+        </div>
+
+        <div id='past_events'>
+          <h4>Past events that happened here</h4>
+          <%= render partial: 'events/list', locals: {events: @venue.events.past} %>
+        </div>
+      </div>
+
+    </div>
+
+    <div class=" well col-sm-2 pull-right">
+      <p>
+        You can <%= link_to "edit", edit_venue_url(@venue) %>
+        or <%= link_to "delete", venue_url(@venue), method: :delete, data: {confirm: "Are you sure?"} %>
+        this venue.
+      </p>
+
+      <hr/>
+      <p>Download an <%= link_to "iCalendar file", venue_url(@venue, :format => :ics) %> or
+        <%= link_to "subscribe to a feed", venue_url(@venue, :format => :ics, :protocol => "webcal") %> of events at
+        this venue.</p>
+      <hr/>
+      <div class="metadata">
+        <%= fromwhere(@venue) %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
