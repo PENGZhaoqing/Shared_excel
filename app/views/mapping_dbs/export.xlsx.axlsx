@@ -1,7 +1,0 @@
-wb = xlsx_package.workbook
-wb.add_worksheet(name: "worksheet") do |sheet|
-  sheet.add_row ["供应商名称", "映射名称","授权码"]
-  @mapping_dbs.each do |db|
-    sheet.add_row [db.supplier1, db.supplier2, db.auth_token]
-  end
-end
