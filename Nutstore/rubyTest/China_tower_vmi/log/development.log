@@ -1,0 +1,64 @@
+
+
+Started GET "/" for 127.0.0.1 at 2016-11-15 20:45:07 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomesController#index as HTML
+  [1m[35mSupplierDb Load (0.7ms)[0m  SELECT "supplier_dbs".* FROM "supplier_dbs"
+  [1m[36mSupplierDb Load (0.4ms)[0m  [1mSELECT "supplier_dbs"."product" FROM "supplier_dbs"[0m
+  [1m[35mUser Load (0.7ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mSupplierDb Load (0.5ms)[0m  [1mSELECT  "supplier_dbs".* FROM "supplier_dbs" WHERE "supplier_dbs"."product" IS NULL LIMIT 5 OFFSET 0[0m
+  Rendered homes/_supplier_table.html.erb (571.5ms)
+  [1m[35mProjectDb Load (1.0ms)[0m  SELECT  "project_dbs".* FROM "project_dbs" LIMIT 7 OFFSET 0
+  Rendered homes/_project_table.html.erb (5.8ms)
+  [1m[36mRepertoryDb Load (0.9ms)[0m  [1mSELECT  "repertory_dbs".* FROM "repertory_dbs" LIMIT 12 OFFSET 0[0m
+  [1m[35m (0.6ms)[0m  SELECT COUNT(*) FROM "repertory_dbs"
+  Rendered homes/_repertory_table.html.erb (17.6ms)
+  Rendered homes/_ajax.erb (600.6ms)
+  Rendered homes/index.html.erb within layouts/application (616.0ms)
+  Rendered shared/_error_messages.html.erb (21.7ms)
+  Rendered layouts/_edit_user.html.erb (36.1ms)
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT "users".* FROM "users" WHERE (hidden = 'f')[0m
+  Rendered layouts/_navside.html.erb (3.7ms)
+  Rendered layouts/_login_panel.html.erb (6.3ms)
+  Rendered layouts/_header.html.erb (51.6ms)
+  Rendered layouts/_content.html.erb (0.6ms)
+Completed 200 OK in 5030ms (Views: 4943.3ms | ActiveRecord: 13.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-11-15 20:45:13 +0800
+Processing by HomesController#index as HTML
+  [1m[35mSupplierDb Load (0.3ms)[0m  SELECT "supplier_dbs".* FROM "supplier_dbs"
+  [1m[36mSupplierDb Load (0.2ms)[0m  [1mSELECT "supplier_dbs"."product" FROM "supplier_dbs"[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mSupplierDb Load (0.5ms)[0m  [1mSELECT  "supplier_dbs".* FROM "supplier_dbs" WHERE "supplier_dbs"."product" IS NULL LIMIT 5 OFFSET 0[0m
+  Rendered homes/_supplier_table.html.erb (2.8ms)
+  [1m[35mProjectDb Load (0.5ms)[0m  SELECT  "project_dbs".* FROM "project_dbs" LIMIT 7 OFFSET 0
+  Rendered homes/_project_table.html.erb (2.4ms)
+  [1m[36mRepertoryDb Load (0.4ms)[0m  [1mSELECT  "repertory_dbs".* FROM "repertory_dbs" LIMIT 12 OFFSET 0[0m
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "repertory_dbs"
+  Rendered homes/_repertory_table.html.erb (4.7ms)
+  Rendered homes/_ajax.erb (13.7ms)
+  Rendered homes/index.html.erb within layouts/application (15.0ms)
+  Rendered shared/_error_messages.html.erb (0.0ms)
+  Rendered layouts/_edit_user.html.erb (2.2ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT "users".* FROM "users" WHERE (hidden = 'f')[0m
+  Rendered layouts/_navside.html.erb (1.9ms)
+  Rendered layouts/_login_panel.html.erb (1.0ms)
+  Rendered layouts/_header.html.erb (9.3ms)
+  Rendered layouts/_content.html.erb (0.1ms)
+Completed 200 OK in 59ms (Views: 54.2ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/assets/application.self-a0ba33d9e154909054100fb7a1a073f111dcbe2ffabb2c99ec1e50dc358390f0.css?body=1" for 127.0.0.1 at 2016-11-15 20:45:13 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for 127.0.0.1 at 2016-11-15 20:45:13 +0800
+
+
+Started GET "/assets/bootstrap.min.self-504d59678f10d79a661b6cecdce5b8c1d5bfd98e860614584c0a40399552d61f.js?body=1" for 127.0.0.1 at 2016-11-15 20:45:13 +0800
+
+
+Started GET "/assets/turbolinks.self-c5acd7a204f5f25ce7a1d8a0e4d92e28d34c9e2df2c7371cd7af88e147e4ad82.js?body=1" for 127.0.0.1 at 2016-11-15 20:45:13 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for 127.0.0.1 at 2016-11-15 20:45:13 +0800
