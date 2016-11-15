@@ -17,7 +17,7 @@ class StockDb < ActiveRecord::Base
   end
 
   def self.filter_by_type(type)
-    where("stock_dbs.supplier LIKE ?",  "%#{type}%")
+    where("stock_dbs.supplier LIKE ?", "%#{type}%")
   end
 
 end
