@@ -9,7 +9,7 @@ class StockExcelsController < ApplicationController
     flash="文件:#{@stock_excel.file_file_name} 已经成功上传"
     redirect_to stock_excels_path, flash: {success: flash}
   end
-
+git
   def index
     @stock_excels=StockExcel.order('created_at DESC').paginate(:page => params[:excel_page], :per_page => 8)
   end
