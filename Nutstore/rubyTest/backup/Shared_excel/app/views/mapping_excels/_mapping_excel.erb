@@ -1,0 +1,20 @@
+<% if request.xhr? %>
+    <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong> <%= message %></strong>
+        </div>
+    <% end %>
+<% end %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <i class="fa fa-eye fa-fw"></i> 授权管理
+  </div>
+  <div class="panel-body" style="min-height: 600px">
+    <%= render "shared/excel_list", :excels => @mapping_excels, :new_excel => MappingExcel.new, :path => mapping_excels_path %>
+  </div>
+
+</div>
+
+
