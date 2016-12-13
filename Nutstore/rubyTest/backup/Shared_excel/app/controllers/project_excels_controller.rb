@@ -32,7 +32,6 @@ class ProjectExcelsController < ApplicationController
       projectdb.approve_time=workbook.row(row_index)[5]
       projectdb.save
     end
-  end
 
     @project_excel.update_attribute(:parse, true)
     redirect_to project_excels_path, flash: {success: "Excel文件中的数据已成功解析"}
