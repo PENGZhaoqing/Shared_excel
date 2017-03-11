@@ -1,0 +1,41 @@
+<% supplier_labels.each do |label, num| %>
+    <%= link_to root_path(label: label), remote: true do %>
+        <span class="label label-info" style="display:inline-block"><%= label %> <%= num %></span>
+    <% end %>
+<% end %>
+
+<table class='table table-responsive table-condensed table-hover' style="margin-top: 5px">
+
+  <tr>
+    <th>产品</th>
+    <th>供应商</th>
+  </tr>
+
+  <tbody>
+  <% supplier_dbs.each do |db| %>
+      <tr>
+        <td>
+          <%= db.product %>
+        </td>
+        <td>
+          <%= db.supplier %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate supplier_dbs, :param_name => 'supplier_page',
+                  :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
+
+<script>
+  $(document).ready(function () {
+    $("body").on("click", '.label-panel a', function (e) {
+      e.preventDefault();
+      $.getScript(this.href);
+      return false;
+    });
+  });
+</script>
+
+

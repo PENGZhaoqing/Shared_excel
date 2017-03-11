@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105163023) do
+ActiveRecord::Schema.define(version: 20170311085349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20161105163023) do
     t.integer  "available"
     t.string   "unit"
     t.string   "model"
+    t.integer  "warning"
   end
 
   create_table "repertory_excels", force: :cascade do |t|

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   root 'homes#index'
 
+
   resources :supplier_excels, only: [:index, :destroy, :create] do
     collection do
       get :clean
@@ -26,9 +27,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :repertory_dbs, only: :index do
+  resources :repertory_dbs, only: [:index, :update] do
     collection do
       get :export
+      get :warning
     end
   end
 
@@ -92,6 +94,7 @@ Rails.application.routes.draw do
   post 'sessions/visit' => 'sessions#visit'
   delete 'sessions/logout' => 'sessions#destroy'
   delete 'sessions/visit_out' => 'sessions#destroy_visit'
+  get 'homes/get_warnings' => 'homes#get_warnings'
 
 
 end
