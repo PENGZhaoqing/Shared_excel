@@ -1,0 +1,86 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <i class="fa fa-bars fa-fw"></i> 遴选信息
+    <div class="pull-right">
+      <%= form_tag export_supplier_dbs_path, :method => :get do %>
+          <%= hidden_field_tag :product, params[:product] %>
+          <%= hidden_field_tag :supplier, params[:supplier] %>
+          <%= button_tag(type: "submit", class: "btn btn-success btn-xs") do %>
+              <span class="glyphicon glyphicon-floppy-save"></span> 导出
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="filter-panel">
+    <%= form_tag supplier_dbs_path, :method => 'get', role: 'form', class: "form-inline", remote: true do %>
+        <div class="form-group">
+          <%= label_tag :product, "产品:" %>
+          <%= text_field_tag :product, params[:product], placeholder: "产品", class: 'form-control input-sm' %>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag :supplier, "供应商:" %>
+          <%= text_field_tag :supplier, params[:supplier], placeholder: "供应商", class: 'form-control input-sm' %>
+        </div>
+
+        <%= button_tag(type: "submit", class: "btn btn-sm btn-info", id: "filter-button") do %>
+            <i class="fa fa-search"></i>查找
+        <% end %>
+
+        <%= link_to supplier_dbs_path, class: "btn btn-sm btn-warning", id: "filter-link", remote: true do %>
+            <i class="fa fa-refresh"></i> 重置
+        <% end %>
+    <% end %>
+
+    <br>
+
+    <text class="text-muted">总数据
+      <mark><%=@supplier_dbs.count%></mark>条,当前页显示:<mark><%= @supplier_dbs.length %></mark>条
+    </text>
+
+    <div class="pull-right">
+      <%= will_paginate @supplier_dbs, :param_name => 'page',
+                        :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
+    </div>
+
+  </div>
+
+  <div class="panel-body" style="min-height:600px">
+    <table class="table table-responsive table-condensed table-hover" id="small-table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>产品</th>
+        <th>供应商</th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+      <% count= 0 %>
+      <% @supplier_dbs.each do |dbs| %>
+          <% count= count+1 %>
+          <tr>
+            <td>
+              <% if params[:page].nil? %>
+                  <%= count %>
+              <% else %>
+                  <%= count+(params[:page].to_i-1)*20 %>
+              <% end %>
+            </td>
+            <td>
+              <%= dbs.product %>
+            </td>
+            <td>
+              <%= dbs.supplier %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
