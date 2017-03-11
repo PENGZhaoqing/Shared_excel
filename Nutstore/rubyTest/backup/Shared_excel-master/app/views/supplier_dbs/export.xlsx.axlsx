@@ -1,7 +1,0 @@
-wb = xlsx_package.workbook
-wb.add_worksheet(name: "worksheet") do |sheet|
-  sheet.add_row ["产品名", "供应公司"]
-  @supplier_dbs.each do |db|
-    sheet.add_row [db.product, db.supplier]
-  end
-end

@@ -1,9 +1,0 @@
-<div class="form-group">
-  <label for="<%= labeltext %>" class="control-label col-sm-2"><%= labeltext %> </label>
-  <div class="col-sm-6">
-    <%= text_field object, content, class: "form-control", id: "#{content.to_s}", placeholder: "Enter the #{labeltext}"  %>
-    <% unless hint.blank? %>
-        <p class="text-muted"><%=hint%></p>
-    <% end %>
-  </div>
-</div>

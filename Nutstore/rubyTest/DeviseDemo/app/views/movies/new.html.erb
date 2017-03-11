@@ -1,9 +1,0 @@
-<%= form_tag movies_path, :method => :post do %>
- 
- <%= render :partial=> 'movies_form'%>
-  <p>
-    <%= submit_tag 'Save Changes' %>
-  </p>
-<% end %>
-
-<%= link_to 'Cancel', movies_path %>

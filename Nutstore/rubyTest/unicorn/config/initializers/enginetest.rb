@@ -1,1 +1,0 @@
-Enginetest.author_class="User"
