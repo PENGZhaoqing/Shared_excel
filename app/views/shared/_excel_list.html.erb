@@ -42,6 +42,14 @@
             <span class="glyphicon glyphicon-trash"></span> 清空数据
         <% end %>
       </div>
+
+  <% elsif params[:controller]=="warning_excels" %>
+      <div class="alert alert-warning pull-right">
+        目前安全阈值数据的行数: <%= WarningDb.all.size %>行
+        <%= link_to clean_warning_excels_path, :remote => true, :data => {confirm: '确定清空数据?'}, class: 'btn-sm btn-danger' do %>
+            <span class="glyphicon glyphicon-trash"></span> 清空数据
+        <% end %>
+      </div>
   <% end %>
 
   <%= form_for new_excel, url: path, html: {multipart: true} do |f| %>
@@ -123,6 +131,14 @@
               <% else %>
                   <td><%= link_to '解析', parse_mapping_excel_path(excel), remote: true, class: 'btn-xs btn-primary pull-right' %></td>
               <% end %>
+          <% elsif params[:controller]=="warning_excels" %>
+              <% if excel.parse %>
+                  <td>
+                    <button type="button" class="btn btn-xs pull-right disabled">已解析</button>
+                  </td>
+              <% else %>
+                  <td><%= link_to '解析', parse_warning_excel_path(excel), remote: true, class: 'btn-xs btn-primary pull-right' %></td>
+              <% end %>
           <% end %>
 
           <% if params[:controller]=="stock_excels" %>
@@ -135,7 +151,9 @@
               <td><%= link_to '删除', supplier_excel_path(excel), method: :delete, :data => {confirm: '确定删除?'}, class: 'btn-xs btn-danger pull-right' %></td>
           <% elsif params[:controller]=="mapping_excels" %>
               <td><%= link_to '删除', mapping_excel_path(excel), method: :delete, :data => {confirm: '确定删除?'}, class: 'btn-xs btn-danger pull-right' %></td>
-          <% end %>
+          <% elsif params[:controller]=="warning_excels" %>
+              <td><%= link_to '删除', warning_excel_path(excel), method: :delete, :data => {confirm: '确定删除?'}, class: 'btn-xs btn-danger pull-right' %></td>
+        <% end %>
 
         </tr>
     <% end %>
@@ -148,10 +166,10 @@
 </div>
 
 <script type="text/javascript">
-  $('input[type=file]').bootstrapFileInput();
-  $('.file-inputs').bootstrapFileInput();
+    $('input[type=file]').bootstrapFileInput();
+    $('.file-inputs').bootstrapFileInput();
 </script>
 
-<%= render "shared/spanner"%>
+<%= render "shared/spanner" %>
 
 

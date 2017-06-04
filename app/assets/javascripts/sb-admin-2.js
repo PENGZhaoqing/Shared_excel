@@ -17,13 +17,13 @@ $(document).ready(function () {
     $('#side-menu').metisMenu();
 });
 
-$(document).ready(function () {
-    $("body").on("click", '#side-menu .nav-second-level a,#nav-first-level', function (e) {
-        e.preventDefault();
-        $.getScript(this.href);
-        return false;
-    });
-});
+// $(document).ready(function () {
+//     $("body").on("click", '#side-menu .nav-second-level a,#nav-first-level', function (e) {
+//         e.preventDefault();
+//         $.getScript(this.href);
+//         return false;
+//     });
+// });
 
 //Loads the correct sidebar on window load,
 //collapses the sidebar on window resize.

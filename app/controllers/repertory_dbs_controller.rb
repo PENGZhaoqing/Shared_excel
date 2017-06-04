@@ -13,13 +13,19 @@ class RepertoryDbsController < ApplicationController
   end
 
   def warning
-    @repertory_dbs=RepertoryDb.filter_by_num.search(search_params).order('created_at desc').paginate(:page => params[:page], :per_page => 20)
+    if logged_in_visit?
+      @repertory_dbs=RepertoryDb.filter_by_num.filter_by_type(current_visit.supplier2).search(search_params).order('created_at desc').paginate(:page => params[:page], :per_page => 20)
+    elsif logged_in?
+      @repertory_dbs=RepertoryDb.filter_by_num.search(search_params).order('created_at desc').paginate(:page => params[:page], :per_page => 20)
+    else
+      redirect_to root_path, flash: {:danger => "Error: 请联系开发人员"}
+    end
   end
 
   def update
     @repertory_data = RepertoryDb.find_by_id(params[:id])
     @repertory_data.update_attributes(repertory_params)
-    redirect_to repertory_dbs_path(page: params[:page])
+    redirect_to warning_repertory_dbs_path(page: params[:page])
   end
 
   def export
@@ -43,7 +49,7 @@ class RepertoryDbsController < ApplicationController
   end
 
   def repertory_params
-    params.require(:repertory_db).permit(:warning)
+    params.require(:repertory_db).permit(:safe_num, :common_num)
   end
 
 end

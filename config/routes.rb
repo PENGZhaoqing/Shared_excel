@@ -44,6 +44,22 @@ Rails.application.routes.draw do
   end
 
 
+  resources :warning_dbs, only: [:index, :update] do
+    collection do
+      get :match
+      get :match_page
+    end
+  end
+
+  resources :warning_excels, only: [:index, :destroy, :create] do
+    collection do
+      get :clean
+    end
+    member do
+      get :parse
+    end
+  end
+
   resources :project_dbs, only: :index do
     collection do
       get :export

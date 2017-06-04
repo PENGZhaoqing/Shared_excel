@@ -17,8 +17,8 @@ class RepertoryDb < ActiveRecord::Base
     where("repertory_dbs.supplier LIKE ?", "%#{type}%")
   end
 
-  def self.filter_by_num()
-    where('repertory_dbs.num < repertory_dbs.warning')
+  def self.filter_by_num
+    where("repertory_dbs.safe_num IS NOT NULL AND repertory_dbs.safe_num >= repertory_dbs.num")
   end
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170311085349) do
+ActiveRecord::Schema.define(version: 20170603144234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,7 +65,9 @@ ActiveRecord::Schema.define(version: 20170311085349) do
     t.integer  "available"
     t.string   "unit"
     t.string   "model"
-    t.integer  "warning"
+    t.integer  "safe_num"
+    t.integer  "common_num"
+    t.integer  "need_num"
   end
 
   create_table "repertory_excels", force: :cascade do |t|
@@ -133,5 +135,25 @@ ActiveRecord::Schema.define(version: 20170311085349) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+
+  create_table "warning_dbs", force: :cascade do |t|
+    t.string   "supplier"
+    t.string   "product_code"
+    t.integer  "safe_num"
+    t.integer  "common_num"
+    t.boolean  "match",        default: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  create_table "warning_excels", force: :cascade do |t|
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.boolean  "parse"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
 
 end

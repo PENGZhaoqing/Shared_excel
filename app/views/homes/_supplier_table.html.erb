@@ -28,14 +28,6 @@
 <%= will_paginate supplier_dbs, :param_name => 'supplier_page',
                   :previous_label => t("前一页"), :next_label => t("后一页"), :inner_window => 1 %>
 
-<script>
-  $(document).ready(function () {
-    $("body").on("click", '.label-panel a', function (e) {
-      e.preventDefault();
-      $.getScript(this.href);
-      return false;
-    });
-  });
-</script>
+
 
 
