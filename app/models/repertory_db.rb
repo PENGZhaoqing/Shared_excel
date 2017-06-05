@@ -18,7 +18,7 @@ class RepertoryDb < ActiveRecord::Base
   end
 
   def self.filter_by_num
-    where("repertory_dbs.safe_num IS NOT NULL AND repertory_dbs.safe_num >= repertory_dbs.num")
+    where("repertory_dbs.safe_num IS NOT NULL AND repertory_dbs.safe_num >= repertory_dbs.available")
   end
 
 end

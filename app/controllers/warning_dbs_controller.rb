@@ -8,7 +8,7 @@ class WarningDbsController < ApplicationController
 
   def match
 
-    matches=RepertoryDb.joins("INNER JOIN warning_dbs ON warning_dbs.safe_num IS NOT NULL AND warning_dbs.common_num IS NOT NULL AND repertory_dbs.num IS NOT NULL
+    matches=RepertoryDb.joins("INNER JOIN warning_dbs ON warning_dbs.safe_num IS NOT NULL AND warning_dbs.common_num IS NOT NULL AND repertory_dbs.available IS NOT NULL
                       AND warning_dbs.supplier = repertory_dbs.supplier AND warning_dbs.product_code = repertory_dbs.product_code")
 
     matches.each do |match|
@@ -39,7 +39,7 @@ class WarningDbsController < ApplicationController
     data.each do |warning_db|
       next if warning_db.safe_num.nil? or warning_db.product_code.nil? or warning_db.supplier.nil? or warning_db.common_num.nil?
       rpd=RepertoryDb.find_by(product_code: warning_db.product_code, supplier: warning_db.supplier)
-      next if rpd.nil? or rpd.num.nil?
+      next if rpd.nil? or rpd.available.nil?
       rpd.update(common_num: warning_db.common_num, safe_num: warning_db.safe_num)
       warning_db.update(match: true)
     end

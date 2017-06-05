@@ -143,7 +143,7 @@
                   </td>
 
                   <td>
-                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Modal-<%= repertory.id %>"><%= repertory.common_num-repertory.num %>
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Modal-<%= repertory.id %>"><%= repertory.common_num-repertory.available %>
                     </button>
                   </td>
 
@@ -176,7 +176,7 @@
                     <%= repertory.common_num %>
                   </td>
                   <td>
-                    <%= repertory.common_num-repertory.num %>
+                    <%= repertory.common_num-repertory.available %>
                   </td>
               <% end %>
             </tr>
