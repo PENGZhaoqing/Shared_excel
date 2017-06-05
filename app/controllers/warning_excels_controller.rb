@@ -15,8 +15,8 @@ class WarningExcelsController < ApplicationController
     workbook.default_sheet = workbook.sheets[0]
     ((workbook.first_row + 1)..workbook.last_row).each do |row_index|
       warningdb=WarningDb.new
-      warningdb.product_code=workbook.row(row_index)[1]
-      warningdb.supplier=workbook.row(row_index)[2]
+      warningdb.supplier=workbook.row(row_index)[1]
+      warningdb.product_code=workbook.row(row_index)[2]
       warningdb.safe_num=workbook.row(row_index)[3]
       warningdb.common_num=workbook.row(row_index)[4]
       warningdb.save

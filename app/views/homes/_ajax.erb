@@ -27,40 +27,43 @@
     </div>
 <% end %>
 
-<script type="application/javascript">
+<% if current_visit || current_user %>
 
-    toastr.options = {
-        "closeButton": true,
-        "debug": false,
-        "newestOnTop": false,
-        "progressBar": false,
-        "positionClass": "toast-bottom-right",
-        "preventDuplicates": false,
-        "showDuration": "1000",
-        "hideDuration": "1000",
-        "timeOut": "4000",
-        "extendedTimeOut": "1000",
-        "showMethod": "slideDown",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "hideMethod": "slideUp"
-    };
+    <script type="application/javascript">
 
-    $.ajax({
-        url: "/homes/get_warnings",
-        dataType: "json",
-        success: function (data) {
-            $.each(data, function (index, value) {
-                setTimeout(function () {
-                    toastr.options.onclick = function () {
-                        location.href = "<%= warning_repertory_dbs_path%>";
-                    };
-                    need = value.safe_num - value.num;
-                    toastr["error"]("库存数量：" + value.num + "，需要补充：" + need, value.name)
-                }, index * 1000);
-            })
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-bottom-right",
+            "preventDuplicates": false,
+            "showDuration": "1000",
+            "hideDuration": "1000",
+            "timeOut": "4000",
+            "extendedTimeOut": "1000",
+            "showMethod": "slideDown",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "hideMethod": "slideUp"
+        };
 
-        }
-    })
-</script>
+        $.ajax({
+            url: "/homes/get_warnings",
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (index, value) {
+                    setTimeout(function () {
+                        toastr.options.onclick = function () {
+                            location.href = "<%= warning_repertory_dbs_path%>";
+                        };
+                        need = value.safe_num - value.num;
+                        toastr["error"]("库存数量：" + value.num + "，需要补充：" + need, value.name)
+                    }, index * 1000);
+                })
 
+            }
+        })
+    </script>
+
+<% end %>
