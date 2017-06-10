@@ -17,8 +17,10 @@ class WarningExcelsController < ApplicationController
       warningdb=WarningDb.new
       warningdb.supplier=workbook.row(row_index)[1]
       warningdb.product_code=workbook.row(row_index)[2]
-      warningdb.safe_num=workbook.row(row_index)[3]
-      warningdb.common_num=workbook.row(row_index)[4]
+      warningdb.product_name=workbook.row(row_index)[3]
+      warningdb.standard=workbook.row(row_index)[4]
+      warningdb.safe_num=workbook.row(row_index)[6]
+      warningdb.common_num=workbook.row(row_index)[7]
       warningdb.save
     end
     @warning_excel.update_attribute(:parse, true)
