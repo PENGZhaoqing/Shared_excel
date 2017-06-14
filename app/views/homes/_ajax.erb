@@ -58,7 +58,7 @@
                             location.href = "<%= warning_repertory_dbs_path%>";
                         };
                         need = value.safe_num - value.num;
-                        toastr["error"]("库存数量：" + value.num + "，需要补充：" + need, value.name)
+                        toastr["error"]("供应商：" + value.supplier + "，库存数量：" + value.num + "，需要补充：" + need, value.name)
                     }, index * 1000);
                 })
 
